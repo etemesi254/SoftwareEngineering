@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string("subcategory_name");
             $table->bigInteger("category_id")->unsigned();
             $table->timestamps();
+
+            $table->foreign("category_id")->references("id")->on("categories");
         });
     }
 
