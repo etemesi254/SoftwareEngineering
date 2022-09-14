@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -72,3 +73,41 @@ Route::post("new_user", function (Request $request) {
 
     return response($msg, $status);
 });
+Route::post("login_user", function (Request $request) {
+    $request_data = json_decode($request->getContent(),true);
+    $msg = [];
+    $status = 200;
+
+    if ($request_data == null) {
+        $msg = ["status" => 400, "description" => "Unprocessible entry"];
+        $status = 400;
+
+    } else {
+        $rules = [
+            "password" => "required|min:6",
+            "username" => "required",
+            ];
+        try {
+            $request->validate($rules);
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+
+                $id = Auth::user()->id;
+                $currentuser = User::find($id);
+                $token = $currentuser->createToken($request_data["username"]);
+                $msg= ["status"=>200,"description"=>"okay","token"=>$token->plainTextToken];
+            } else{
+                $msg= ["status"=>401,"description"=>"unauthorised"];
+                $status=401;
+
+            }
+
+
+        } catch (Exception $e) {
+            $msg = ["status" => 500, "description" => "Internal error", "error" => $e->getMessage(),"data"=>[]];
+            $status = 500;
+
+        }
+    }
+
+    return response($msg, $status);});
