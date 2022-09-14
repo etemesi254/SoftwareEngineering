@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -111,3 +112,32 @@ Route::post("login_user", function (Request $request) {
     }
 
     return response($msg, $status);});
+
+
+Route::post("add_category", function (Request $req) {
+    $rules = ["category" => "required"];
+
+    $msg = [];
+    $status = 200;
+    try {
+        $req->validate($rules);
+        $categoryV = $req->only("category");
+        $categories = Categories::create([
+            "category_name" => $categoryV["category"]
+        ]);
+        $msg = "okay";
+
+    } catch (Exception $e) {
+        $status = 400;
+        $msg = $e->getMessage();
+    }
+
+    return response($msg, $status);
+});
+Route::get('/get_categories', function (Request $request) {
+
+    $response_data = ["status" => 200, "description" => "okay", "num_records" => DB::table("categories")->count(), "data" => Categories::all()];
+    return response($response_data, 200);
+
+});
+
