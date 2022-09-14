@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/tokens/create', function (Request $request) {
-    //$token = $request->user()->createToken($request->token_name);
+Route::get('/users', function (Request $request) {
 
-    return ['token' => "hello"];
+    $response_data = ["status" => 200, "description" => "okay", "num_records" => DB::table("users")->count(), "data" => User::all()];
+    return response($response_data, 200);
+
 });
