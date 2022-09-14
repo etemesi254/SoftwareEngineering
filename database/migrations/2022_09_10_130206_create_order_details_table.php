@@ -18,10 +18,14 @@ return new class extends Migration {
             $table->bigInteger("product_id")->unsigned();
             $table->double("price");
             $table->integer("quantity")->unsigned();
+
             $table->double("total")->storedAs("price*quantity");
 
 
             $table->timestamps();
+
+            $table->foreign("order_id")->references("id")->on("orders");
+            $table->foreign("product_id")->references("id")->on("menus");
         });
     }
 
