@@ -151,7 +151,7 @@ Route::get('/get_menu', function (Request $request) {
      *  "sub-category":"pizza"
      *  }
      * We want to only return menu items whose categories is pizza and not burgers.
-     * This allows for us to generate multiple options for menus , but now we need it to work for the api.
+     * This allows for us to generate multiple options for menus  , but now we need it to work for the api.
      *
      *  Before you even figure out how it's done, you need to add data in your db, so suggesting using phpmyadmin
      * (note you need to run in the terminal `service mysql start` and `apachectl start` before navigating to phpmyadmin, the former starts
@@ -199,4 +199,11 @@ Route::get('/get_menu', function (Request $request) {
     $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
     return response($response_data, 200);
 
+});
+
+Route::get("/get_category_details",function (Request $request){
+    $categories = new Categories();
+    $values = $categories->GetCategories();
+    $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
+    return response($response_data, 200);
 });
