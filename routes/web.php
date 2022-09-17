@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Categories;
+use App\Models\SubCategories;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get("/admin/categories", function () {
+    $categories = new Categories();
+    $values = $categories->GetCategories();
+    $total_categories = $categories->GetTotalCategories();
+    $subcategories = new SubCategories();
+
+    $total_subcategories = $subcategories::all()->count();
+
+    return view("admin.categories", ["categories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories]);
+
 });
