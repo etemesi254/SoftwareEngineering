@@ -193,22 +193,37 @@ Route::get('/get_menu', function (Request $request) {
      */
 
     try {
-        $category = $request->only("category","subcategory");
+        $categories = $request->only("category", "subcategory");
+
         $menu = new Menu();
-        $values = $menu->GetMenuItems();
+        $values = $menu->GetMenuItems()->all();
+        $new_values = [];
+        if (!(isset ($categories["category"]) || isset($categories["subcategory"]))) {
+            $new_values = $values;
+        } else {
+            foreach ($values as $value) {
+                if (isset ($categories["category"])) {
+                    if ($value->category_name === $categories["category"]) {
+                        $new_values[] = $value;
+                    };
+                } else if (isset ($categories["subcategory"])) {
+                    if ($value->subcategory_name === $categories["subcategory"]) {
+                        $new_values[] = $value;
+                    };
+                }
+            }
+        }
+        $response_data = ["status" => 200, "description" => "okay", "num_records" => count($new_values), "data" => $new_values];
+        return response($response_data, 200);
 
-       // $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
-        return response($category, 200);
+    } catch (\PHPUnit\Exception $e) {
 
-    } catch (Exception $e) {
-        $status = 400;
-        $msg = ["status" => 400, "description" => $e->getMessage()];
     }
 
-    // $menu = new Menu();
-    // $values = $menu->GetMenuItems();
-    // $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
-    // return response($response_data, 200);
+//    $menu = new Menu();
+//    $values = $menu->GetMenuItems();
+//    $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
+//    return response($response_data, 200);
 
 });
 
