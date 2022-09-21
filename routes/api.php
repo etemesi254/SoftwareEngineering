@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\Categories;
 use App\Models\CategoriesDashboard;
 use App\Models\Menu;
 use App\Models\User;
-use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,12 +19,11 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 Route::get('/users', function (Request $request) {
 
@@ -56,14 +55,14 @@ Route::post("new_user", function (Request $request) {
             $user = new User;
 
             $user = User::create([
-                    'username' => $request_data['username'],
-                    'email' => $request_data['email'],
-                    'password' => Hash::make($request_data['password']),
-                    'full_name' => $request_data["full_name"],
-                    'gender' => $request_data["gender"],
-                    'telephone' => $request_data['telephone'],
-                    'dob' => $request_data['dob']
-                ]
+                'username' => $request_data['username'],
+                'email' => $request_data['email'],
+                'password' => Hash::make($request_data['password']),
+                'full_name' => $request_data["full_name"],
+                'gender' => $request_data["gender"],
+                'telephone' => $request_data['telephone'],
+                'dob' => $request_data['dob'],
+            ]
             );
             $token = $user->createToken($request_data["username"]);
             $msg = ["status" => 200, "description" => "okay", "token" => $token->plainTextToken];
@@ -108,7 +107,6 @@ Route::post("login_user", function (Request $request) {
     return response($msg, $status);
 });
 
-
 Route::post("add_category", function (Request $req) {
     $rules = ["category" => "required"];
 
@@ -118,7 +116,7 @@ Route::post("add_category", function (Request $req) {
         $req->validate($rules);
         $categoryV = $req->only("category");
         $categories = Categories::create([
-            "category_name" => $categoryV["category"]
+            "category_name" => $categoryV["category"],
         ]);
         $msg = ["status" => 200, "description" => "okay"];
 
@@ -129,7 +127,6 @@ Route::post("add_category", function (Request $req) {
 
     return response($msg, $status);
 });
-
 
 Route::get('/get_categories', function (Request $request) {
     $data = new CategoriesDashboard;
@@ -147,7 +144,7 @@ Route::get('/get_menu', function (Request $request) {
      * Say e.g we have a request with  the following json
      *
      *
-    * {
+     * {
      *  "sub-category":"pizza"
      *  }
      * We want to only return menu items whose categories is pizza and not burgers.
@@ -173,7 +170,7 @@ Route::get('/get_menu', function (Request $request) {
      *
      * ``
      *  select categories.category_name,sub_categories.subcategory_name,menus.* from categories
-	 *  inner join sub_categories on  sub_categories.category_id=categories.id and sub_categories.subcategory_name="pizza"
+     *  inner join sub_categories on  sub_categories.category_id=categories.id and sub_categories.subcategory_name="pizza"
      *  inner join menus on menus.subcategory_id = sub_categories.id;
      * ``
      *
@@ -194,14 +191,28 @@ Route::get('/get_menu', function (Request $request) {
      * And if you are stuck do not hesitate to ask.
      *
      */
-    $menu = new Menu();
-    $values = $menu->GetMenuItems();
-    $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
-    return response($response_data, 200);
+
+    try {
+        $category = $request->only("category","subcategory");
+        $menu = new Menu();
+        $values = $menu->GetMenuItems();
+
+       // $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
+        return response($category, 200);
+
+    } catch (Exception $e) {
+        $status = 400;
+        $msg = ["status" => 400, "description" => $e->getMessage()];
+    }
+
+    // $menu = new Menu();
+    // $values = $menu->GetMenuItems();
+    // $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
+    // return response($response_data, 200);
 
 });
 
-Route::get("/get_category_details",function (Request $request){
+Route::get("/get_category_details", function (Request $request) {
     $categories = new Categories();
     $values = $categories->GetCategories();
     $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
