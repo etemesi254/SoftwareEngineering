@@ -194,14 +194,43 @@ Route::get('/get_menu', function (Request $request) {
      * And if you are stuck do not hesitate to ask.
      *
      */
-    $menu = new Menu();
-    $values = $menu->GetMenuItems();
-    $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
-    return response($response_data, 200);
+
+    try {
+        $categories = $request->only("category", "subcategory");
+
+        $menu = new Menu();
+        $values = $menu->GetMenuItems()->all();
+        $new_values = [];
+        if (!(isset ($categories["category"]) || isset($categories["subcategory"]))) {
+            $new_values = $values;
+        } else {
+            foreach ($values as $value) {
+                if (isset ($categories["category"])) {
+                    if ($value->category_name === $categories["category"]) {
+                        $new_values[] = $value;
+                    };
+                } else if (isset ($categories["subcategory"])) {
+                    if ($value->subcategory_name === $categories["subcategory"]) {
+                        $new_values[] = $value;
+                    };
+                }
+            }
+        }
+        $response_data = ["status" => 200, "description" => "okay", "num_records" => count($new_values), "data" => $new_values];
+        return response($response_data, 200);
+
+    } catch (\PHPUnit\Exception $e) {
+
+    }
+
+//    $menu = new Menu();
+//    $values = $menu->GetMenuItems();
+//    $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
+//    return response($response_data, 200);
 
 });
 
-Route::get("/get_category_details",function (Request $request){
+Route::get("/get_category_details", function (Request $request) {
     $categories = new Categories();
     $values = $categories->GetCategories();
     $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
