@@ -220,13 +220,9 @@ Route::get('/get_menu', function (Request $request) {
         return response($response_data, 200);
 
     } catch (\PHPUnit\Exception $e) {
-
+        $response_data = ["status" => 400, "description" => $e->getMessage() ];
+        return response($response_data, 200);
     }
-
-//    $menu = new Menu();
-//    $values = $menu->GetMenuItems();
-//    $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
-//    return response($response_data, 200);
 
 });
 
@@ -235,4 +231,28 @@ Route::get("/get_category_details", function (Request $request) {
     $values = $categories->GetCategories();
     $response_data = ["status" => 200, "description" => "okay", "num_records" => count($values), "data" => $values];
     return response($response_data, 200);
+});
+
+
+Route::any("/add_menu",function (Request $request){
+    $rules = [
+        "name" => "required",
+        "unit_price" => "required",
+        "description" => "required",
+        "image" => "required",
+        "available_quantity" => "required",
+        "subcategory_id" => "required",
+        ];
+
+    $msg = [];
+    $status = 200;
+    try{
+        $request->validate($rules);
+    } catch (Exception $e)
+    {
+        $status = 400;
+        $msg = ["statusDescription"=>$e->getMessage(),"status"=>400];
+    }
+    return response($msg, $status);
+
 });

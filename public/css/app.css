@@ -50,3 +50,33 @@ html, body {
     max-width: 350px;
     /*left: 20px;*/
 }
+
+
+
+
+
+
+table {
+    border-spacing: 10px 15px;
+}
+
+th {
+    background-color: #0C0B0D;
+    text-align: start;
+    color: white;
+}
+
+th,
+td {
+    /*width: 150px;*/
+    /*height: 30px;*/
+    /*border: 1px solid black;*/
+    padding: 15px;
+    margin: 5px;
+}
+tr >td {
+    padding-bottom: 1em;
+}
+h2 {
+    color: #4287f5;
+}

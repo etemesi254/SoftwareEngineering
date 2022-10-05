@@ -2,6 +2,7 @@
 
 use App\Models\Categories;
 use App\Models\SubCategories;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,25 @@ Route::get("/admin/categories", function () {
 
     $total_subcategories = $subcategories::all()->count();
 
-    return view("admin.categories", ["categories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories]);
+    $menu = new \App\Models\Menu();
+    $last_five = $menu->GetMenuItems(5);
 
+    return view("admin.categories", ["categories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories,"menus"=>$last_five]);
+
+});
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get("/admin/users", function () {
+    $users = new User();
+    $values = $users->getUserOrders();
+
+    return view("admin.users", ["users" => $values, "total_users" => $users::count()]);
+
+});
+
+Route::get("/admin/upload_products", function () {
+    return view("admin.upload_products");
 });
