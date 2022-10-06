@@ -3,6 +3,7 @@
 use App\Models\Categories;
 use App\Models\SubCategories;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::get("/admin/categories", function () {
     $categories = new Categories();
     $values = $categories->GetCategories();
@@ -29,4 +32,14 @@ Route::get("/admin/categories", function () {
 
     return view("admin.categories", ["categories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories]);
 
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
