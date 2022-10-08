@@ -2,7 +2,6 @@
 
 use App\Models\Categories;
 use App\Models\SubCategories;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,4 +48,15 @@ Route::get("/admin/users", function () {
 
 Route::get("/admin/upload_products", function () {
     return view("admin.upload_products");
+});
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
