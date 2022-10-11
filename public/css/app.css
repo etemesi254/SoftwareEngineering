@@ -1,5 +1,5 @@
 html, body {
-    height:100%;
+    height: 100%;
 }
 
 .panel {
@@ -8,7 +8,7 @@ html, body {
     width: 20%;
     min-width: 250px;
     max-width: 350px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     font-family: "Lato", sans-serif;
 }
 
@@ -18,12 +18,13 @@ html, body {
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
-    color: rgba(255,255,255,0.5);
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
 }
-.panel-action{
-    color: rgba(255,255,255,0.9);;
+
+.panel-action {
+    color: rgba(255, 255, 255, 0.9);;
     align-content: center;
     display: flex;
     margin: 0px;
@@ -33,15 +34,17 @@ html, body {
     padding-left: 15px;
 }
 
-.panel-action-text{
+.panel-action-text {
     margin-left: 10px;
 
 }
-.panel-action:hover{
+
+.panel-action:hover {
     color: black;
     background-color: white;
     transition: 1s ease;
 }
+
 .panel-bottom {
     position: absolute;
     bottom: 0;
@@ -50,10 +53,6 @@ html, body {
     max-width: 350px;
     /*left: 20px;*/
 }
-
-
-
-
 
 
 table {
@@ -74,9 +73,107 @@ td {
     padding: 15px;
     margin: 5px;
 }
-tr >td {
+
+tr > td {
     padding-bottom: 1em;
 }
+
 h2 {
     color: #4287f5;
+}
+
+.tab {
+    display: flex;
+    justify-content: center;
+}
+
+.tablinks {
+    background-color: rgba(162, 210, 255, 0.48);
+    margin: 14px 10px;
+    /*border: 1px  solid rgba(1,1,1,0.5);*/
+    float: left;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tablinks:hover {
+    background-color: rgb(162, 210, 255);
+    transition: 0.2s ease-in;
+
+}
+
+/*** COLORS ***/
+p {
+    margin-top: 30px;
+}
+
+.cntr {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.cntr .cntr-innr {
+    display: table-cell;
+    text-align: end;
+    vertical-align: middle;
+    margin-left: 10px;
+
+}
+
+/*** STYLES ***/
+.search {
+    display: inline-block;
+    position: relative;
+    height: 35px;
+    width: 35px;
+    box-sizing: border-box;
+    margin: 0px 8px 7px 0px;
+    padding: 7px 9px 0px 9px;
+    border: 3px solid #ffffff;
+    border-radius: 25px;
+    transition: all 200ms ease;
+    cursor: text;
+}
+
+.search:after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 20px;
+    right: -5px;
+    top: 21px;
+    background: #ffffff;
+    border-radius: 3px;
+    transform: rotate(-45deg);
+    transition: all 200ms ease;
+}
+
+.search.active,
+.search:hover {
+    width: 200px;
+    margin-right: 0px;
+}
+
+.search.active:after,
+.search:hover:after {
+    height: 0px;
+}
+
+.search input {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    font-family: Helvetica;
+    font-size: 15px;
+    color: inherit;
+    background: transparent;
+    outline-width: 0px;
+}
+
+
+.search_bar {
+    margin-bottom: 30px;
 }

@@ -20,9 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get("/admin/categories", function () {
-    $categories = new Categories();
-    $values = $categories->GetCategories();
-    $total_categories = $categories->GetTotalCategories();
+    $categories = new SubCategories();
+    $values = $categories->SubCategoriesAggregate();
+    $total_categories = $categories::all()->count();
     $subcategories = new SubCategories();
 
     $total_subcategories = $subcategories::all()->count();
@@ -30,12 +30,16 @@ Route::get("/admin/categories", function () {
     $menu = new \App\Models\Menu();
     $last_five = $menu->GetMenuItems(5);
 
-    return view("admin.categories", ["categories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories,"menus"=>$last_five]);
+    $categories = new Categories();
+    $categories_aggregate = $categories->GetCategoriesAggregate();
+
+
+    return view("admin.categories", ["subcategories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories, "menus" => $last_five, "categories_aggregate" => $categories_aggregate]);
 
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return file_get_contents(public_path()."/index.html");
 });
 
 Route::get("/admin/users", function () {
@@ -49,7 +53,6 @@ Route::get("/admin/users", function () {
 Route::get("/admin/upload_products", function () {
     return view("admin.upload_products");
 });
-
 
 Route::middleware([
     'auth:sanctum',

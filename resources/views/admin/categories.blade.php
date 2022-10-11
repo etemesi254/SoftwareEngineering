@@ -14,10 +14,18 @@
 <body class="bg-[#DFDFF0]">
 
 <div class="w-50 h-10 bg-[#0C0B0D]"></div>
+
 <div class="flex h-full">
     <div class="panel">
     </div>
+
     <div class="m-6">
+        <div style="display: flex;justify-content: space-between;margin-bottom: 30px">
+            <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px">
+                Hello <span style="color:#FF9F1C"> Darian</span>
+            </h1>
+        </div>
+
         <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px">
             Dashboard
         </h1>
@@ -55,7 +63,7 @@
             {{--    @endforeach--}}
         </div>
         <div>
-            <canvas id="myChart" style="width:100%;margin: 20px"></canvas>
+            <canvas id="myChart1" style="width:100%;margin: 20px"></canvas>
 
             <script>
                 let cNames = [];
@@ -63,23 +71,69 @@
                 Chart.defaults.font.family = "'Outfit', sans-serif";
                 Chart.defaults.font.size = 15;
 
-                @foreach ($categories as $category)
-                cNames.push("{{$category->subcategory_name}}");
-                cValues.push({{$category->counts}});
+                @foreach ($subcategories as $sub_category)
+                cNames.push("{{$sub_category->subcategory_name}}");
+                cValues.push({{$sub_category->counts}});
                 @endforeach
 
-                const max = Math.max(...cValues)
-                new Chart("myChart", {
+                const max2 = Math.max(...cValues)
+                new Chart("myChart1", {
                     type: "bar",
 
                     data: {
                         datasets: [
                             {
                                 data: cValues,
-                                label: "Categories",
+                                label: "Sub Categories",
                                 backgroundColor: "black"
                             }],
                         labels: cNames
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                max: max2 + 1,
+                                alignToPixels: true,
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+        <div>
+            <canvas id="myChart2" style="width:100%;margin: 20px;display: none"></canvas>
+
+            <script>
+                let cNames1 = [];
+                let cValues1 = [];
+                Chart.defaults.font.family = "'Outfit', sans-serif";
+                Chart.defaults.font.size = 15;
+
+                @foreach($categories_aggregate as $category_aggregate)
+                cNames1.push("{{$category_aggregate->category_name}}");
+                cValues1.push({{$category_aggregate->counts}});
+                @endforeach
+
+                const max = Math.max(...cValues1)
+                new Chart("myChart2", {
+                    type: "bar",
+
+                    data: {
+                        datasets: [
+                            {
+                                data: cValues1,
+                                label: "Categories",
+                                backgroundColor: "black"
+                            }],
+                        labels: cNames1
                     },
                     options: {
                         scales: {
@@ -100,10 +154,35 @@
                 });
             </script>
         </div>
+        <div class="tab">
+            <button class="tablinks" onclick="showSubCategories()"> Categories</button>
+            <button class="tablinks" onclick="showCategories()"> Sub Categories</button>
+        </div>
+        <script>
+            function showSubCategories() {
+                document.getElementById("myChart1").style.display = "block";
+                document.getElementById("myChart2").style.display = "none";
+            }
+            function showCategories(){
+                document.getElementById("myChart1").style.display = "none";
+                document.getElementById("myChart2").style.display = "block";
+
+            }
+        </script>
+
 
     </div>
 
     <div class="m-6">
+        <div class="search_bar">
+            <div class="cntr">
+                <div class="cntr-innr">
+                    <label class="search" for="inpt_search">
+                        <input id="inpt_search" type="text" />
+                    </label>
+                </div>
+            </div>
+        </div>
         <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px"> History</h1>
 
         <p style="font-family: 'Outfit',sans-serif;"> Last records added into the database</p>
@@ -118,7 +197,9 @@
                 <th> Subcategory Name</th>
 
             </tr>
-            <tr><td></td></tr>
+            <tr>
+                <td></td>
+            </tr>
             @foreach ($menus as $menu)
 
                 <tr>
@@ -136,6 +217,7 @@
         </table>
     </div>
 </div>
+
 
 </body>
 </html>
