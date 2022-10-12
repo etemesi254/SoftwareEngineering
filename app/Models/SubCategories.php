@@ -10,6 +10,13 @@ class SubCategories extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "subcategory_name",
+        "description",
+        "image",
+        "category_id"
+    ];
+
     function SubCategoriesAggregate(): \Illuminate\Support\Collection
     {
         //   select sub_categories.subcategory_name,categories.category_name ,COUNT(menus.subcategory_id)  as counts from menus

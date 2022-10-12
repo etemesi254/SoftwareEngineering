@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubCategoryFormController;
 use App\Models\Categories;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
@@ -88,6 +89,8 @@ Route::get("/admin/upload_subcategories", function () {
 });
 
 Route::post("/admin/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
+Route::post("/admin/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"])->name("/admin/upload_category_post");
+
 
 Route::middleware([
     'auth:sanctum',

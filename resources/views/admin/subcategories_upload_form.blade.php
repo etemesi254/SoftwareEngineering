@@ -9,7 +9,7 @@
 <body>
 <div>
     <!-- Upload Area -->
-    <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post" enctype="multipart/form-data" >
+    <form id="uploadArea" class="upload-area" action="/admin/upload_sub_category_post" method="post" enctype="multipart/form-data" >
         @csrf
         <div>
             <label>Name</label>
@@ -18,7 +18,7 @@
         <div>
             <label>Category</label>
 
-            <select id="categories" name="category" class="upload-texts">
+            <select id="categories" name="category_id" class="upload-texts">
                 @foreach ($categories as $category)
                     <option value='{{$category->id}}'  style='display: flex'> {{$category->category_name}} </option>
                 @endforeach
