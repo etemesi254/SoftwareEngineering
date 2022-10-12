@@ -2,38 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\CategoriesController;
-use App\Http\Requests\CategoriesStoreRequest;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 
-class CategoriesController extends Controller
+
+class CategoriesFormController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
         return view('admin.upload_products');
     }
 
-    public function store(CategoriesStoreRequest $request)
+    public function uploadCategory(Request $request): string
     {
-        $image = $request->file('image')->store('public/images');
 
-        Categories::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $image
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg,webp svg|max:2048'
+
         ]);
 
-        return to_route('admin.categories.index')->with('success', 'Category created successfully.');
+       // $imageName = time() . '.' . $request->image->extension();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('public/images/categories');
+            if ($image===false){
+                return "Image not uploaded";
+            }
+            Categories::create([
+                "category_name"=>$request->name,
+                "description"=>$request->description,
+                "image"=>$image
+            ]);
+        } else{
+         return "error";
+        }
+
+
+        return "success";
     }
 
-    
+
     public function update(Request $request, Categories $categories)
     {
         $request->validate([
@@ -57,8 +73,8 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Categories $categories)
     {

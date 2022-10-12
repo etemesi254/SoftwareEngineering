@@ -2,8 +2,9 @@
 
 use App\Models\Categories;
 use App\Models\SubCategories;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CategoriesFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,9 @@ use App\Http\Controllers\CategoriesController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::get("/admin/categories", function () {
     $categories = new SubCategories();
@@ -40,7 +41,7 @@ Route::get("/admin/categories", function () {
 });
 
 Route::get('/', function () {
-    return file_get_contents(public_path()."/index.html");
+    return file_get_contents(public_path() . "/index.html");
 });
 
 Route::get("/admin/users", function () {
@@ -64,8 +65,29 @@ Route::get("/admin/subcategories_form", function () {
 });
 
 Route::get("/admin/menu_form", function () {
-    return view("admin.menu_form");
+    $categories = Categories::all();
+
+//        return view('admin.menus.index', compact('menus'));
+    return view('admin.menu_form', ["categories" => $categories]);
+
+    //return view("admin.menu_form");
 });
+
+Route::get("/admin/upload_categories", function () {
+
+    return view('admin.categories_upload_form');
+
+});
+
+Route::get("/admin/upload_subcategories", function () {
+
+    $categories = Categories::all();
+
+    return view('admin.subcategories_upload_form', ["categories" => $categories]);
+
+});
+
+Route::post("/admin/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
 
 Route::middleware([
     'auth:sanctum',
@@ -75,4 +97,5 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
 });

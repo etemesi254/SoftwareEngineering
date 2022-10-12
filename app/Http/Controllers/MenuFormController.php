@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\MenuController;
 use App\Http\Requests\MenuStoreRequest;
 use App\Models\Categories;
 use App\Models\Menu;
@@ -14,12 +13,17 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
         $menus = Menu::all();
-        return view('admin.menus.index', compact('menus'));
+
+        $categories = Categories::all();
+
+//        return view('admin.menus.index', compact('menus'));
+        return view('admin.menu_form',["categories"=>$categories]);
+
     }
 
     /**
