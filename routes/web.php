@@ -3,6 +3,7 @@
 use App\Models\Categories;
 use App\Models\SubCategories;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,18 @@ Route::get("/admin/users", function () {
 
 Route::get("/admin/upload_products", function () {
     return view("admin.upload_products");
+});
+
+Route::get("/admin/categories_form", function () {
+    return view("categories_form");
+});
+
+Route::get("/admin/subcategories_form", function () {
+    return view("admin.subcategories_form");
+});
+
+Route::get("/admin/menu_form", function () {
+    return view("admin.menu_form");
 });
 
 Route::middleware([

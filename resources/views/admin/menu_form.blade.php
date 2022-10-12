@@ -38,7 +38,7 @@
                                             Description
                                         </th>
                                         <th scope="col" class="relative py-3 px-6">
-                                            <span class="sr-only">Edit</span>
+                                            <span class="sr-only">Add to menu</span>
                                         </th>
                                     </tr>
                                 </thead>
