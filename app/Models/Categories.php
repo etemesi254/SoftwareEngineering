@@ -11,7 +11,9 @@ class Categories extends Model
     use HasFactory;
 
     protected $fillable = [
-        "category_name"
+        "category_name",
+        "description",
+        "image"
     ];
 
     public function GetCategoriesAggregate(): \Illuminate\Support\Collection
