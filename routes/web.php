@@ -26,26 +26,21 @@ use App\Http\Controllers\CategoriesFormController;
 Route::get('/', [HomePageController::class, "showHomePage"]);
 // ----- Home page end ---------
 
-// ------- Categories start ----------
-Route::get("/admin/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
-Route::get("/admin/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
-Route::get("/admin/add_categories", [CategoriesController::class, "showCategoriesUploadForm"]);
-Route::post("/admin/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
-//-------- Categories end -----------------
+Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'])
+    ->name("admin")->prefix("admin")->group(function () {
+    // ------- Categories start ----------
+    Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
+    Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
+    Route::get("/add_categories", [CategoriesController::class, "showCategoriesUploadForm"]);
 
+    Route::post("/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
+    //-------- Categories end -----------------
 
-//--------- Subcategories start -------------
-Route::get("/admin/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
+    //--------- Subcategories start -------------
+    Route::get("/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
 
-Route::post("/admin/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
-//--------- Subcategories start -------------
+    Route::post("/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
+    //--------- Subcategories start -------------
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 });
+
