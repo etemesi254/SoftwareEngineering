@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\SubCategoryFormController;
 use App\Models\Categories;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesFormController;
 
@@ -18,79 +22,23 @@ use App\Http\Controllers\CategoriesFormController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+// ----- Home page  Start ------
+Route::get('/', [HomePageController::class, "showHomePage"]);
+// ----- Home page end ---------
 
-Route::get("/admin/categories", function () {
-    $categories = new SubCategories();
-    $values = $categories->SubCategoriesAggregate();
-    $total_categories = $categories::all()->count();
-    $subcategories = new SubCategories();
-
-    $total_subcategories = $subcategories::all()->count();
-
-    $menu = new \App\Models\Menu();
-    $last_five = $menu->GetMenuItems(5);
-
-    $categories = new Categories();
-    $categories_aggregate = $categories->GetCategoriesAggregate();
-
-
-    return view("admin.categories", ["subcategories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories, "menus" => $last_five, "categories_aggregate" => $categories_aggregate]);
-
-});
-
-Route::get('/', function () {
-    return file_get_contents(public_path() . "/index.html");
-});
-
-Route::get("/admin/users", function () {
-    $users = new User();
-    $values = $users->getUserOrders();
-
-    return view("admin.users", ["users" => $values, "total_users" => $users::count()]);
-
-});
-
-Route::get("/admin/upload_products", function () {
-    return view("admin.upload_products");
-});
-
-Route::get("/admin/categories_form", function () {
-    return view("categories_form");
-});
-
-Route::get("/admin/subcategories_form", function () {
-    return view("admin.subcategories_form");
-});
-
-Route::get("/admin/menu_form", function () {
-    $categories = Categories::all();
-
-//        return view('admin.menus.index', compact('menus'));
-    return view('admin.menu_form', ["categories" => $categories]);
-
-    //return view("admin.menu_form");
-});
-
-Route::get("/admin/upload_categories", function () {
-
-    return view('admin.categories_upload_form');
-
-});
-
-Route::get("/admin/upload_subcategories", function () {
-
-    $categories = Categories::all();
-
-    return view('admin.subcategories_upload_form', ["categories" => $categories]);
-
-});
-
+// ------- Categories start ----------
+Route::get("/admin/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
+Route::get("/admin/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
+Route::get("/admin/add_categories", [CategoriesController::class, "showCategoriesUploadForm"]);
 Route::post("/admin/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
-Route::post("/admin/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"])->name("/admin/upload_category_post");
+//-------- Categories end -----------------
 
+
+//--------- Subcategories start -------------
+Route::get("/admin/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
+
+Route::post("/admin/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
+//--------- Subcategories start -------------
 
 Route::middleware([
     'auth:sanctum',
@@ -100,5 +48,4 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
 });

@@ -9,22 +9,13 @@
 <body>
 <div>
     <!-- Upload Area -->
-    <form id="uploadArea" class="upload-area" action="/admin/upload_sub_category_post" method="post" enctype="multipart/form-data" >
+    <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post" enctype="multipart/form-data" >
         @csrf
         <div>
             <label>Name</label>
             <input type="text" class="upload-texts" style="display: block" name="name"></input>
-        </div>
-        <div>
-            <label>Category</label>
 
-            <select id="categories" name="category_id" class="upload-texts">
-                @foreach ($categories as $category)
-                    <option value='{{$category->id}}'  style='display: flex'> {{$category->category_name}} </option>
-                @endforeach
-            </select>
         </div>
-
 
         <div>
             <label>Description</label>
@@ -74,12 +65,20 @@
             </div>
         </div>
         <!-- End File Details -->
-        <input type="submit" class="submit-btn"></input>
+        <input type="submit" class="submit-btn" value="Submit"></input>
 
         @if($errors->any())
             <h4 class="m-auto p-2 f text-rose-500 text-center"
                 style="color: red">{{$errors->first()}}</h4>
         @endif
+        <div style="margin-top: 30px">
+            <a class="submit-btn" href="/admin/add_subcategories" style="text-decoration: none;color: black"> Add Sub Category</a>
+        </div>
+
+        <div style="margin-top: 30px">
+            <a class="submit-btn" href="/admin/categories_dashboard" style="text-decoration: none;color: black"> Categories Dashboard </a>
+        </div>
+
     </form>
     <!-- End Upload Area -->
 
@@ -694,7 +693,7 @@
         // If The Uploaded File Is An Image
         if (isImage.length !== 0) {
             // Check, If File Size Is 2MB or Less
-            if (fileSize <= 2000000) { // 2MB :)
+            if (fileSize <= 20000000) { // 2MB :)
                 return true;
             } else { // Else File Size
                 return alert('Please Your File Should be 2 Megabytes or Less');

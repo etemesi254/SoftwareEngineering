@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <title>Upload Category-Heaven's Taste</title>
+    <title>Upload SubCategories-Heaven's Taste</title>
     <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
     <link rel="stylesheet" href="../css/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
@@ -9,13 +9,22 @@
 <body>
 <div>
     <!-- Upload Area -->
-    <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post" enctype="multipart/form-data" >
+    <form id="uploadArea" class="upload-area" action="/admin/upload_sub_category_post" method="post" enctype="multipart/form-data" >
         @csrf
         <div>
             <label>Name</label>
             <input type="text" class="upload-texts" style="display: block" name="name"></input>
-
         </div>
+        <div>
+            <label>Category</label>
+
+            <select id="categories" name="category_id" class="upload-texts">
+                @foreach ($categories as $category)
+                    <option value='{{$category->id}}'  style='display: flex'> {{$category->category_name}} </option>
+                @endforeach
+            </select>
+        </div>
+
 
         <div>
             <label>Description</label>

@@ -163,7 +163,8 @@
                 document.getElementById("myChart1").style.display = "block";
                 document.getElementById("myChart2").style.display = "none";
             }
-            function showCategories(){
+
+            function showCategories() {
                 document.getElementById("myChart1").style.display = "none";
                 document.getElementById("myChart2").style.display = "block";
 
@@ -178,37 +179,37 @@
             <div class="cntr">
                 <div class="cntr-innr">
                     <label class="search" for="inpt_search">
-                        <input id="inpt_search" type="text" />
+                        <input id="inpt_search" type="text"/>
                     </label>
                 </div>
             </div>
         </div>
-        <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px"> History</h1>
+        <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px"> Categories</h1>
 
-        <p style="font-family: 'Outfit',sans-serif;"> Last records added into the database</p>
+        <p style="font-family: 'Outfit',sans-serif;"> Categories present in the database</p>
 
         <div class="h-10"></div>
-        <table>
+        <table >
             <tr style="margin-bottom:10px">
                 <th> Image</th>
-                <th> ID</th>
                 <th> Name</th>
-                <th> Unit Price</th>
-                <th> Subcategory Name</th>
+                <th> Category Description</th>
 
             </tr>
             <tr>
                 <td></td>
             </tr>
-            @foreach ($menus as $menu)
+            @foreach ($categories as $category)
 
                 <tr>
-                    <td class="rounded-full bg-[#ffffff]"></td>
-                    <td> {{$menu->id}}</td>
+                    <td>
+                        <img src="{{ Storage::url($category->image) }}"
+                             class="rounded-lg" style="width: 14rem;height: 7.2rem">
+                    </td>
 
-                    <td style=""> {{$menu->name}}</td>
-                    <td> {{$menu->unit_price}}</td>
-                    <td> {{$menu->subcategory_name}}</td>
+                    <td style=""> {{$category->category_name}}</td>
+                    {{--                    <td> {{$menu->unit_price}}</td>--}}
+                    <td> {{$category->description}}</td>
                 </tr>
                 <tr>
                     <td></td>

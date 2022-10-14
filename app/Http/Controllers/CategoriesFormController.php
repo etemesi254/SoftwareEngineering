@@ -26,7 +26,7 @@ class CategoriesFormController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg,webp svg|max:2048'
+            'image' => 'required|image|mimes:png,jpg,jpeg,webp svg|max:20480'
 
         ]);
 
