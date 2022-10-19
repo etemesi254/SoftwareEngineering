@@ -11,7 +11,7 @@
             integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="bg-[#DFDFF0]">
+<body style="background-color: rgba(107,162,146,0.1)">
 
 <div class="w-50 h-10 bg-[#0C0B0D]"></div>
 
@@ -20,13 +20,8 @@
     </div>
 
     <div class="m-6">
-        <div style="display: flex;justify-content: space-between;margin-bottom: 30px">
-            <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px">
-                Hello <span style="color:#FF9F1C"> Darian</span>
-            </h1>
-        </div>
 
-        <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px">
+        <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px;color: #ff7720">
             Dashboard
         </h1>
         <h1 style="font-family:'Outfit',sans-serif;font-weight: lighter;font-size: 20px;color: #6b7280">
@@ -35,8 +30,8 @@
         <div class="flex justify-between mx-10  flex-wrap">
 
             {{--    @foreach ($categories as $category)--}}
-            <div
-                class="m-5 p-5 rounded-3xl bg-white shadow-lg hover:shadow-2xl flex justify-between flex-col w-56 text-center">
+            <div style="background-color: rgba(230,96,1,0.2)"
+                 class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-56 text-center">
 
                 <i class="fa-solid fa-list fa-2xl my-5"></i>
 
@@ -48,8 +43,8 @@
                 <div
                     style="font-family: 'Outfit', sans-serif;font-weight: bold;font-size: 18px">{{ $total_categories}}</div>
             </div>
-            <div
-                class="m-5 p-5 rounded-3xl bg-white shadow-lg	hover:shadow-2xl flex justify-between flex-col w-56 text-center">
+            <div style="background-color: rgba(230,96,1,0.2)"
+                 class="m-5 p-5 rounded-3xl bg-white shadow-lg	hover:shadow-2xl flex justify-between flex-col w-56 text-center">
                 <i class="fa-solid fa-list-1-2 fa-2xl my-5"></i>
 
                 <div
@@ -85,7 +80,7 @@
                             {
                                 data: cValues,
                                 label: "Sub Categories",
-                                backgroundColor: "black"
+                                backgroundColor: "#ff7720"
                             }],
                         labels: cNames
                     },
@@ -131,7 +126,7 @@
                             {
                                 data: cValues1,
                                 label: "Categories",
-                                backgroundColor: "black"
+                                backgroundColor: "#ff7720"
                             }],
                         labels: cNames1
                     },
@@ -175,21 +170,12 @@
     </div>
 
     <div class="m-6">
-        <div class="search_bar">
-            <div class="cntr">
-                <div class="cntr-innr">
-                    <label class="search" for="inpt_search">
-                        <input id="inpt_search" type="text"/>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px"> Categories</h1>
+        <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px;color: #ff7720"> Categories</h1>
 
         <p style="font-family: 'Outfit',sans-serif;"> Categories present in the database</p>
 
         <div class="h-10"></div>
-        <table >
+        <table>
             <tr style="margin-bottom:10px">
                 <th> Image</th>
                 <th> Name</th>
@@ -217,6 +203,22 @@
             @endforeach
         </table>
     </div>
+
+    <div style="width: 500px;border-left: solid 1px rgba(0,0,0,0.1);height: 100%" class="px-6 my-6">
+        <div style="display: flex;justify-content: space-between;margin-bottom: 30px">
+            <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px">
+                Hello <span style="color:#FF9F1C"> {{$user->name}}</span>
+            </h1>
+        </div>
+        <div class="avatar-image">
+            <div style="margin: auto;border-radius: 9999px;background-color: #1b171d;width: 100px;height: 100px"></div>
+        </div>
+
+        <div style=" display: flex;justify-content: flex-end;flex-direction: column;">
+            <h3>email:{{$user->email}}</h3>
+        </div>
+    </div>
+
 </div>
 
 

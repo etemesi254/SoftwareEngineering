@@ -25,6 +25,11 @@ Route::get('/', [HomePageController::class, "showHomePage"]);
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
     ->name("admin")->prefix("admin")->group(function () {
+        // -- Main dashboard ----
+        Route::get("/",function (){
+            $user = auth()->user();
+            return view("admin.dashboard",["user"=>$user]);
+        });
         // ------- Categories start ----------
         Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
         Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
