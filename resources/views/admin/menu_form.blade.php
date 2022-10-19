@@ -9,18 +9,26 @@
 <body>
 <div>
     <!-- Upload Area -->
-    <form id="uploadArea" class="upload-area" action="/admin/upload_sub_category_post" method="post" enctype="multipart/form-data" >
+    <form id="uploadArea" class="upload-area" action="/admin/upload_menu_post" method="post"
+          enctype="multipart/form-data">
         @csrf
         <div>
             <label>Name</label>
-            <input type="text" class="upload-texts" style="display: block" name="name"></input>
+            <input type="text" class="upload-texts" style="display: block" name="name">
         </div>
-        
-        <div>
-            <label>SubCategory</label>
 
-            <select id="sub_categories" name="subcategory_id" class="upload-texts">
-            
+        <div>
+
+
+            <label for="sub_categories">SubCategory</label>
+
+            <select id="sub_categories" name="subcategory"
+                    class="upload-texts">
+
+                @foreach ($subcategories as $subcategory)
+                    <option value='{{$subcategory->id}}'
+                            style='display: flex'> {{$subcategory->subcategory_name}} </option>
+                @endforeach
             </select>
         </div>
 
@@ -33,10 +41,14 @@
 
         <div>
             <label>Price</label>
-            <input type="text" class="upload-texts" style="display: block" name="price"></input>
-
+            <input type="text" class="upload-texts" style="display: block" name="price">
         </div>
 
+
+        <div>
+            <label>Available Quantity</label>
+            <input type="text" class="upload-texts" style="display: block" name="quantity"></input>
+        </div>
         <!-- Header -->
         <div class="upload-area__header">
             <h1 class="upload-area__title">Upload your file</h1>
@@ -155,9 +167,11 @@
         width: 100%;
         margin: 5px;
     }
+
     .upload-texts:focus {
         border: 2px solid var(--clr-light-blue);
     }
+
     .submit-btn {
         background-color: var(--clr-light-blue);
         box-shadow: 0 10px 60px rgb(218, 229, 255);
@@ -175,6 +189,7 @@
         box-sizing: border-box;
         font-family: 'Cardo', serif;
     }
+
     :root {
         --clr-white: rgb(255, 255, 255);
         --clr-black: rgb(0, 0, 0);
@@ -183,6 +198,7 @@
         --clr-blue: rgb(63, 134, 255);
         --clr-light-blue: rgb(171, 202, 255);
     }
+
     body {
         margin: 0;
         padding: 0;
@@ -195,6 +211,7 @@
         justify-content: center;
         align-items: center;
     }
+
     /* End General Styles */
     /* Upload Area */
     .upload-area {
@@ -209,9 +226,11 @@
         margin: auto;
         margin-top: 30px;
     }
+
     .upload-area--open { /* Slid Down Animation */
         animation: slidDown 500ms ease-in-out;
     }
+
     @keyframes slidDown {
         from {
             height: 28.125rem; /* 450px */
@@ -220,28 +239,34 @@
             height: 35rem; /* 560px */
         }
     }
+
     /* Header */
     .upload-area__header {
     }
+
     .upload-area__title {
         font-size: 1.8rem;
         font-weight: 500;
         margin-bottom: 0.3125rem;
     }
+
     .upload-area__paragraph {
         font-size: 0.9375rem;
         color: var(--clr-light-gray);
         margin-top: 0;
     }
+
     .upload-area__tooltip {
         position: relative;
         color: var(--clr-light-blue);
         cursor: pointer;
         transition: color 300ms ease-in-out;
     }
+
     .upload-area__tooltip:hover {
         color: var(--clr-blue);
     }
+
     .upload-area__tooltip-data {
         position: absolute;
         top: 50%;
@@ -258,10 +283,12 @@
         transition: none 300ms ease-in-out;
         transition-property: opacity, visibility;
     }
+
     .upload-area__tooltip:hover .upload-area__tooltip-data {
         opacity: 1;
         visibility: visible;
     }
+
     /* Drop Zoon */
     .upload-area__drop-zoon {
         position: relative;
@@ -276,15 +303,18 @@
         cursor: pointer;
         transition: border-color 300ms ease-in-out;
     }
+
     .upload-area__drop-zoon:hover {
         border-color: var(--clr-blue);
     }
+
     .drop-zoon__icon {
         display: flex;
         font-size: 3.75rem;
         color: var(--clr-blue);
         transition: opacity 300ms ease-in-out;
     }
+
     .drop-zoon__paragraph {
         font-size: 0.9375rem;
         color: var(--clr-light-gray);
@@ -292,10 +322,12 @@
         margin-top: 0.625rem;
         transition: opacity 300ms ease-in-out;
     }
+
     .drop-zoon:hover .drop-zoon__icon,
     .drop-zoon:hover .drop-zoon__paragraph {
         opacity: 0.7;
     }
+
     .drop-zoon__loading-text {
         position: absolute;
         top: 50%;
@@ -305,6 +337,7 @@
         color: var(--clr-light-blue);
         z-index: 10;
     }
+
     .drop-zoon__preview-image {
         position: absolute;
         top: 0;
@@ -318,27 +351,34 @@
         z-index: 1000;
         transition: opacity 300ms ease-in-out;
     }
+
     .drop-zoon:hover .drop-zoon__preview-image {
         opacity: 0.8;
     }
+
     .drop-zoon__file-input {
         display: none;
     }
+
     /* (drop-zoon--over) Modifier Class */
     .drop-zoon--over {
         border-color: var(--clr-blue);
     }
+
     .drop-zoon--over .drop-zoon__icon,
     .drop-zoon--over .drop-zoon__paragraph {
         opacity: 0.7;
     }
+
     /* (drop-zoon--over) Modifier Class */
     .drop-zoon--Uploaded {
     }
+
     .drop-zoon--Uploaded .drop-zoon__icon,
     .drop-zoon--Uploaded .drop-zoon__paragraph {
         display: none;
     }
+
     /* File Details Area */
     .upload-area__file-details {
         height: 0;
@@ -349,17 +389,20 @@
         transition-property: opacity, visibility;
         transition-delay: 500ms;
     }
+
     /* (duploaded-file--open) Modifier Class */
     .file-details--open {
         height: auto;
         visibility: visible;
         opacity: 1;
     }
+
     .file-details__title {
         font-size: 1.125rem;
         font-weight: 500;
         color: var(--clr-light-gray);
     }
+
     /* Uploaded File */
     .uploaded-file {
         display: flex;
@@ -370,19 +413,23 @@
         transition: none 500ms ease-in-out;
         transition-property: visibility, opacity;
     }
+
     /* (duploaded-file--open) Modifier Class */
     .uploaded-file--open {
         visibility: visible;
         opacity: 1;
     }
+
     .uploaded-file__icon-container {
         position: relative;
         margin-right: 0.3125rem;
     }
+
     .uploaded-file__icon {
         font-size: 3.4375rem;
         color: var(--clr-blue);
     }
+
     .uploaded-file__icon-text {
         position: absolute;
         top: 1.5625rem;
@@ -392,6 +439,7 @@
         font-weight: 500;
         color: var(--clr-white);
     }
+
     .uploaded-file__info {
         position: relative;
         top: -0.3125rem;
@@ -399,6 +447,7 @@
         display: flex;
         justify-content: space-between;
     }
+
     .uploaded-file__info::before,
     .uploaded-file__info::after {
         content: '';
@@ -409,18 +458,22 @@
         background-color: #ebf2ff;
         border-radius: 0.625rem;
     }
+
     .uploaded-file__info::before {
         width: 100%;
     }
+
     .uploaded-file__info::after {
         width: 100%;
         background-color: var(--clr-blue);
     }
+
     /* Progress Animation */
     .uploaded-file__info--active::after {
         animation: progressMove 800ms ease-in-out;
         animation-delay: 300ms;
     }
+
     @keyframes progressMove {
         from {
             width: 0%;
@@ -431,6 +484,7 @@
             background-color: var(--clr-blue);
         }
     }
+
     .uploaded-file__name {
         width: 100%;
         max-width: 6.25rem; /* 100px */
@@ -440,6 +494,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .uploaded-file__counter {
         font-size: 1rem;
         color: var(--clr-light-gray);
@@ -518,6 +573,7 @@
         // Call Function uploadFile(), And Send To Her The Chosen File :)
         uploadFile(file);
     });
+
     // Upload File Function
     function uploadFile(file) {
         // FileReader()
@@ -569,6 +625,7 @@
         }
         ;
     };
+
     // Progress Counter Increase Function
     function progressMove() {
         // Counter Start
@@ -590,6 +647,7 @@
             }, 100);
         }, 600);
     };
+
     // Simple File Validate Function
     function fileValidate(fileType, fileSize) {
         // File Type Validation

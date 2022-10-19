@@ -9,6 +9,19 @@ use Illuminate\Support\Facades\DB;
 class Menu extends Model
 {
     use HasFactory;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'unit_price',
+        'description',
+        "image",
+        "available_quantity",
+        "subcategory_id",
+    ];
 
     public function GetMenuItems($limit = PHP_INT_MAX, $order_by_direction = 'asc'): \Illuminate\Support\Collection
     {
