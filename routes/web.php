@@ -1,9 +1,12 @@
 <?php
 
-use App\Models\Categories;
-use App\Models\SubCategories;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SubCategoriesController;
+use App\Http\Controllers\SubCategoryFormController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoriesFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,30 +19,35 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// ----- Home page  Start ------
+Route::get('/', [HomePageController::class, "showHomePage"]);
+// ----- Home page end ---------
 
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
+    ->name("admin")->prefix("admin")->group(function () {
+        // -- Main dashboard ----
+        Route::get("/",function (){
+            $user = auth()->user();
+            return view("admin.dashboard",["user"=>$user]);
+        });
+        // ------- Categories start ----------
+        Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
+        Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
+        Route::get("/add_categories", [CategoriesController::class, "showCategoriesUploadForm"]);
 
+        Route::post("/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
+        //-------- Categories end -----------------
 
-Route::get("/admin/categories", function () {
-    $categories = new Categories();
-    $values = $categories->GetCategories();
-    $total_categories = $categories->GetTotalCategories();
-    $subcategories = new SubCategories();
+        //--------- Subcategories start -------------
+        Route::get("/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
 
-    $total_subcategories = $subcategories::all()->count();
+        Route::post("/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
+        //--------- Subcategories start -------------
 
-    return view("admin.categories", ["categories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories]);
+        //------- Menu start -----------------------
+        Route::get("/add_menu",[MenuController::class,"showUploadForm"]);
+        Route::post("/upload_menu_post",[MenuController::class,"uploadMenu"]);
+        //------ Menu End --------------------
 
-});
+    });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});

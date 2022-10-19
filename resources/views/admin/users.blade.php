@@ -12,6 +12,9 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body class="bg-[#DFDFF0]">
+<div  class="w-50 h-10 bg-[#00000]">
+
+</div>
 <div class="flex h-full">
     <div class="panel">
 
@@ -34,24 +37,13 @@
 
                 <div
                     style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Total number <br>of
-                    categories
+                    Users
                 </div>
 
                 <div
-                    style="font-family: 'Outfit', sans-serif;font-weight: bold;font-size: 18px">{{ $total_categories}}</div>
+                    style="font-family: 'Outfit', sans-serif;font-weight: bold;font-size: 18px">{{ $total_users}}</div>
             </div>
-            <div
-                class="m-5 p-5 rounded-3xl bg-white shadow-lg	hover:shadow-2xl flex justify-between flex-col w-56 text-center">
-                <i class="fa-solid fa-list-1-2 fa-2xl my-5"></i>
 
-                <div
-                    style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px"> Total number <br>of
-                    sub categories
-                </div>
-
-                <div
-                    style="font-family: 'Outfit', sans-serif;font-weight: bold;font-size: 18px">{{ $total_subcategories}}</div>
-            </div>
             {{--    @endforeach--}}
         </div>
         <div>
@@ -63,9 +55,9 @@
                 Chart.defaults.font.family = "'Outfit', sans-serif";
                 Chart.defaults.font.size = 15;
 
-                @foreach ($categories as $category)
-                cNames.push("{{$category->subcategory_name}}");
-                cValues.push({{$category->counts}});
+                @foreach ($users as $user)
+                cNames.push("{{$user->username}}");
+                cValues.push({{$user->quantity}});
                 @endforeach
 
                 const max = Math.max(...cValues)
@@ -76,7 +68,7 @@
                         datasets: [
                             {
                                 data: cValues,
-                                label: "Categories",
+                                label: "Users",
                                 backgroundColor: "black"
                             }],
                         labels: cNames

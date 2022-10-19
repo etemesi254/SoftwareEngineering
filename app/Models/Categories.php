@@ -11,22 +11,25 @@ class Categories extends Model
     use HasFactory;
 
     protected $fillable = [
-        "category_name"
+        "category_name",
+        "description",
+        "image"
     ];
 
-    public function GetCategories(): \Illuminate\Support\Collection
+    public function GetCategoriesAggregate(): \Illuminate\Support\Collection
     {
-        //   select sub_categories.subcategory_name,categories.category_name ,COUNT(menus.subcategory_id)  as counts from menus
-        //	 left join sub_categories on sub_categories.id = menus.subcategory_id
-        //   left join categories on sub_categories.category_id = categories.id
-        //   GROUP BY menus.subcategory_id;
+
+        // select categories.category_name, count(categories.id) as counts from menus
+        // RIGHT join sub_categories on sub_categories.id = menus.subcategory_id
+        // RIGHT JOIN categories on sub_categories.category_id = categories.id
+        // GROUP by menus.subcategory_id;
         return DB::table("menus")
-            ->leftJoin("sub_categories", "sub_categories.id", "=", "menus.subcategory_id")
-            ->leftJoin("categories", "categories.id", "=", "sub_categories.category_id")
-            ->select("sub_categories.subcategory_name", "categories.category_name")
-            ->selectRaw("COUNT(menus.subcategory_id)  as counts")
+            ->rightJoin("sub_categories", "sub_categories.id", "=", "menus.subcategory_id")
+            ->rightJoin("categories","sub_categories.category_id","=","categories.id")
+            ->selectRaw("categories.category_name, count(categories.id) as counts")
             ->groupBy("menus.subcategory_id")
             ->get();
+
 
 
     }

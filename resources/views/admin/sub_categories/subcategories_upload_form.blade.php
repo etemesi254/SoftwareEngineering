@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <title>Menu Upload-Heaven's Taste</title>
+    <title>Upload SubCategories-Heaven's Taste</title>
     <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
     <link rel="stylesheet" href="../css/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
@@ -9,25 +9,18 @@
 <body>
 <div>
     <!-- Upload Area -->
-    <form id="uploadArea" class="upload-area" action="/admin/upload_menu_post" method="post"
-          enctype="multipart/form-data">
+    <form id="uploadArea" class="upload-area" action="/admin/upload_sub_category_post" method="post" enctype="multipart/form-data" >
         @csrf
         <div>
             <label>Name</label>
-            <input type="text" class="upload-texts" style="display: block" name="name">
+            <input type="text" class="upload-texts" style="display: block" name="name"></input>
         </div>
-
         <div>
+            <label>Category</label>
 
-
-            <label for="sub_categories">SubCategory</label>
-
-            <select id="sub_categories" name="subcategory"
-                    class="upload-texts">
-
-                @foreach ($subcategories as $subcategory)
-                    <option value='{{$subcategory->id}}'
-                            style='display: flex'> {{$subcategory->subcategory_name}} </option>
+            <select id="categories" name="category_id" class="upload-texts">
+                @foreach ($categories as $category)
+                    <option value='{{$category->id}}'  style='display: flex'> {{$category->category_name}} </option>
                 @endforeach
             </select>
         </div>
@@ -39,16 +32,6 @@
 
         </div>
 
-        <div>
-            <label>Price</label>
-            <input type="text" class="upload-texts" style="display: block" name="price">
-        </div>
-
-
-        <div>
-            <label>Available Quantity</label>
-            <input type="text" class="upload-texts" style="display: block" name="quantity"></input>
-        </div>
         <!-- Header -->
         <div class="upload-area__header">
             <h1 class="upload-area__title">Upload your file</h1>
@@ -156,7 +139,6 @@
     </div>
 </div>
 </body>
-
 <style>
     .upload-texts {
         background-color: var(--clr-white);
@@ -182,12 +164,15 @@
         /*padding: 2rem 1.875rem 5rem 1.875rem;*/
         text-align: center;
     }
+
 </style>
 <style>
     /* General Styles */
+
     * {
         box-sizing: border-box;
         font-family: 'Cardo', serif;
+
     }
 
     :root {
@@ -213,6 +198,7 @@
     }
 
     /* End General Styles */
+
     /* Upload Area */
     .upload-area {
         width: 100%;
@@ -235,6 +221,7 @@
         from {
             height: 28.125rem; /* 450px */
         }
+
         to {
             height: 35rem; /* 560px */
         }
@@ -242,6 +229,7 @@
 
     /* Header */
     .upload-area__header {
+
     }
 
     .upload-area__title {
@@ -372,6 +360,7 @@
 
     /* (drop-zoon--over) Modifier Class */
     .drop-zoon--Uploaded {
+
     }
 
     .drop-zoon--Uploaded .drop-zoon__icon,
@@ -479,6 +468,7 @@
             width: 0%;
             background-color: transparent;
         }
+
         to {
             width: 100%;
             background-color: var(--clr-blue);
@@ -504,30 +494,43 @@
 <script>
     // Design By
     // - https://dribbble.com/shots/13992184-File-Uploader-Drag-Drop
+
     // Select Upload-Area
     const uploadArea = document.querySelector('#uploadArea')
+
     // Select Drop-Zoon Area
     const dropZoon = document.querySelector('#dropZoon');
+
     // Loading Text
     const loadingText = document.querySelector('#loadingText');
+
     // Slect File Input
     const fileInput = document.querySelector('#fileInput');
+
     // Select Preview Image
     const previewImage = document.querySelector('#previewImage');
+
     // File-Details Area
     const fileDetails = document.querySelector('#fileDetails');
+
     // Uploaded File
     const uploadedFile = document.querySelector('#uploadedFile');
+
     // Uploaded File Info
     const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
+
     // Uploaded File  Name
     const uploadedFileName = document.querySelector('.uploaded-file__name');
+
     // Uploaded File Icon
     const uploadedFileIconText = document.querySelector('.uploaded-file__icon-text');
+
     // Uploaded File Counter
     const uploadedFileCounter = document.querySelector('.uploaded-file__counter');
+
     // ToolTip Data
     const toolTipData = document.querySelector('.upload-area__tooltip-data');
+
     // Images Types
     const imagesTypes = [
         "jpeg",
@@ -536,40 +539,51 @@
         "gif",
         "webp"
     ];
+
     // Append Images Types Array Inisde Tooltip Data
     toolTipData.innerHTML = [...imagesTypes].join(', .');
+
     // When (drop-zoon) has (dragover) Event
     dropZoon.addEventListener('dragover', function (event) {
         // Prevent Default Behavior
         event.preventDefault();
+
         // Add Class (drop-zoon--over) On (drop-zoon)
         dropZoon.classList.add('drop-zoon--over');
     });
+
     // When (drop-zoon) has (dragleave) Event
     dropZoon.addEventListener('dragleave', function (event) {
         // Remove Class (drop-zoon--over) from (drop-zoon)
         dropZoon.classList.remove('drop-zoon--over');
     });
+
     // When (drop-zoon) has (drop) Event
     dropZoon.addEventListener('drop', function (event) {
         // Prevent Default Behavior
         event.preventDefault();
+
         // Remove Class (drop-zoon--over) from (drop-zoon)
         dropZoon.classList.remove('drop-zoon--over');
+
         // Select The Dropped File
         const file = event.dataTransfer.files[0];
+
         // Call Function uploadFile(), And Send To Her The Dropped File :)
         uploadFile(file);
     });
+
     // When (drop-zoon) has (click) Event
     dropZoon.addEventListener('click', function (event) {
         // Click The (fileInput)
         fileInput.click();
     });
+
     // When (fileInput) has (change) Event
     fileInput.addEventListener('change', function (event) {
         // Select The Chosen File
         const file = event.target.files[0];
+
         // Call Function uploadFile(), And Send To Her The Chosen File :)
         uploadFile(file);
     });
@@ -582,28 +596,34 @@
         const fileType = file.type;
         // File Size
         const fileSize = file.size;
+
         // If File Is Passed from the (File Validation) Function
         if (fileValidate(fileType, fileSize)) {
             // Add Class (drop-zoon--Uploaded) on (drop-zoon)
             dropZoon.classList.add('drop-zoon--Uploaded');
+
             // Show Loading-text
             loadingText.style.display = "block";
             // Hide Preview Image
             previewImage.style.display = 'none';
+
             // Remove Class (uploaded-file--open) From (uploadedFile)
             uploadedFile.classList.remove('uploaded-file--open');
             // Remove Class (uploaded-file__info--active) from (uploadedFileInfo)
             uploadedFileInfo.classList.remove('uploaded-file__info--active');
+
             // After File Reader Loaded
             fileReader.addEventListener('load', function () {
                 // After Half Second
                 setTimeout(function () {
                     // Add Class (upload-area--open) On (uploadArea)
                     uploadArea.classList.add('upload-area--open');
+
                     // Hide Loading-text (please-wait) Element
                     loadingText.style.display = "none";
                     // Show Preview Image
                     previewImage.style.display = 'block';
+
                     // Add Class (file-details--open) On (fileDetails)
                     fileDetails.classList.add('file-details--open');
                     // Add Class (uploaded-file--open) On (uploadedFile)
@@ -611,17 +631,23 @@
                     // Add Class (uploaded-file__info--active) On (uploadedFileInfo)
                     uploadedFileInfo.classList.add('uploaded-file__info--active');
                 }, 500); // 0.5s
+
                 // Add The (fileReader) Result Inside (previewImage) Source
                 previewImage.setAttribute('src', fileReader.result);
+
                 // Add File Name Inside Uploaded File Name
                 uploadedFileName.innerHTML = file.name;
+
                 // Call Function progressMove();
                 progressMove();
             });
+
             // Read (file) As Data Url
             fileReader.readAsDataURL(file);
         } else { // Else
+
             this; // (this) Represent The fileValidate(fileType, fileSize) Function
+
         }
         ;
     };
@@ -630,6 +656,7 @@
     function progressMove() {
         // Counter Start
         let counter = 0;
+
         // After 600ms
         setTimeout(() => {
             // Every 100ms
@@ -648,10 +675,12 @@
         }, 600);
     };
 
+
     // Simple File Validate Function
     function fileValidate(fileType, fileSize) {
         // File Type Validation
         let isImage = imagesTypes.filter((type) => fileType.indexOf(`image/${type}`) !== -1);
+
         // If The Uploaded File Type Is 'jpeg'
         if (isImage[0] === 'jpeg') {
             // Add Inisde (uploadedFileIconText) The (jpg) Value
@@ -661,6 +690,7 @@
             uploadedFileIconText.innerHTML = isImage[0];
         }
         ;
+
         // If The Uploaded File Is An Image
         if (isImage.length !== 0) {
             // Check, If File Size Is 2MB or Less
@@ -675,6 +705,7 @@
         }
         ;
     };
+
     // :)
 </script>
 </html>
