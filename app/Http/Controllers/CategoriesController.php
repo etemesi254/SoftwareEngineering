@@ -13,6 +13,7 @@ class CategoriesController extends Controller
 
     function showCategoriesDashboard(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $user = auth()->user();
         $categories = new SubCategories();
         $values = $categories->SubCategoriesAggregate();
         $total_categories = $categories::all()->count();
@@ -27,7 +28,12 @@ class CategoriesController extends Controller
         $categories = new Categories();
         $categories_aggregate = $categories->GetCategoriesAggregate();
 
-        return view("admin.categories.categories_dashboard", ["subcategories" => $values, "total_categories" => $total_categories, "total_subcategories" => $total_subcategories, "categories" => DB::table("categories")->limit(3)->get(), "categories_aggregate" => $categories_aggregate]);
+        return view("admin.categories.categories_dashboard", ["subcategories" => $values,
+            "total_categories" => $total_categories,
+            "total_subcategories" => $total_subcategories,
+            "categories" => DB::table("categories")->limit(3)->get(),
+            "categories_aggregate" => $categories_aggregate,
+            "user" => $user]);
     }
 
     function showCategoriesUploadView(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
