@@ -241,8 +241,6 @@
     }
 
     /* Header */
-    .upload-area__header {
-    }
 
     .upload-area__title {
         font-size: 1.8rem;
@@ -371,8 +369,7 @@
     }
 
     /* (drop-zoon--over) Modifier Class */
-    .drop-zoon--Uploaded {
-    }
+    
 
     .drop-zoon--Uploaded .drop-zoon__icon,
     .drop-zoon--Uploaded .drop-zoon__paragraph {
