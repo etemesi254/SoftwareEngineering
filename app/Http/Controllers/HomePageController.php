@@ -32,10 +32,11 @@ class HomePageController extends Controller
         $category_details = DB::table("categories")
             ->where("category_name", "=", $time->value)
             ->first();
+        $menus = new MenuController();
+        $menu_details = $menus->getMenusForTime($time);
 
 
-
-        return view("index",["category"=>$category_details]);
+        return view("index",["category"=>$category_details,"menus"=>$menu_details]);
     }
 
 }

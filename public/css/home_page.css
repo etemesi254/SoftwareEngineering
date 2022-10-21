@@ -184,6 +184,9 @@ p{
     background-color: #ff7720;
     color: whitesmoke;
 }
+.menu-order-btn:hover{
+    color: whitesmoke;
+}
 .col-4-desc{
 
     font-size: 17px;
@@ -217,6 +220,9 @@ width: 160px;
     border-radius: 30px;
     text-decoration: none;
     background-color: #0c5460;
+    color: whitesmoke;
+}
+.menu-btn:hover, .order-btn:hover{
     color: whitesmoke;
 }
 
