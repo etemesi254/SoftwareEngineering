@@ -15,9 +15,9 @@ class HomePageController extends Controller
     {
         $timeOfDay = date('a');
         if ($timeOfDay == 'am') {
-            return TimeOfDay::Morning;
+            return "breakfast";
         } else {
-            return TimeOfDay::Afternoon;
+            return "lunch";
         }
 
     }
@@ -30,13 +30,13 @@ class HomePageController extends Controller
 
         // Get sub category, this is set up there with enums
         $category_details = DB::table("categories")
-            ->where("category_name", "=", $time->value)
+            ->where("category_name", "=", $time)
             ->first();
         $menus = new MenuController();
         $menu_details = $menus->getMenusForTime($time);
 
 
-        return view("index",["category"=>$category_details,"menus"=>$menu_details]);
+        return view("index", ["category" => $category_details, "menus" => $menu_details]);
     }
 
 }
