@@ -12,7 +12,7 @@ class MenuController extends Controller
 {
     function showUploadForm()
     {
-        $subcateggetMenusForTimeories = SubCategories::all();
+        $subcategories = SubCategories::all();
         return view("admin.menu_form", ["subcategories" => $subcategories]);
     }
     function uploadMenu(Request $request){
@@ -45,7 +45,7 @@ class MenuController extends Controller
         return "success";
     }
 
-    public function getMenusForTime(TimeOfDay $time=TimeOfDay::All,int $limit=PHP_INT_MAX,): \Illuminate\Support\Collection
+    public function getMenusForTime(String $time="*",int $limit=PHP_INT_MAX,): \Illuminate\Support\Collection
     {
         // Do some joins I love
         return Db::table('menus')
@@ -53,7 +53,7 @@ class MenuController extends Controller
             ->join("categories", "categories.id", "=", "sub_categories.category_id")
             ->select("menus.id", "menus.name", "menus.unit_price", "menus.description", "menus.image", "sub_categories.subcategory_name", "categories.category_name")
             ->limit($limit)
-            ->where("categories.category_name","=",$time->value)
+            ->where("categories.category_name","=",$time)
             //->groupBy("subcategory_id")
             ->get();
 
