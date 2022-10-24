@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubCategoriesController;
@@ -26,10 +27,8 @@ Route::get('/', [HomePageController::class, "showHomePage"]);
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
     ->name("admin")->prefix("admin")->group(function () {
         // -- Main dashboard ----
-        Route::get("/",function (){
-            $user = auth()->user();
-            return view("admin.dashboard",["user"=>$user]);
-        });
+        Route::get("/", [DashboardController::class, "showDashboard"]);
+        Route::get("/dashboard", [DashboardController::class, "showDashboard"]);
         // ------- Categories start ----------
         Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
         Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
@@ -42,11 +41,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get("/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
 
         Route::post("/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
-        //--------- Subcategories start -------------
+        //--------- Subcategories end -------------
 
         //------- Menu start -----------------------
-        Route::get("/add_menu",[MenuController::class,"showUploadForm"]);
-        Route::post("/upload_menu_post",[MenuController::class,"uploadMenu"]);
+        Route::get("/add_menu", [MenuController::class, "showUploadForm"]);
+        Route::post("/upload_menu_post", [MenuController::class, "uploadMenu"]);
         //------ Menu End --------------------
 
     });

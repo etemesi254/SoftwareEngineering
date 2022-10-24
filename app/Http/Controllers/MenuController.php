@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\FlareClient\Time\Time;
 
 class MenuController extends Controller
 {
     function showUploadForm()
     {
-        $subcategories = SubCategories::all();
+        $subcateggetMenusForTimeories = SubCategories::all();
         return view("admin.menu_form", ["subcategories" => $subcategories]);
     }
     function uploadMenu(Request $request){
@@ -40,8 +42,21 @@ class MenuController extends Controller
         } else {
             return "error";
         }
-
-
         return "success";
     }
+
+    public function getMenusForTime(TimeOfDay $time=TimeOfDay::All,int $limit=PHP_INT_MAX,): \Illuminate\Support\Collection
+    {
+        // Do some joins I love
+        return Db::table('menus')
+            ->join('sub_categories', 'sub_categories.id', "=", "menus.subcategory_id")
+            ->join("categories", "categories.id", "=", "sub_categories.category_id")
+            ->select("menus.id", "menus.name", "menus.unit_price", "menus.description", "menus.image", "sub_categories.subcategory_name", "categories.category_name")
+            ->limit($limit)
+            ->where("categories.category_name","=",$time->value)
+            //->groupBy("subcategory_id")
+            ->get();
+
+    }
+
 }

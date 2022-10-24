@@ -7,7 +7,7 @@
 }
 
 .navbar {
-    background: #f8f3f3;
+    /*background: #f8f3f3;*/
     height: 80px;
     display: flex;
     justify-content: center;
@@ -749,3 +749,7 @@ img {
     justify-content: space-between;
 }
 
+
+.top__container{
+    margin: 10px;
+}
