@@ -8,6 +8,7 @@ use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\SubCategoryFormController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesFormController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get("/add_menu", [MenuController::class, "showUploadForm"]);
         Route::post("/upload_menu_post", [MenuController::class, "uploadMenu"]);
         //------ Menu End --------------------
+
+        //------- Orders start -----------------------
+        Route::get("/view_orders", [OrdersController::class, "showOrdersView"]);
+        //------ Orders End --------------------
 
     });
 
