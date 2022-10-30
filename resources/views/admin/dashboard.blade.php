@@ -158,7 +158,7 @@
     <div style="border-left: solid 1px rgba(0,0,0,0.1);height: 100%" class="px-6 my-6">
         <div style="display: flex;justify-content: center;margin-bottom: 30px">
             <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px" class="text-center">
-                Hello <span style="color:#FF9F1C"> {{$user->name}}</span>
+                Hello <span style="color:#FF9F1C"> {{$user->fullname}}</span>
             </h1>
         </div>
         <div class="avatar-image">
