@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Menu Upload-Heaven's Taste</title>
@@ -9,29 +10,25 @@
 <body>
 <div>
     <!-- Upload Area -->
-    <form id="uploadArea" class="upload-area" action="/admin/upload_menu_post" method="post"
-          enctype="multipart/form-data">
+    <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post" enctype="multipart/form-data" >
         @csrf
         <div>
             <label>Name</label>
-            <input type="text" class="upload-texts" style="display: block" name="name">
+            <input type="text" class="upload-texts" style="display: block" name="name"></input>
+
         </div>
 
-        <div>
+        <div class="wrapper">
 
-
-            <label for="sub_categories">SubCategory</label>
-
-            <select id="sub_categories" name="subcategory"
-                    class="upload-texts">
-
-                @foreach ($subcategories as $subcategory)
-                    <option value='{{$subcategory->id}}'
-                            style='display: flex'> {{$subcategory->subcategory_name}} </option>
-                @endforeach
-            </select>
+         <div class="dropdown">
+            <label data-value="">Select a subcategory...</label>
+         <ul>
+            <li data-value="1">Sub 1</li>
+            <li data-value="2">Sub 2</li>
+            <li data-value="3">Sub 3</li>
+         </ul>
+         </div>
         </div>
-
 
         <div>
             <label>Description</label>
@@ -41,14 +38,10 @@
 
         <div>
             <label>Price</label>
-            <input type="text" class="upload-texts" style="display: block" name="price">
+            <input type="text" class="upload-texts" style="display: block" name="description"></input>
+
         </div>
 
-
-        <div>
-            <label>Available Quantity</label>
-            <input type="text" class="upload-texts" style="display: block" name="quantity"></input>
-        </div>
         <!-- Header -->
         <div class="upload-area__header">
             <h1 class="upload-area__title">Upload your file</h1>
@@ -85,7 +78,7 @@
                 </div>
 
                 <div id="uploadedFileInfo" class="uploaded-file__info">
-                    <span class="uploaded-file__name">Proejct 1</span>
+                    <span class="uploaded-file__name">Project 1</span>
                     <span class="uploaded-file__counter">0%</span>
                 </div>
             </div>
@@ -182,12 +175,16 @@
         /*padding: 2rem 1.875rem 5rem 1.875rem;*/
         text-align: center;
     }
+
 </style>
+
 <style>
     /* General Styles */
+
     * {
         box-sizing: border-box;
         font-family: 'Cardo', serif;
+
     }
 
     :root {
@@ -213,6 +210,7 @@
     }
 
     /* End General Styles */
+
     /* Upload Area */
     .upload-area {
         width: 100%;
@@ -235,12 +233,16 @@
         from {
             height: 28.125rem; /* 450px */
         }
+
         to {
             height: 35rem; /* 560px */
         }
     }
 
     /* Header */
+    .upload-area__header {
+
+    }
 
     .upload-area__title {
         font-size: 1.8rem;
@@ -369,7 +371,9 @@
     }
 
     /* (drop-zoon--over) Modifier Class */
-    
+    .drop-zoon--Uploaded {
+
+    }
 
     .drop-zoon--Uploaded .drop-zoon__icon,
     .drop-zoon--Uploaded .drop-zoon__paragraph {
@@ -476,6 +480,7 @@
             width: 0%;
             background-color: transparent;
         }
+
         to {
             width: 100%;
             background-color: var(--clr-blue);
@@ -498,33 +503,111 @@
     }
 </style>
 
+<style>
+/*Dropdown Menu*/
+html, body {
+  background: #343838;
+  font: 10px 'Cardo';
+  line-height: 18px;
+  border: none;
+  width: 500%;
+  height: 500%;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dropdown {
+  margin: 0px auto;
+  position: relative;
+  width: calc(100% - 40px);
+  max-width: 400px;
+}
+
+.dropdown label {
+  display: block;
+  padding: 8px 16px;
+  background: #02C7EA;
+  color: #3B92E3;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.dropdown ul {
+  list-style: none;
+  position: absolute;
+  width: 100%;
+}
+
+.dropdown ul li {
+  padding: 0px 16px;
+  color: #4DB9C9;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+  height: 0px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: height 0.1s linear 0s;
+}
+
+.dropdown ul li:hover,
+.dropdown ul li.selected {
+  background: #00B4CC;
+  color: #FAFAFA;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown:hover ul li {
+  padding: 8px 16px;
+  height: 34px;
+}
+</style>
+
+
+
 <script>
     // Design By
     // - https://dribbble.com/shots/13992184-File-Uploader-Drag-Drop
+
     // Select Upload-Area
     const uploadArea = document.querySelector('#uploadArea')
+
     // Select Drop-Zoon Area
     const dropZoon = document.querySelector('#dropZoon');
+
     // Loading Text
     const loadingText = document.querySelector('#loadingText');
-    // Slect File Input
+
+    // Select File Input
     const fileInput = document.querySelector('#fileInput');
+
     // Select Preview Image
     const previewImage = document.querySelector('#previewImage');
+
     // File-Details Area
     const fileDetails = document.querySelector('#fileDetails');
+
     // Uploaded File
     const uploadedFile = document.querySelector('#uploadedFile');
+
     // Uploaded File Info
     const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
+
     // Uploaded File  Name
     const uploadedFileName = document.querySelector('.uploaded-file__name');
+
     // Uploaded File Icon
     const uploadedFileIconText = document.querySelector('.uploaded-file__icon-text');
+
     // Uploaded File Counter
     const uploadedFileCounter = document.querySelector('.uploaded-file__counter');
+
     // ToolTip Data
     const toolTipData = document.querySelector('.upload-area__tooltip-data');
+
     // Images Types
     const imagesTypes = [
         "jpeg",
@@ -533,40 +616,51 @@
         "gif",
         "webp"
     ];
+
     // Append Images Types Array Inisde Tooltip Data
     toolTipData.innerHTML = [...imagesTypes].join(', .');
+
     // When (drop-zoon) has (dragover) Event
     dropZoon.addEventListener('dragover', function (event) {
         // Prevent Default Behavior
         event.preventDefault();
+
         // Add Class (drop-zoon--over) On (drop-zoon)
         dropZoon.classList.add('drop-zoon--over');
     });
+
     // When (drop-zoon) has (dragleave) Event
     dropZoon.addEventListener('dragleave', function (event) {
         // Remove Class (drop-zoon--over) from (drop-zoon)
         dropZoon.classList.remove('drop-zoon--over');
     });
+
     // When (drop-zoon) has (drop) Event
     dropZoon.addEventListener('drop', function (event) {
         // Prevent Default Behavior
         event.preventDefault();
+
         // Remove Class (drop-zoon--over) from (drop-zoon)
         dropZoon.classList.remove('drop-zoon--over');
+
         // Select The Dropped File
         const file = event.dataTransfer.files[0];
+
         // Call Function uploadFile(), And Send To Her The Dropped File :)
         uploadFile(file);
     });
+
     // When (drop-zoon) has (click) Event
     dropZoon.addEventListener('click', function (event) {
         // Click The (fileInput)
         fileInput.click();
     });
+
     // When (fileInput) has (change) Event
     fileInput.addEventListener('change', function (event) {
         // Select The Chosen File
         const file = event.target.files[0];
+
         // Call Function uploadFile(), And Send To Her The Chosen File :)
         uploadFile(file);
     });
@@ -579,28 +673,34 @@
         const fileType = file.type;
         // File Size
         const fileSize = file.size;
+
         // If File Is Passed from the (File Validation) Function
         if (fileValidate(fileType, fileSize)) {
             // Add Class (drop-zoon--Uploaded) on (drop-zoon)
             dropZoon.classList.add('drop-zoon--Uploaded');
+
             // Show Loading-text
             loadingText.style.display = "block";
             // Hide Preview Image
             previewImage.style.display = 'none';
+
             // Remove Class (uploaded-file--open) From (uploadedFile)
             uploadedFile.classList.remove('uploaded-file--open');
             // Remove Class (uploaded-file__info--active) from (uploadedFileInfo)
             uploadedFileInfo.classList.remove('uploaded-file__info--active');
+
             // After File Reader Loaded
             fileReader.addEventListener('load', function () {
                 // After Half Second
                 setTimeout(function () {
                     // Add Class (upload-area--open) On (uploadArea)
                     uploadArea.classList.add('upload-area--open');
+
                     // Hide Loading-text (please-wait) Element
                     loadingText.style.display = "none";
                     // Show Preview Image
                     previewImage.style.display = 'block';
+
                     // Add Class (file-details--open) On (fileDetails)
                     fileDetails.classList.add('file-details--open');
                     // Add Class (uploaded-file--open) On (uploadedFile)
@@ -608,17 +708,23 @@
                     // Add Class (uploaded-file__info--active) On (uploadedFileInfo)
                     uploadedFileInfo.classList.add('uploaded-file__info--active');
                 }, 500); // 0.5s
+
                 // Add The (fileReader) Result Inside (previewImage) Source
                 previewImage.setAttribute('src', fileReader.result);
+
                 // Add File Name Inside Uploaded File Name
                 uploadedFileName.innerHTML = file.name;
+
                 // Call Function progressMove();
                 progressMove();
             });
+
             // Read (file) As Data Url
             fileReader.readAsDataURL(file);
         } else { // Else
+
             this; // (this) Represent The fileValidate(fileType, fileSize) Function
+
         }
         ;
     };
@@ -627,6 +733,7 @@
     function progressMove() {
         // Counter Start
         let counter = 0;
+
         // After 600ms
         setTimeout(() => {
             // Every 100ms
@@ -645,10 +752,12 @@
         }, 600);
     };
 
+
     // Simple File Validate Function
     function fileValidate(fileType, fileSize) {
         // File Type Validation
         let isImage = imagesTypes.filter((type) => fileType.indexOf(`image/${type}`) !== -1);
+
         // If The Uploaded File Type Is 'jpeg'
         if (isImage[0] === 'jpeg') {
             // Add Inisde (uploadedFileIconText) The (jpg) Value
@@ -658,6 +767,7 @@
             uploadedFileIconText.innerHTML = isImage[0];
         }
         ;
+
         // If The Uploaded File Is An Image
         if (isImage.length !== 0) {
             // Check, If File Size Is 2MB or Less
@@ -672,6 +782,22 @@
         }
         ;
     };
+
     // :)
+
+</script>
+
+<!--Dropdown Menu-->
+<script>
+    $(function() {
+  $('.dropdown ul li').on('click', function() {
+    var label = $(this).parent().parent().children('label');
+    label.attr('data-value', $(this).attr('data-value'));
+    label.html($(this).html());
+
+    $(this).parent().children('.selected').removeClass('selected');
+    $(this).addClass('selected');
+  });
+});
 </script>
 </html>
