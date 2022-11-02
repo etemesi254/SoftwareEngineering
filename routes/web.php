@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\orderFormController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\SubCategoryFormController;
 use Illuminate\Support\Facades\Route;
@@ -30,11 +31,15 @@ Route::get('register',function (){
 })->name('register');
 // ----- Home page end ---------
 
+// ----- Kitchen/Order Pages Start ---------
+Route::post('kitchenOrders',[orderFormController::class,'selectedOrder']);
+
+// ----- Kitchen/Order Pages End ---------
+
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
     ->name("admin")->prefix("admin")->group(function () {
         // -- Main dashboard ----
         Route::get("/", [DashboardController::class, "showDashboard"]);
-//        Route::get("/dashboard", [DashboardController::class, "showDashboard"]);
         // ------- Categories start ----------
         Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
         Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
