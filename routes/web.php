@@ -22,13 +22,19 @@ use App\Http\Controllers\CategoriesFormController;
 
 // ----- Home page  Start ------
 Route::get('/', [HomePageController::class, "showHomePage"]);
+Route::get('about',function (){
+    return view('about');
+});
+Route::get('register',function (){
+    return view('auth.register');
+})->name('register');
 // ----- Home page end ---------
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
     ->name("admin")->prefix("admin")->group(function () {
         // -- Main dashboard ----
         Route::get("/", [DashboardController::class, "showDashboard"]);
-        Route::get("/dashboard", [DashboardController::class, "showDashboard"]);
+//        Route::get("/dashboard", [DashboardController::class, "showDashboard"]);
         // ------- Categories start ----------
         Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
         Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
