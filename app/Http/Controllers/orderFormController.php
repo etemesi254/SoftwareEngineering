@@ -45,18 +45,4 @@ class orderFormController extends Controller
         $newOrder->save();
         return redirect('/');
     }
-//    public function addData(Request $request)
-//    {
-//        $newStudent = new Student;
-//        $newStudent->first_name = $request->firstName;
-//        $newStudent->last_name = $request->lastName;
-//        $newStudent->email = $request->email;
-//        $newStudent->phone_number = $request->phoneNumber;
-//        $newStudent->date_of_birth = $request->dob;
-//        $newStudent->password = $request->password;
-//
-//        $newStudent->save();
-//
-//        return redirect('/');
-//    }
 }
