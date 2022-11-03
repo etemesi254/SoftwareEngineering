@@ -87,9 +87,9 @@
 
             <div class="m-6">
                 <div style="display: flex;justify-content:space-around">
-                <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 20px;color:#7c3000">
-                    Sub Categories
-                </h1>
+                    <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 20px;color:#7c3000">
+                        Sub Categories
+                    </h1>
                     <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 20px;color:#7c3000">
                         Menu
                     </h1>
@@ -122,29 +122,28 @@
                     </a>
 
 
+                    <a href="/admin/add_menu" style="background-color: rgba(230,96,1,0.2)"
+                       class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
+                        <i class="fa-solid fa-cloud-upload fa-2xl my-5"></i>
 
-                        <a href="/admin/add_menu" style="background-color: rgba(230,96,1,0.2)"
-                           class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
-                            <i class="fa-solid fa-cloud-upload fa-2xl my-5"></i>
+                        <div
+                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Upload New
+                            <br>
+                            Menu
+                        </div>
 
-                            <div
-                                style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Upload New
-                                <br>
-                                Menu
-                            </div>
+                    </a>
 
-                        </a>
+                    <a href="http://127.0.0.1/phpmyadmin/index.php?route=/sql&pos=0&db={{$database_name}}&table=menus"
+                       style="background-color: rgba(230,96,1,0.2)"
+                       class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
 
-                        <a href="http://127.0.0.1/phpmyadmin/index.php?route=/sql&pos=0&db={{$database_name}}&table=menus"
-                           style="background-color: rgba(230,96,1,0.2)"
-                           class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
-
-                            <i class="fa-solid fa-database fa-2xl my-5"></i>
-                            <div
-                                style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Menu <br>
-                                Database
-                            </div>
-                        </a>
+                        <i class="fa-solid fa-database fa-2xl my-5"></i>
+                        <div
+                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Menu <br>
+                            Database
+                        </div>
+                    </a>
 
                 </div>
 
@@ -154,7 +153,7 @@
             <div class="m-6">
                 <div style="display: flex;justify-content:space-around">
                     <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 20px;color:#7c3000">
-                            Orders
+                        Orders
                     </h1>
                     <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 20px;color:#7c3000">
                         Users
@@ -188,29 +187,28 @@
                     </a>
 
 
+                    <a href="/admin/add_menu" style="background-color: rgba(230,96,1,0.2)"
+                       class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
+                        <i class="fa-solid fa-cloud-upload fa-2xl my-5"></i>
 
-                        <a href="/admin/add_menu" style="background-color: rgba(230,96,1,0.2)"
-                           class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
-                            <i class="fa-solid fa-cloud-upload fa-2xl my-5"></i>
+                        <div
+                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">View Users
+                            <br>
+                            Dashboard
+                        </div>
 
-                            <div
-                                style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">View Users
-                                <br>
-                                Dashboard
-                            </div>
+                    </a>
 
-                        </a>
+                    <a href="http://127.0.0.1/phpmyadmin/index.php?route=/sql&pos=0&db={{$database_name}}&table=users"
+                       style="background-color: rgba(230,96,1,0.2)"
+                       class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
 
-                        <a href="http://127.0.0.1/phpmyadmin/index.php?route=/sql&pos=0&db={{$database_name}}&table=users"
-                           style="background-color: rgba(230,96,1,0.2)"
-                           class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
-
-                            <i class="fa-solid fa-database fa-2xl my-5"></i>
-                            <div
-                                style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Users <br>
-                                Database
-                            </div>
-                        </a>
+                        <i class="fa-solid fa-database fa-2xl my-5"></i>
+                        <div
+                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Users <br>
+                            Database
+                        </div>
+                    </a>
 
                 </div>
 
@@ -230,9 +228,9 @@
             <div style="margin: auto;border-radius: 9999px;background-color: #1b171d;width: 100px;height: 100px"></div>
         </div>
 
-{{--        <div style=" display: flex;justify-content: flex-end;flex-direction: column;">--}}
-{{--            <h3>email:{{$user->email}}</h3>--}}
-{{--        </div>--}}
+        {{--        <div style=" display: flex;justify-content: flex-end;flex-direction: column;">--}}
+        {{--            <h3>email:{{$user->email}}</h3>--}}
+        {{--        </div>--}}
 
         <div>
             <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 23px;color:#ff7720">
