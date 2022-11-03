@@ -68,7 +68,7 @@
                 </span>
                 <span>
                     <input type='hidden' name='customerId' value='{{$customer_id}}'>
-                    <input type='hidden' name='id' value="{{$menu_id}}"/>
+                    <input type='hidden' name='menuId' value="{{$menu_id}}"/>
                     <input type='hidden' name='unit_price' value='{{$unit_price}}'>
                     <input type='hidden' name='dateTime' value='{{$current_time}}'/>
                     <input type='hidden' name='status' value="pending"/>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderDetails;
 use App\Models\Orders;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,8 +42,21 @@ class orderFormController extends Controller
         $newOrder->description = $request->customer_preferences;
         $newOrder->status = $request->status;
 
-        //running the new assigned queries
-        $newOrder->save();
-        return redirect('/');
+        //running the new assigned queries and updating order details table
+
+        if ($newOrder->save()) {
+            $newOrderDetails = new OrderDetails;
+            $lastID = DB::getPdo()->lastInsertId();
+            $orderInfo = DB::table('orders')->find($lastID);
+
+            $newOrderDetails->order_id = $orderInfo->id;
+            $newOrderDetails->product_id = $request->menuId;
+            $newOrderDetails->price = $request->unit_price;
+            $newOrderDetails->quantity = $request->customer_quantity;
+
+            $newOrderDetails->save();
+            return redirect('/');
+        }
+
     }
 }
