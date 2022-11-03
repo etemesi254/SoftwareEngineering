@@ -21,6 +21,7 @@ return new class extends Migration {
                 $table->double("price");
 
                 $table->date("date");
+                $table->longText('description');
 
                 $table->enum("status", ["pending", "pending payment", "paid"]);
 
