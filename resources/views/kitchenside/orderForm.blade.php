@@ -11,43 +11,36 @@
 <section class="order-container">
 
     <div class="make-order">
-        <form action="" method="post">
-            @csrf
+        <div class="form" id="orderForm">
             <div class="field">
                 <label for="{{$menu_data->name}}">Food Item: </label>
-                <input type='hidden' name='id' value="{{$menu_id}}"/>
-                <input type="text" name="name" value="{{$menu_data->name}}" readonly>
+                <input type="text" id="foodName" name="name" value="{{$menu_data->name}}" readonly>
             </div>
 
             <div class="field">
-                <label for="{{$customer_id}}">Customer ID:</label>
-                <input type='number' name='customer_id' value="{{$customer_id}}" readonly/>
+                <label for="{{$customer_id}}">Customer ID: </label>
+                <input type='number' id="customer_id" name='customer_id' value="{{$customer_id}}" readonly/>
             </div>
 
             <div class="field">
                 <label for="quantity">Quantity:</label>
-                <input type='number' name='quantity' step="1"/>
+                <input type='number' id="quantity" name='quantity' step="1"/>
             </div>
 
             <div class="field">
                 <label for="unit_price">Each product at Ksh</label>
-                <input type='text' name='price' step="1" value="{{$unit_price}}" readonly/>
+                <input type='text' id="unit_price" name='price' value="{{$unit_price}}" readonly/>
             </div>
 
             <div class="field">
                 <label for="additions">Enter Preferences: </label>
-                <textarea name="additions" cols="30" rows="10" style="resize: none;"></textarea>
+                <textarea name="additions" id="preferences" cols="30" rows="10" style="resize: none;"></textarea>
             </div>
 
             <div class="field">
-                <input type='hidden' name='dateTime' value="{{$current_time}}" readonly/>
-                <input type='hidden' name='status' value="pending"/>
+                <button type="submit" id='summary'>Generate Summary</button>
             </div>
-
-            <div class="field">
-                <button type="submit" name='place_order'>Generate Summary</button>
-            </div>
-        </form>
+        </div>
     </div>
 
     <div class="order-receipt">
@@ -55,30 +48,35 @@
             <img src="{{ Storage::url($menu_data->image) }}" class="m-6">
         </div>
         <div class="receipt-content">
-            <form action="" method="post">
+            <form action="submitOrder" method="post">
+                @csrf
                 <span>
                     <h3>Food Item:</h3>
                     <h2>{{$menu_data->name}}</h2>
                 </span>
                 <span>
                     <h3>Unit Price:</h3>
-                    <h2>{{$unit_price}}</h2>
+                    <h2>Ksh {{$unit_price}}</h2>
+                </span>
+                <span class="fetch-data">
+                    <h3>Quantity: </h3>
+                    <input type="text" name="customer_quantity" id="quantity_receipt">
+                </span>
+                <span class="fetch-data">
+                    <h3>Total Price: </h3>
+                    <input type="text" name="calculated_price" id="total_price">
                 </span>
                 <span>
-                    <h3>Quantity:</h3>
-                    <h2>(not applicable yet)</h2>
-                </span>
-                <span>
-                    <h3>Total Price:</h3>
-                    <h2>(not applicable yet)</h2>
-                </span>
-                <span>
-                    <h3>Number of Items</h3>
-                    <h2>(not applicable yet)</h2>
+                    <input type='hidden' name='customerId' value='{{$customer_id}}'>
+                    <input type='hidden' name='id' value="{{$menu_id}}"/>
+                    <input type='hidden' name='unit_price' value='{{$unit_price}}'>
+                    <input type='hidden' name='dateTime' value='{{$current_time}}'/>
+                    <input type='hidden' name='status' value="pending"/>
+                    <input type="hidden" name="customer_preferences" id="preferences_new">
                 </span>
                 <span class="field">
                     <button type="submit">Submit Order</button>
-                    <button type="submit">Re-edit Order</button>
+                    <button>Re-edit Order</button>
                 </span>
             </form>
         </div>
@@ -86,5 +84,20 @@
 
 </section>
 
+<script>
+    document.getElementById('summary').addEventListener("click", updateReceipt);
+
+    function updateReceipt() {
+        // extracting form information
+        var quantity = parseInt(document.getElementById('quantity').value);
+        var unit_price = parseFloat(document.getElementById('unit_price').value);
+        var preferences = document.getElementById('preferences').value;
+
+        // filling in hidden form content
+        document.getElementById('quantity_receipt').value = quantity;
+        document.getElementById('total_price').value = "Ksh " + quantity * unit_price;
+        document.getElementById('preferences_new').value = preferences;
+    }
+</script>
 </body>
 </html>

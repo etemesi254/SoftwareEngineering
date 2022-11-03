@@ -33,6 +33,7 @@ Route::get('register',function (){
 
 // ----- Kitchen/Order Pages Start ---------
 Route::post('kitchenOrders',[orderFormController::class,'selectedOrder']);
+Route::post('submitOrder',[orderFormController::class,'insertOrder']);
 
 // ----- Kitchen/Order Pages End ---------
 

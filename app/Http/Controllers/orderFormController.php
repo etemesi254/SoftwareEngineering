@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Orders;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,14 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class orderFormController extends Controller
 {
-    //
-//    public function showOrderForm()
-//    {
-//        $user = Auth::user();
-//        $id = Auth::id();
-//        $menus = new MenuController();
-//        $menu_details = $menus->getMenusForTime($time);
-//    }
 
     public function selectedOrder(Request $request)
     {
@@ -30,8 +23,40 @@ class orderFormController extends Controller
             'menu_id' => $selected_menu,
             'unit_price' => $unit_price,
             'customer_id' => $id,
-            'menu_data'=>$menuData,
-            'current_time'=>$currentTime,
+            'menu_data' => $menuData,
+            'current_time' => $currentTime,
         ]);
     }
+
+    public function insertOrder(Request $request)
+    {
+        //generating instance of model
+        $newOrder = new Orders;
+
+        //assigning extracted data
+        $newOrder->customer_id = $request->customerId;
+        $newOrder->quantity = $request->customer_quantity;
+        $newOrder->price = $request->unit_price;
+        $newOrder->date = $request->dateTime;
+        $newOrder->description = $request->customer_preferences;
+        $newOrder->status = $request->status;
+
+        //running the new assigned queries
+        $newOrder->save();
+        return redirect('/');
+    }
+//    public function addData(Request $request)
+//    {
+//        $newStudent = new Student;
+//        $newStudent->first_name = $request->firstName;
+//        $newStudent->last_name = $request->lastName;
+//        $newStudent->email = $request->email;
+//        $newStudent->phone_number = $request->phoneNumber;
+//        $newStudent->date_of_birth = $request->dob;
+//        $newStudent->password = $request->password;
+//
+//        $newStudent->save();
+//
+//        return redirect('/');
+//    }
 }

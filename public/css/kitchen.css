@@ -10,7 +10,7 @@ COMMON SECTIONS
     padding: 20px;
 }
 
-form input, textarea {
+.form input, textarea {
     font-size: 16px;
     color: #5D4037;
     font-weight: bold;
@@ -21,12 +21,20 @@ form input, textarea {
     border-radius: 25px;
 }
 
-form input {
+.form input {
     height: 30px;
     width: 200px;
 }
 
-form .field button {
+.fetch-data input {
+    height: 30px;
+    width: 90px;
+    color: #2ca02c;
+    text-align: center;
+    background-color: transparent;
+}
+
+.form .field button, form .field button {
     padding: 10px;
     color: #7C3000;
     background-color: transparent;
@@ -34,7 +42,7 @@ form .field button {
     border: 2px solid #7C3000;
 }
 
-form .field button:hover {
+.form .field button:hover, form .field button:hover {
     background-color: #7C3000;
     color: white;
 }
@@ -60,17 +68,17 @@ SECTION - WAITER FORM CONTENT CSS
     border-radius: 10px;
 }
 
-.make-order form {
+.make-order .form {
     display: grid;
     justify-content: center;
 }
 
-.make-order form .field {
+.make-order .form .field {
     display: flex;
     margin: 10px 0;
 }
 
-.make-order form .field label {
+.make-order .form .field label {
     margin-right: 2em;
     color: #7C3000;
 }
@@ -80,7 +88,7 @@ label {
 }
 
 
-.make-order form .field button:hover {
+.make-order .form .field button:hover {
     cursor: pointer;
 }
 
