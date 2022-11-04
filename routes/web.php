@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MenuController;
@@ -25,7 +26,14 @@ use App\Http\Controllers\OrdersController;
 Route::get('/', [HomePageController::class, "showHomePage"]);
 // ----- Home page end ---------
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
+Route::get("/login",[CustomAuthController::class,"index"]);
+
+Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('login-post', [CustomAuthController::class, 'customLogin'])->name('login-post');
+Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])->name('sign-up-post');
+
+Route::middleware(['auth'])
     ->name("admin")->prefix("admin")->group(function () {
         // -- Main dashboard ----
         Route::get("/", [DashboardController::class, "showDashboard"]);

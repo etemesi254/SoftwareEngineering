@@ -13,20 +13,21 @@ return new class extends Migration
      */
     public function up():void
     {
-        Schema::create('user_register', function (Blueprint $table) {
-            $table->id();
-            $table->string('fullname');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('telephone')->unique();
-            $table->enum('gender', ['Male', 'Female', 'Unknown']);
-            $table->date('dob');
-            $table->string('password');
-            $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
-            $table->timestamps();
-        });
+
+//        Schema::create('users', function (Blueprint $table) {
+//            $table->id();
+//            $table->string('fullname');
+//            $table->string('email')->unique();
+//            $table->timestamp('email_verified_at')->nullable();
+//            $table->string('telephone')->unique();
+//            $table->enum('gender', ['Male', 'Female', 'Unknown']);
+//            $table->date('dob');
+//            $table->string('password');
+//            $table->rememberToken();
+//            $table->foreignId('current_team_id')->nullable();
+//            $table->string('profile_photo_path', 2048)->nullable();
+//            $table->timestamps();
+//        });
     }
 
     /**
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down():void
     {
-        Schema::dropIfExists('user_register');
+       // Schema::dropIfExists('user_register');
     }
 };
