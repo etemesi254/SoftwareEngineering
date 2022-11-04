@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\orderFormController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\SubCategoryFormController;
 use Illuminate\Support\Facades\Route;
