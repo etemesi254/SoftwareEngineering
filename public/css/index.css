@@ -1,0 +1,119 @@
+/*
+COMMON CLASS CSS
+*/
+.image-container {
+    width: fit-content;
+}
+
+.image-container img {
+    width: 90%;
+    border-radius: 10px;
+}
+
+/*
+REST OF THE PAGE
+*/
+.top__container {
+    margin: 10px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-left: 200px;
+    margin-bottom: 200px;
+}
+
+.col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+    margin: 50px 0;
+}
+
+.col-2.image-container img {
+    border: 2px solid #B38B67;
+    border-radius: 10px;
+}
+
+.menu-btn {
+    margin: 20px;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 30px;
+    text-decoration: none;
+    background-color: #0c5460;
+    color: whitesmoke;
+}
+
+.menu-btn:hover, .order-btn:hover {
+    color: whitesmoke;
+}
+
+.order-btn {
+    margin: 20px;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 30px;
+    text-decoration: none;
+    background-color: #ff7720;
+    color: whitesmoke;
+}
+
+.col-4 {
+    flex-basis: 23%;
+    padding: 20px;
+    /*min-width: 200px;*/
+    align-content: center;
+    align-items: center;
+    border-radius: 10px;
+    /*border: 1px solid rgba(0, 0, 0, 2);*/
+    margin: 10px;
+    background-color: #B38B67;
+
+}
+
+.col-4:hover {
+    transform: translateY(-7px);
+    /*background-color: rgba(46, 196, 182, 0.09);*/
+    transition: 0.5s ease-in;
+}
+
+.col-4-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.col-4-price {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ecdbd7;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 140px;
+}
+
+.col-4-desc {
+    font-size: 17px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: lighter;
+}
+
+.menu-order-btn {
+    /*margin: 20px;*/
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: #ff7720;
+    color: whitesmoke;
+    width: 120px;
+}
+
+.menu-order-btn:hover {
+    color: whitesmoke;
+}

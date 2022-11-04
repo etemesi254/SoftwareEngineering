@@ -23,17 +23,24 @@ use App\Http\Controllers\CategoriesFormController;
 
 // ----- Home page  Start ------
 Route::get('/', [HomePageController::class, "showHomePage"]);
-Route::get('about',function (){
+
+Route::get('about', function () {
     return view('about');
 });
-Route::get('register',function (){
-    return view('auth.register');
+
+Route::match(['get', 'post'], 'register', function () {
+    return view('authentication.register');
 })->name('register');
+
+Route::match(['get', 'post'], 'newLogin', function () {
+    return view('authentication.login');
+});
+
 // ----- Home page end ---------
 
 // ----- Kitchen/Order Pages Start ---------
-Route::post('kitchenOrders',[orderFormController::class,'selectedOrder']);
-Route::post('submitOrder',[orderFormController::class,'insertOrder']);
+Route::post('kitchenOrders', [orderFormController::class, 'selectedOrder']);
+Route::post('submitOrder', [orderFormController::class, 'insertOrder']);
 // ----- Kitchen/Order Pages End ---------
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
