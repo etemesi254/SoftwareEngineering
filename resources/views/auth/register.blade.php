@@ -18,23 +18,23 @@
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
-            
+
             <br>
             <div>
                 <x-jet-label for="telephone" value="{{ __('Telephone') }}" />
                 <x-jet-input id="telephone" class="block mt-1 w-full" type="text" name="telephone" :value="old('telephone')" required />
             </div>
-            
+
             <br>
             <div>
                 <x-jet-label for="gender" value="{{ __('Gender') }}" />
                 <x-jet-input id="gender" class="block mt-1 w-full" type="text" name="gender" :value="old('gender')" required />
             </div>
-            
+
             <br>
             <div>
                 <x-jet-label for="dob" value="{{ __('Date of Birth') }}" />
-                <x-jet-input id="dob" class="block mt-1 w-full" type="text" name="dob" :value="old('dob')" required />
+                <x-jet-input id="dob" class="block mt-1 w-full" type="date" name="dob" :value="old('dob')" required />
             </div>
 
             <div class="mt-4">
@@ -75,4 +75,5 @@
             </div>
         </form>
     </x-jet-authentication-card>
+
 </x-guest-layout>

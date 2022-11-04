@@ -1,0 +1,131 @@
+/*
+------------------------------
+COMMON SECTIONS
+------------------------------
+*/
+.order-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.form input, textarea {
+    font-size: 16px;
+    color: #5D4037;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #7C3000;
+    background-color: transparent;
+    border-radius: 25px;
+}
+
+.form input {
+    height: 30px;
+    width: 200px;
+}
+
+.fetch-data input {
+    height: 30px;
+    width: 90px;
+    color: #2ca02c;
+    text-align: center;
+    background-color: transparent;
+}
+
+.form .field button, form .field button {
+    padding: 10px;
+    color: #7C3000;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid #7C3000;
+}
+
+.form .field button:hover, form .field button:hover {
+    background-color: #7C3000;
+    color: white;
+}
+
+h3 {
+    color: #7C3000;
+}
+
+h2 {
+    color: #2ca02c;
+}
+
+/*
+------------------------------
+SECTION - WAITER FORM CONTENT CSS
+------------------------------
+*/
+.make-order {
+    width: fit-content;
+    height: fit-content;
+    border: 3px solid #7C3000;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.make-order .form {
+    display: grid;
+    justify-content: center;
+}
+
+.make-order .form .field {
+    display: flex;
+    margin: 10px 0;
+}
+
+.make-order .form .field label {
+    margin-right: 2em;
+    color: #7C3000;
+}
+
+label {
+    width: 65px;
+}
+
+
+.make-order .form .field button:hover {
+    cursor: pointer;
+}
+
+/*
+------------------------------
+SECTION - WAITER RECEIPT CONTENT CSS
+------------------------------
+*/
+.order-receipt {
+    width: fit-content;
+    height: fit-content;
+    border: 3px solid #7C3000;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.order-receipt .image-container {
+    /*max-width: 284px;*/
+    width: 15em;
+}
+
+.order-receipt .image-container img {
+    width: 75%;
+    border-radius: 10px;
+}
+
+
+.receipt-content {
+    width: fit-content;
+}
+
+.receipt-content span {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.receipt-content span.field button {
+    margin: 0 10px;
+}

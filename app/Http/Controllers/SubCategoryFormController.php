@@ -43,6 +43,8 @@ class SubCategoryFormController extends Controller
                 "image" => $image,
                 "category_id" =>$request->category_id
             ]);
+//            return route('admin');
+//            redirect()->route('admin');
         } else {
             return "error";
         }
