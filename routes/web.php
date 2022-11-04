@@ -29,7 +29,6 @@ Route::post('kitchenOrders', [orderFormController::class, 'selectedOrder']);
 Route::post('submitOrder', [orderFormController::class, 'insertOrder']);
 // ----- Kitchen/Order Pages End ---------
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
 Route::get("/login",[CustomAuthController::class,"index"]);
 
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
@@ -37,8 +36,7 @@ Route::post('login-post', [CustomAuthController::class, 'customLogin'])->name('l
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])->name('sign-up-post');
 
-Route::middleware(['auth'])
-    ->name("admin")->prefix("admin")->group(function () {
+Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
         // -- Main dashboard ----
         Route::get("/", [DashboardController::class, "showDashboard"]);
         Route::get("/dashboard", [DashboardController::class, "showDashboard"]);
