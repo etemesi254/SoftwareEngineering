@@ -24,7 +24,7 @@
                     <a href="" class="navbar__links" id="services-page">Orders</a>
                 </li>
                 <li class="navbar__btn">
-                    <a href="/newLogin" class="button" id="signup">Login </a>
+                    <a href="/login" class="button" id="signup">Login </a>
                 </li>
                 <li class="navbar__btn">
                     <a href="/register" class="button" id="signup">Sign Up</a>

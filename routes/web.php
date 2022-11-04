@@ -28,11 +28,7 @@ Route::get('about', function () {
     return view('about');
 });
 
-Route::match(['get', 'post'], 'register', function () {
-    return view('authentication.register');
-})->name('register');
-
-Route::match(['get', 'post'], 'newLogin', function () {
+Route::get('newLogin', function () {
     return view('authentication.login');
 });
 
@@ -67,4 +63,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         //------ Menu End --------------------
 
     });
-
+//['auth:sanctum', config('jetstream.auth_session'), 'verified'] - this was inside the middleware bracket
