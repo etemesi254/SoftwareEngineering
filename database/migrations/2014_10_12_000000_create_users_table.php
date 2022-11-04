@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->enum('gender', ['Male', 'Female', 'Unknown']);
             $table->date('dob');
             $table->string('password');
+            $table->enum('roles', ["customer", "employee", "admin"])->default('customer');
             $table->rememberToken();
             $table->enum("roles", ["customer", "employee", "admin"]);
 

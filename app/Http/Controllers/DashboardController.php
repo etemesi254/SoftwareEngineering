@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $total_menus = Menu::all()->count();
         $database_name = DB::connection()->getDatabaseName();
 
-        return view("admin.dashboard", ["user" => $user,
+        return view("admin.dashboard", ['user' => $user,
             "total_categories" => $total_categories,
             "total_subcategories" => $total_subcategories,
             "total_users" => $total_users,

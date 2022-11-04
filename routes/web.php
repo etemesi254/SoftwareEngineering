@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MenuController;
@@ -9,7 +8,6 @@ use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\SubCategoryFormController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesFormController;
-use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +24,12 @@ use App\Http\Controllers\OrdersController;
 Route::get('/', [HomePageController::class, "showHomePage"]);
 // ----- Home page end ---------
 
+// ----- Kitchen/Order Pages Start ---------
+Route::post('kitchenOrders', [orderFormController::class, 'selectedOrder']);
+Route::post('submitOrder', [orderFormController::class, 'insertOrder']);
+// ----- Kitchen/Order Pages End ---------
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
 Route::get("/login",[CustomAuthController::class,"index"]);
 
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
