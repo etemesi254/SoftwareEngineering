@@ -17,14 +17,15 @@ class UserDashboardController extends Controller
     {
         $values = DB::table("user_logins")
             ->selectRaw("users.fullname as name,count(user_logins.user)  as counts")
-            ->leftJoin("users", "users.id", "=", "user_logins.id")
+            ->leftJoin("users", "users.id", "=", "user_logins.user")
             ->groupBy("user_logins.user")->get();
 
         $most_common = DB::table("user_logins")
             ->selectRaw("users.fullname as name,count(user_logins.user)  as counts, users.created_at as joined")
-            ->leftJoin("users", "users.id", "=", "user_logins.id")
+            ->leftJoin("users", "users.id", "=", "user_logins.user")
             ->groupBy("user_logins.user")
-            ->orderBy("counts")->limit(5)
+            ->orderBy("counts")
+            ->limit(5)
             ->get();
 
         $new_accounts = DB::table("users")->orderByDesc("id")->limit(5)->get();

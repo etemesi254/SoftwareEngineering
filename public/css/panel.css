@@ -1,0 +1,65 @@
+.panel-text {
+    padding-top: 40px;
+    margin: auto;
+    display: flex;
+    justify-content: start;
+    font-family: "Outfit", sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.panel-content {
+    margin-top: 13px;
+    display: flex;
+    justify-content: normal;
+    height: 96%;
+}
+
+.panel-panel {
+    background-color: #011916;
+    height: 96%;
+    width: 20%;
+    min-width: 250px;
+    max-width: 350px;
+    color: rgba(255,255,255,0.6);
+    font-family: "Lato", sans-serif;
+}
+
+.panel-maintext {
+    margin-top: 30px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+    color: rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+
+}
+.panel-action{
+    color: rgba(255,255,255,0.9);;
+    align-content: center;
+    display: flex;
+    margin: 0px;
+    text-decoration: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
+.panel-action-text{
+    margin-left: 10px;
+
+}
+.panel-action:hover{
+    color: black;
+    background-color: white;
+    transition: 1s ease;
+}
+.panel-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 20%;
+    min-width: 250px;
+    max-width: 350px;
+    /*left: 20px;*/
+}
