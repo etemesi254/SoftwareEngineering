@@ -4,17 +4,16 @@
     <body class="relative bg-white-mg-20">
     <br><br>
     <div class="cont content-center flex m-auto">
-        <form class="form sign-in" style="margin-left: 20%" action="/login-post" method="post">
+        <form id="login" class="form sign-in" style="margin-left: 20%" action="/login-post" method="post">
             @csrf
-
             <h2>Welcome</h2>
             <label>
                 <span class="text-black text-base" style="font-family: 'Outfit',sans-serif">Email</span>
-                <input type="email" name="email"/>
+                <input type="email" name="email" required/>
             </label>
             <label>
                 <span class="text-black text-base" style="font-family: 'Outfit',sans-serif">Password</span>
-                <input type="password" name="password"/>
+                <input type="password" name="password" required/>
             </label>
             <p class="forgot-pass text-black" style="font-family: 'Outfit',sans-serif">Forgot password?</p>
 
@@ -40,7 +39,7 @@
                     <span class="m--in">Sign In</span>
                 </div>
             </div>
-            <form class="form sign-up p-3" method="post" action="/sign-up-post">
+            <form id="sign_up" class="form sign-up p-3" method="post" action="/sign-up-post">
                 @csrf
                 <h2>Create your Account</h2>
                 <label>
@@ -83,7 +82,7 @@
             if (value !== 'login') {
                 document.querySelector('.cont').classList.toggle('s--signup');
             }
-        } else{
+        } else {
             document.querySelector('.cont').classList.toggle('s--signup');
         }
 

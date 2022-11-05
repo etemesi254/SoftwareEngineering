@@ -6,9 +6,10 @@
     <title>{{$category->category_name}}</title>
 </head>
 <body>
-
 <x-header></x-header>
-
+<h1>
+    {{session('userRole')}}
+</h1>
 <div class="top__container">
     <div class="row">
         <div class="col-2">

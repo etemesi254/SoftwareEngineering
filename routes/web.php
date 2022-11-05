@@ -24,46 +24,53 @@ use App\Http\Controllers\CategoriesFormController;
 
 // ----- Home page  Start ------
 Route::get('/', [HomePageController::class, "showHomePage"]);
+Route::get('about',function (){
+   return view('about');
+});
 // ----- Home page end ---------
+
+// ----- Login and Registration start ---------
+Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
+Route::get('/logout',[CustomAuthController::class, 'customLogout']);
+Route::post('login-post', [CustomAuthController::class, 'customLogin'])->name('login-post');
+Route::get('registration', [CustomAuthController::class, 'index'])->name('register-user');
+Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])->name('sign-up-post');
+// ----- Login and Registration end ---------
 
 // ----- Kitchen/Order Pages Start ---------
 Route::post('kitchenOrders', [orderFormController::class, 'selectedOrder']);
 Route::post('submitOrder', [orderFormController::class, 'insertOrder']);
+Route::get('kitchenView',[orderFormController::class, 'kitchenOrderListing' ]);
 // ----- Kitchen/Order Pages End ---------
 
-Route::get("/login",[CustomAuthController::class,"index"]);
 
-Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
-Route::post('login-post', [CustomAuthController::class, 'customLogin'])->name('login-post');
-Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
-Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])->name('sign-up-post');
-
+// ----- Administrator Access start ---------
 Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
-        // -- Main dashboard ----
-        Route::get("/", [DashboardController::class, "showDashboard"]);
-        Route::get("/dashboard", [DashboardController::class, "showDashboard"]);
-        // ------- Categories start ----------
-        Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
-        Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
-        Route::get("/add_categories", [CategoriesController::class, "showCategoriesUploadForm"]);
+    // -- Main dashboard ----
+    Route::get("/", [DashboardController::class, "showDashboard"]);
+    // ------- Categories start ----------
+    Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
+    Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
+    Route::get("/add_categories", [CategoriesController::class, "showCategoriesUploadForm"]);
 
-        Route::post("/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
-        //-------- Categories end -----------------
+    Route::post("/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
+    //-------- Categories end -----------------
 
-        //--------- Subcategories start -------------
-        Route::get("/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
+    //--------- Subcategories start -------------
+    Route::get("/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
 
-        Route::post("/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
-        //--------- Subcategories end -------------
+    Route::post("/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
+    //--------- Subcategories end -------------
 
-        //------- Menu start -----------------------
-        Route::get("/add_menu", [MenuController::class, "showUploadForm"]);
-        Route::post("/upload_menu_post", [MenuController::class, "uploadMenu"]);
-        //------ Menu End --------------------
+    //------- Menu start -----------------------
+    Route::get("/add_menu", [MenuController::class, "showUploadForm"]);
+    Route::post("/upload_menu_post", [MenuController::class, "uploadMenu"]);
+    //------ Menu End --------------------
 
-        //------- Orders start -----------------------
-        Route::get("/view_orders", [OrdersController::class, "showOrdersView"]);
-        //------ Orders End --------------------
+    //------- Orders start -----------------------
+    Route::get("/view_orders", [OrdersController::class, "showOrdersView"]);
+    //------ Orders End --------------------
 
-    });
+});
+// ----- Administrator Access End ---------
 

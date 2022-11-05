@@ -23,12 +23,24 @@
                 <li class="navbar__item">
                     <a href="" class="navbar__links" id="services-page">Orders</a>
                 </li>
-                <li class="navbar__btn">
-                    <a href="/admin" class="button" id="signup">Login </a>
-                </li>
-                <li class="navbar__btn">
-                    <a href="/register" class="button" id="signup">Sign Up</a>
-                </li>
+
+                @if(session()->has('email'))
+                    <li class="navbar__item">
+                        <a href="">
+                            <i class="uil uil-user-circle" style="font-size: 50px"></i>
+                        </a>
+                    </li>
+                    <li class="navbar__btn">
+                        <a href="/logout" class="button" id="signup">Logout </a>
+                    </li>
+                @else
+                    <li class="navbar__btn">
+                        <a href="/login" class="button" id="signup">Login </a>
+                    </li>
+                    <li class="navbar__btn">
+                        <a href="/registration" class="button" id="signup">Sign Up</a>
+                    </li>
+                @endif
             </ul>
 
         </div>
