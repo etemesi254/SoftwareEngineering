@@ -18,7 +18,7 @@
             </div>
 
             <div class="field">
-                <label for="{{$customer_id}}">Customer ID: </label>
+                <label for="{{$customer_id}}">User ID: </label>
                 <input type='number' id="customer_id" name='customer_id' value="{{$customer_id}}" readonly/>
             </div>
 

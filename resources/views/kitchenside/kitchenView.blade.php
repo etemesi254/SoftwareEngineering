@@ -1,4 +1,8 @@
-<!doctype html>
+@php
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Storage;
+@endphp
+    <!doctype html>
 <html lang="en">
 <head>
     <title>Heavens Taste Kitchen</title>
@@ -11,6 +15,7 @@
     <div class="order-display">
         @foreach($orderList as $order)
             <form action="" method="post">
+                @csrf
                 <article class="order-content">
                     <div class="order-content-top">
                         <h2>Order #{{$order['id']}}</h2>
@@ -22,32 +27,46 @@
                                 $time = date('H:i:s', $timestamp);
                             @endphp
                             <h3>Date:{{$date}}</h3>
+                            <br>
                             <h3>Time:{{$time}}</h3>
                         </span>
                     </div>
 
                     <div class="order-content-middle order-list">
-
+                        @php
+                            $orderDetails = DB::table('orders')
+                            ->selectRaw(
+                            'menus.image as image,
+                            menus.name as name,
+                            order_details.quantity as quantity,
+                            order_details.total as total_price'
+                            )
+                            ->join('order_details','orders.id','=','order_details.order_id')
+                            ->join('menus','menus.id','=','order_details.product_id')
+                            ->where('orders.id','=',$order['id'])
+                            ->get()
+                            ->first();
+                        @endphp
                         <div class="image-container">
-                            <img src="" alt="">
+                            <img src="{{ Storage::url($orderDetails->image) }}" alt="">
                         </div>
                         <div class="food-info">
-                            <h2>Food Name</h2>
-                            <h3>{{$order['description']}}</h3>
-                            <h2>{{$order['price']}}</h2>
-                            <h2>{{$order['quantity']}}</h2>
+                            <h2>{{$orderDetails->name}}</h2>
+                            <h3>Customer Info: "<u>{{$order['description']}}</u>"</h3>
+                            <h2>Ksh {{$order['price']}}</h2>
+                            <h2>Qty: {{$order['quantity']}}</h2>
                         </div>
                     </div>
 
                     <div class="order-content-bottom">
                         <div class="subtotals">
-                            <h3>Total Qty = 10 Items</h3>
-                            <h2>Total Price = Ksh 1200</h2>
+                            <h3>Total Qty = {{$orderDetails->quantity}} Items</h3>
+                            <h2>Total Price = Ksh {{$orderDetails->total_price}}</h2>
                         </div>
                         <div class="confirmation">
                             <input type="hidden" name="orderID" value="{{$order['id']}}">
                             <button type="submit" name="completed">Completed</button>
-                            <button type="submit" name="rejected">Rejected</button>
+{{--                            <button type="submit" name="rejected">Rejected</button>--}}
                         </div>
                     </div>
                 </article>
@@ -55,6 +74,5 @@
         @endforeach
     </div>
 </section>
-<x-footer></x-footer>
 </body>
 </html>
