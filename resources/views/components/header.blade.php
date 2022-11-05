@@ -26,7 +26,7 @@
 
                 @if(session()->has('email'))
                     <li class="navbar__item">
-                        <a href="">
+                        <a href="" title="{{session('email')}}">
                             <i class="uil uil-user-circle" style="font-size: 50px"></i>
                         </a>
                     </li>

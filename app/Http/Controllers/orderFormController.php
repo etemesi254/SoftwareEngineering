@@ -60,7 +60,14 @@ class orderFormController extends Controller
 
     }
 
-    public function kitchenOrderListing(){
-        return view('kitchenside.kitchenView');
+    public function kitchenOrderListing()
+    {
+        $orders = Orders::all()->where('status', '=', 'pending');
+
+        return view('kitchenside.kitchenView',
+            [
+                'orderList' => $orders,
+            ]
+        );
     }
 }

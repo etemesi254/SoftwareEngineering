@@ -135,7 +135,10 @@ SECTION - WAITER RECEIPT CONTENT CSS
 MAIN - KITCHEN PAGE CONTENT CSS
 ------------------------------
 */
-
+.kitchen-view{
+    margin: 30px 0;
+    margin-left: 70px;
+}
 .kitchen-view .order-display {
     margin-top: 20px;
     margin-right: 20px;
@@ -148,7 +151,7 @@ MAIN - KITCHEN PAGE CONTENT CSS
     font-size: .75rem;
     padding: 10px;
     overflow: hidden;
-    margin: 0px 25px;
+    margin: 0 25px;
     /*margin-bottom: 0px;*/
     /*margin-bottom: 20px;*/
 }
@@ -172,6 +175,7 @@ MAIN - KITCHEN PAGE CONTENT CSS
 .order-content .order-content-top h2 {
     width: fit-content;
     height: fit-content;
+    color: #7C3000;
 }
 
 .kitchen-view .order-display .order-content .order-content-middle {
