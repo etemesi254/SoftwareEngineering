@@ -80,6 +80,10 @@ REST OF THE PAGE
     transition: 0.5s ease-in;
 }
 
+.col-4.image-container img{
+    width: 20em;
+}
+
 .col-4-title {
     font-size: 20px;
     margin-bottom: 10px;

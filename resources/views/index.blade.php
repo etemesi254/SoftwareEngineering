@@ -28,6 +28,11 @@
 
     <div id="menu" style="border-top: solid 2px rgba(0,0,0,0.05)">
         <h1 style="font-weight: normal;font-size: 60px;color: #ff7720;text-align: center">Menu</h1>
+        @if($errors->any())
+            <h4 class="m-auto p-2 f text-rose-500 text-center" style="font-family: 'Outfit',sans-serif">
+                {{$errors->first()}}
+            </h4>
+        @endif
         <div class="row" style="margin: 0 50px">
             @foreach($menus as $menu)
                 <div class="col-4 image-container">
@@ -41,7 +46,8 @@
                             @csrf
                             <input type="hidden" name="id" value="{{$menu->id}}">
                             <input type="hidden" name="unit_price" value="{{$menu->unit_price}}">
-                            <button class="menu-order-btn" style="background-color: #ff7720;" type="submit">Order Now </button>
+                            <button class="menu-order-btn" style="background-color: #ff7720;" type="submit">Order Now
+                            </button>
                         </form>
                     </div>
                     <p style="color: rgba(0,0,0,0.4);font-size: 17px">{{$menu->subcategory_name}}</p>

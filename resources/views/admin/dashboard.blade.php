@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heavens Taste Administrator Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Outfit&display=swap" rel="stylesheet">
     <link href="{{asset("css/app.css")}}" rel="stylesheet">
@@ -213,6 +215,22 @@
 
                 </div>
 
+            </div>
+
+            <div class="m-6">
+                <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 20px;color:#7c3000">
+                    Kitchen Orders
+                </h1>
+                <a href="/kitchenView" style="background-color: rgba(230,96,1,0.2)"
+                   class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
+                    <i class="fa-solid fa-cloud-upload fa-2xl my-5"></i>
+                    <div
+                        style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">View Users
+                        <br>
+                        Dashboard
+                    </div>
+
+                </a>
             </div>
 
         </div>
