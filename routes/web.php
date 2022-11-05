@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\orderFormController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\SubCategoryFormController;
 use App\Http\Controllers\UserDashboardController;
@@ -32,10 +35,10 @@ Route::get('kitchenView', [orderFormController::class, 'kitchenOrderListing']);
 // ----- Kitchen/Order Pages End ---------
 
 Route::get("/login", [CustomAuthController::class, "index"]);
-
+Route::get('/logout',[CustomAuthController::class,'customLogout']);
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('login-post', [CustomAuthController::class, 'customLogin'])->name('login-post');
-Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+Route::get('registration', [CustomAuthController::class, 'index'])->name('register-user');
 Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])->name('sign-up-post');
 
 Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
