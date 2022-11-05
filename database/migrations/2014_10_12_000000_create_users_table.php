@@ -24,8 +24,6 @@ return new class extends Migration {
             $table->string('password');
             $table->enum('roles', ["customer", "employee", "admin"])->default('customer');
             $table->rememberToken();
-            $table->enum("roles", ["customer", "employee", "admin"]);
-
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();

@@ -55,8 +55,19 @@ class orderFormController extends Controller
             $newOrderDetails->quantity = $request->customer_quantity;
 
             $newOrderDetails->save();
-            return redirect('/');
+            return redirect('kitchenView');
         }
 
+    }
+
+    public function kitchenOrderListing()
+    {
+        $orders = Orders::all()->where('status', '=', 'pending');
+
+        return view('kitchenside.kitchenView',
+            [
+                'orderList' => $orders,
+            ]
+        );
     }
 }

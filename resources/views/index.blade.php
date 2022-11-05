@@ -6,9 +6,7 @@
     <title>{{$category->category_name}}</title>
 </head>
 <body>
-
 <x-header></x-header>
-
 <div class="top__container">
     <div class="row">
         <div class="col-2">

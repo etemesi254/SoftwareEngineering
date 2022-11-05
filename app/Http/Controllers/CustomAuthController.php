@@ -11,9 +11,13 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Hash;
 use Illuminate\Routing\Redirector;
-use Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
+//use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use function GuzzleHttp\Promise\rejection_for;
 
 class CustomAuthController extends Controller
 {
@@ -24,23 +28,42 @@ class CustomAuthController extends Controller
 
     public function customLogin(Request $request): Redirector|RedirectResponse|Application
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
         $credentials = $request->only('email', 'password');
+
         if (Auth::attempt($credentials)) {
             UserLogins::create(["user" => \auth()->user()->id]);
-            return redirect()->intended('/');
-        }
 
-        return redirect("/login?window=login")->withErrors(['msg' => "Invalid Login Credentials"]);
+            $request->session()->regenerate();
+
+//            storing logged in users email
+            $request->session()->put('email', $request->input('email'));
+
+//            selecting logged-in users role
+            $selectRole = DB::table('users')
+                ->where('email', $request->input('email'))
+                ->get('roles')
+                ->first()->roles;
+            $request->session()->put('userRole', $selectRole,);
+
+            if ($selectRole == 'admin'){
+                return redirect()->intended('/admin');
+            }else{
+                return redirect()->intended('/');
+            }
+        } else {
+            return redirect("/login?window=login")->withErrors(['msg' => "Invalid Login Credentials"]);
+        }
     }
 
-    public function registration(): Factory|View|Application
+    public function customLogout(Request $request)
     {
-        return view('auth.registration');
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
     public function customRegistration(Request $request): Redirector|Application|RedirectResponse
@@ -55,9 +78,7 @@ class CustomAuthController extends Controller
         ]);
 
         $data = $request->all();
-        $check = $this->create($data);
-
-
+        $this->create($data);
         return redirect("/");
     }
 
@@ -77,18 +98,10 @@ class CustomAuthController extends Controller
 
     public function dashboard()
     {
-        if (Auth()::check()) {
+        if (Auth()->check()) {
             return view('');
+        } else {
+            return redirect("login");
         }
-
-        return redirect("login");
-    }
-
-    public function signOut(): Redirector|Application|RedirectResponse
-    {
-        Session::flush();
-        Auth::logout();
-//        (new \App\Models\UserLogins)->update([]);
-        return Redirect('/');
     }
 }
