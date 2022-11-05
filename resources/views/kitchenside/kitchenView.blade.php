@@ -40,7 +40,7 @@
                             <h2>Total Price = Ksh 1200</h2>
                         </div>
                         <div class="confirmation">
-                            <input type="hidden" name="orderID" value="">
+                            <input type="hidden" name="orderID" value="{{$order['id']}}">
                             <button type="submit" name="completed">Completed</button>
                             <button type="submit" name="rejected">Rejected</button>
                         </div>
