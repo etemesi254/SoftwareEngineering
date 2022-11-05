@@ -26,9 +26,15 @@
 
                 @if(session()->has('email'))
                     <li class="navbar__item">
-                        <a href="" title="{{session('email')}}">
-                            <i class="uil uil-user-circle" style="font-size: 50px"></i>
-                        </a>
+                        @if(session('userRole')=='admin')
+                            <a href="/admin" title="Administrator: {{session('userName')}}">
+                                <i class="uil uil-user-circle" style="font-size: 50px"></i>
+                            </a>
+                        @else
+                            <a href="/" title="User: {{session('userName')}}">
+                                <i class="uil uil-user-circle" style="font-size: 50px"></i>
+                            </a>
+                        @endif
                     </li>
                     <li class="navbar__btn">
                         <a href="/logout" class="button" id="signup">Logout </a>

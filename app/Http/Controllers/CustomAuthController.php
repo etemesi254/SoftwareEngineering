@@ -45,6 +45,13 @@ class CustomAuthController extends Controller
                 ->first()->roles;
             $request->session()->put('userRole', $selectRole,);
 
+//            selecting logged-in users name
+            $selectName = DB::table('users')
+                ->where('email', $request->input('email'))
+                ->get('fullname')
+                ->first()->fullname;
+            $request->session()->put('userName', $selectName,);
+
             if ($selectRole == 'admin'){
                 return redirect()->intended('/admin');
             }else{

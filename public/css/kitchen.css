@@ -135,30 +135,32 @@ SECTION - WAITER RECEIPT CONTENT CSS
 MAIN - KITCHEN PAGE CONTENT CSS
 ------------------------------
 */
-.kitchen-view{
+.kitchen-view {
     margin: 30px 0;
     margin-left: 70px;
 }
+
 .kitchen-view .order-display {
     margin-top: 20px;
     margin-right: 20px;
     display: flex;
     flex-wrap: wrap;
 }
+
 .kitchen-view .order-display .order-content {
     border: 2px solid #7C3000;
     border-radius: 10px;
     font-size: .75rem;
     padding: 10px;
     overflow: hidden;
-    margin: 0 25px;
+    margin: 20px 25px;
     /*margin-bottom: 0px;*/
     /*margin-bottom: 20px;*/
 }
 
 .kitchen-view .order-display .order-content .order-content-top {
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
     border: 2px solid #7C3000;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -172,7 +174,7 @@ MAIN - KITCHEN PAGE CONTENT CSS
     margin-top: -20px;
 }
 
-.order-content .order-content-top h2 {
+.order-content .order-content-top h2, .order-content .order-content-middle h2, .order-content .order-content-bottom h2 {
     width: fit-content;
     height: fit-content;
     color: #7C3000;
@@ -181,26 +183,40 @@ MAIN - KITCHEN PAGE CONTENT CSS
 .kitchen-view .order-display .order-content .order-content-middle {
     display: flex;
     margin: 10px 0;
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
     border: 2px solid #7C3000;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+.order-content .order-content-middle div.image-container img{
+    width: 70px;
+    height: 70px;
+    border: 2px solid #7C3000;
+    border-radius: 50px;
+}
 .order-content .order-content-middle .image-container {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
 
 .order-content .order-content-middle .food-info {
     margin-left: 30px;
-    margin-top: -10px;
 }
 
 .kitchen-view .order-display .order-content .order-content-bottom {
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
     border: 2px solid #7C3000;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.order-display .order-content .order-content-bottom button {
+    padding: 10px;
+    color: #7C3000;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid #7C3000;
+    margin: 0 10px;
+    margin-top: 15px;
 }
 
 @media only screen and (min-width: 1024px) {

@@ -26,7 +26,7 @@ use App\Http\Controllers\CategoriesFormController;
 
 // ----- Home page  Start ------
 Route::get('/', [HomePageController::class, "showHomePage"]);
-Route::get('about',function (){
+Route::get('about', function () {
     return view('about');
 });
 // ----- Home page end ---------
@@ -35,11 +35,12 @@ Route::get('about',function (){
 Route::post('kitchenOrders', [orderFormController::class, 'selectedOrder']);
 Route::post('submitOrder', [orderFormController::class, 'insertOrder']);
 Route::get('kitchenView', [orderFormController::class, 'kitchenOrderListing']);
+Route::post('kitchenView', [orderFormController::class, 'orderCompletion']);
 // ----- Kitchen/Order Pages End ---------
 
 // ----- Login and Registration start ---------
 Route::get("/login", [CustomAuthController::class, "index"]);
-Route::get('/logout',[CustomAuthController::class,'customLogout']);
+Route::get('/logout', [CustomAuthController::class, 'customLogout']);
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('login-post', [CustomAuthController::class, 'customLogin'])->name('login-post');
 Route::get('registration', [CustomAuthController::class, 'index'])->name('register-user');
@@ -76,6 +77,5 @@ Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
     //---- Users start ---------------------
     Route::get("/view_users", [UserDashboardController::class, "showUserDashboard"]);
     //----- Users end --------------------
-
 });
 

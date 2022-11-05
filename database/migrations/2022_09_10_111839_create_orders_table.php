@@ -23,7 +23,7 @@ return new class extends Migration {
                 $table->dateTime("date");
                 $table->longText('description');
 
-                $table->enum("status", ["pending", "pending payment", "paid"]);
+                $table->enum("status", ["pending", "completed", "rejected"]);
 
                 $table->timestamps();
 
