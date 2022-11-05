@@ -17,6 +17,7 @@
 
 <div class="flex h-full">
     <div class="panel">
+        <x-panel></x-panel>
     </div>
 
     <div class="m-6">
