@@ -1,141 +1,101 @@
 <html lang="en">
 <head>
-    <title>Upload Category-Heaven's Taste</title>
-    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
-    <link rel="stylesheet" href="../css/style.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Outfit&display=swap" rel="stylesheet">
+    <link href="{{asset("css/app.css")}}" rel="stylesheet">
+    <link href="{{asset("css/style.css")}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+            integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-<div>
-    <!-- Upload Area -->
-    <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post" enctype="multipart/form-data" >
-        @csrf
-        <div>
-            <label>Name</label>
-            <input type="text" class="upload-texts" style="display: block" name="name"></input>
 
-        </div>
+<div class="flex h-full w-full">
 
-        <div>
-            <label>Description</label>
-            <textarea type="text" class="upload-texts" style="display: block" name="description"></textarea>
+    <div class="panel">
+        <x-panel></x-panel>
+    </div>
 
-        </div>
+    <div style="width: 100%" class="m-6">
+        <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px;color: #ff7720">
+            Upload Categories
+        </h1>
 
-        <!-- Header -->
-        <div class="upload-area__header">
-            <h1 class="upload-area__title">Upload your file</h1>
-            <p class="upload-area__paragraph">
-                File should be an image
-                <strong class="upload-area__tooltip">
-                    Like
-                    <span class="upload-area__tooltip-data"></span> <!-- Data Will be Comes From Js -->
-                </strong>
-            </p>
-        </div>
-        <!-- End Header -->
+        <!-- Upload Area -->
+        <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post"
+              enctype="multipart/form-data">
+            @csrf
+            <div>
+                <label>Name</label>
+                <input type="text" class="upload-texts" style="display: block" name="name"></input>
 
-        <!-- Drop Zoon -->
-        <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+            </div>
+
+            <div>
+                <label>Description</label>
+                <textarea type="text" class="upload-texts" style="display: block" name="description"></textarea>
+
+            </div>
+
+            <!-- Header -->
+            <div class="upload-area__header">
+                <h1 class="upload-area__title">Upload your file</h1>
+                <p class="upload-area__paragraph">
+                    File should be an image
+                    <strong class="upload-area__tooltip">
+                        Like
+                        <span class="upload-area__tooltip-data"></span> <!-- Data Will be Comes From Js -->
+                    </strong>
+                </p>
+            </div>
+            <!-- End Header -->
+
+            <!-- Drop Zoon -->
+            <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
     <span class="drop-zoon__icon">
       <i class='bx bxs-file-image'></i>
     </span>
-            <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
-            <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
-            <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-            <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*" name="image">
-        </div>
-        <!-- End Drop Zoon -->
+                <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
+                <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
+                <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+                <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*" name="image">
+            </div>
+            <!-- End Drop Zoon -->
 
-        <!-- File Details -->
-        <div id="fileDetails" class="upload-area__file-details file-details">
-            <h3 class="file-details__title">Uploaded File</h3>
+            <!-- File Details -->
+            <div id="fileDetails" class="upload-area__file-details file-details">
+                <h3 class="file-details__title">Uploaded File</h3>
 
-            <div id="uploadedFile" class="uploaded-file">
-                <div class="uploaded-file__icon-container">
-                    <i class='bx bxs-file-blank uploaded-file__icon'></i>
-                    <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
-                </div>
+                <div id="uploadedFile" class="uploaded-file">
+                    <div class="uploaded-file__icon-container">
+                        <i class='bx bxs-file-blank uploaded-file__icon'></i>
+                        <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
+                    </div>
 
-                <div id="uploadedFileInfo" class="uploaded-file__info">
-                    <span class="uploaded-file__name">Proejct 1</span>
-                    <span class="uploaded-file__counter">0%</span>
+                    <div id="uploadedFileInfo" class="uploaded-file__info">
+                        <span class="uploaded-file__name">Proejct 1</span>
+                        <span class="uploaded-file__counter">0%</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- End File Details -->
-        <input type="submit" class="submit-btn" value="Submit"></input>
+            <!-- End File Details -->
+            <input type="submit" class="submit-btn" value="Submit"></input>
 
-        @if($errors->any())
-            <h4 class="m-auto p-2 f text-rose-500 text-center"
-                style="color: red">{{$errors->first()}}</h4>
-        @endif
-        <div style="margin-top: 30px">
-            <a class="submit-btn" href="/admin/add_subcategories" style="text-decoration: none;color: black"> Add Sub Category</a>
-        </div>
+            @if($errors->any())
+                <h4 class="m-auto p-2 f text-rose-500 text-center"
+                    style="color: red">{{$errors->first()}}</h4>
+            @endif
 
-        <div style="margin-top: 30px">
-            <a class="submit-btn" href="/admin/categories_dashboard" style="text-decoration: none;color: black"> Categories Dashboard </a>
-        </div>
-
-    </form>
-    <!-- End Upload Area -->
-
-    <!-- Footer Section -->
-    <div class="footer__container">
-        <div class="footer__links">
-            <div class="footer__link--wrapper">
-                <div class="footer__link--items">
-                    <h2>About Us</h2>
-                    <a href="/sign__up">How it works</a> <a href="/">Testimonials</a>
-                    <a href="/">Careers</a> <a href="/">Terms of Service</a>
-                </div>
-                <div class="footer__link--items">
-                    <h2>Contact Us</h2>
-                    <a href="/">Contact</a> <a href="/">Support</a>
-                    <a href="/">Destinations</a>
-                </div>
-            </div>
-            <div class="footer__link--wrapper">
-                <div class="footer__link--items">
-                    <h2>Videos</h2>
-                    <a href="/">Submit Video</a> <a href="/">Ambassadors</a>
-                    <a href="/">Agency</a>
-                </div>
-                <div class="footer__link--items">
-                    <h2>Social Media</h2>
-                    <a href="/">Instagram</a> <a href="/">Facebook</a>
-                    <a href="/">Youtube</a> <a href="/">Twitter</a>
-                </div>
-            </div>
-        </div>
-        <section class="social__media">
-            <div class="social__media--wrap">
-                <div class="footer__logo">
-                    <a href="/" id="footer__logo">HEAVEN</a>
-                </div>
-                <p class="website__rights">© HEAVEN 2020. All rights reserved</p>
-                <div class="social__icons">
-                    <a href="/" class="social__icon--link" target="_blank"
-                    ><i class="fab fa-facebook"></i
-                        ></a>
-                    <a href="/" class="social__icon--link"
-                    ><i class="fab fa-instagram"></i
-                        ></a>
-                    <a href="/" class="social__icon--link"
-                    ><i class="fab fa-youtube"></i
-                        ></a>
-                    <a href="/" class="social__icon--link"
-                    ><i class="fab fa-linkedin"></i
-                        ></a>
-                    <a href="/" class="social__icon--link"
-                    ><i class="fab fa-twitter"></i
-                        ></a>
-                </div>
-            </div>
-        </section>
+        </form>
     </div>
+    <!-- End Upload Area -->
+    <div>
+        <x-side-bar></x-side-bar>
+    </div>
+
 </div>
 </body>
 <style>
@@ -154,9 +114,8 @@
     }
 
     .submit-btn {
-        background-color: var(--clr-light-blue);
+        background-color: #ff7720;
         box-shadow: 0 10px 60px rgb(218, 229, 255);
-        border: 2px solid var(--clr-light-blue);
         padding: 10px 20px;
         border-radius: 5px;
         margin-top: 20px;
@@ -179,8 +138,8 @@
         --clr-black: rgb(0, 0, 0);
         --clr-light: rgb(245, 248, 255);
         --clr-light-gray: rgb(196, 195, 196);
-        --clr-blue: rgb(63, 134, 255);
-        --clr-light-blue: rgb(171, 202, 255);
+        --clr-blue: #ff7720;
+        --clr-light-blue: #ff7720;
     }
 
     body {
@@ -204,7 +163,7 @@
         max-width: 25rem;
         background-color: var(--clr-white);
         box-shadow: 0 10px 60px rgb(218, 229, 255);
-        border: 2px solid var(--clr-light-blue);
+        border: 2px rgba(255, 65, 60, 0.3);
         border-radius: 24px;
         padding: 2rem 1.875rem 5rem 1.875rem;
         text-align: center;

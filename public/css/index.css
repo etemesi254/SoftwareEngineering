@@ -2,7 +2,7 @@
 COMMON CLASS CSS
 */
 .image-container {
-    width: fit-content;
+    width: 700px;
 }
 
 .image-container img {
@@ -70,7 +70,7 @@ REST OF THE PAGE
     border-radius: 10px;
     /*border: 1px solid rgba(0, 0, 0, 2);*/
     margin: 10px;
-    background-color: #B38B67;
+    background-color: white;
 
 }
 
@@ -90,7 +90,7 @@ REST OF THE PAGE
 .col-4-price {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #ecdbd7;
+    color: #070707;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     width: 140px;

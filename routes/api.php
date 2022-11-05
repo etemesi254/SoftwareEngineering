@@ -167,7 +167,7 @@ Route::get('/get_menu', function (Request $request) {
 
     } catch (\PHPUnit\Exception $e) {
         $response_data = ["status" => 400, "description" => $e->getMessage() ];
-        return response($response_data, 200);
+        return response($response_data, 400);
     }
 
 });
