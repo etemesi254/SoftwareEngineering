@@ -20,7 +20,7 @@ return new class extends Migration {
                 $table->double("quantity");
                 $table->double("price");
 
-                $table->date("date");
+                $table->dateTime("date");
                 $table->longText('description');
 
                 $table->enum("status", ["pending", "pending payment", "paid"]);
