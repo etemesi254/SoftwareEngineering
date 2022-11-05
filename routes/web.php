@@ -26,6 +26,9 @@ use App\Http\Controllers\CategoriesFormController;
 
 // ----- Home page  Start ------
 Route::get('/', [HomePageController::class, "showHomePage"]);
+Route::get('about',function (){
+    return view('about');
+});
 // ----- Home page end ---------
 
 // ----- Kitchen/Order Pages Start ---------
@@ -34,12 +37,14 @@ Route::post('submitOrder', [orderFormController::class, 'insertOrder']);
 Route::get('kitchenView', [orderFormController::class, 'kitchenOrderListing']);
 // ----- Kitchen/Order Pages End ---------
 
+// ----- Login and Registration start ---------
 Route::get("/login", [CustomAuthController::class, "index"]);
 Route::get('/logout',[CustomAuthController::class,'customLogout']);
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('login-post', [CustomAuthController::class, 'customLogin'])->name('login-post');
 Route::get('registration', [CustomAuthController::class, 'index'])->name('register-user');
 Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])->name('sign-up-post');
+// ----- Login and Registration end ---------
 
 Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
     // -- Main dashboard ----

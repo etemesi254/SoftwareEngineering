@@ -16,8 +16,13 @@
                         <h2>Order #{{$order['id']}}</h2>
                         <br>
                         <span class="time">
-                            <h3>Date:{{$order['date']}}</h3>
-                            <h3>Time:</h3>
+                            @php
+                                $timestamp = (strtotime($order['date']));
+                                $date = date('Y.j.n', $timestamp);
+                                $time = date('H:i:s', $timestamp);
+                            @endphp
+                            <h3>Date:{{$date}}</h3>
+                            <h3>Time:{{$time}}</h3>
                         </span>
                     </div>
 
