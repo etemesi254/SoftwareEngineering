@@ -41,7 +41,7 @@ class SubCategoryFormController extends Controller
                 "subcategory_name" => $request->name,
                 "description" => $request->description,
                 "image" => $image,
-                "category_id" =>$request->category_id
+                "category_id" => $request->category_id
             ]);
 //            return route('admin');
 //            redirect()->route('admin');
@@ -50,7 +50,7 @@ class SubCategoryFormController extends Controller
         }
 
 
-        return "success";
+        return redirect("/admin")->with(["success"]);
     }
 
 }

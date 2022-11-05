@@ -46,7 +46,8 @@ class CategoriesFormController extends Controller
         }
 
 
-        return "success";
+        return redirect("/admin")->with(["success"]);
+;
     }
 
 

@@ -126,13 +126,6 @@
 </style>
 <style>
     /* General Styles */
-
-    * {
-        box-sizing: border-box;
-        font-family: 'Cardo', serif;
-
-    }
-
     :root {
         --clr-white: rgb(255, 255, 255);
         --clr-black: rgb(0, 0, 0);

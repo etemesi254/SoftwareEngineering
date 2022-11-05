@@ -1,152 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Menu Upload-Heaven's Taste</title>
-    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
-    <link rel="stylesheet" href="../css/style.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Outfit&display=swap" rel="stylesheet">
+    <link href="{{asset("css/app.css")}}" rel="stylesheet">
+    <link href="{{asset("css/style.css")}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+            integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-<div>
-    <!-- Upload Area -->
-    <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post" enctype="multipart/form-data" >
-        @csrf
-        <div>
-            <label>Name</label>
-            <input type="text" class="upload-texts" style="display: block" name="name"></input>
 
-        </div>
+<div class="flex h-full w-full">
 
-        <div class="wrapper">
+    <div class="panel">
+        <x-panel></x-panel>
+    </div>
+    <div class="w-full">
+        <!-- Upload Area -->
+        <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post"
+              enctype="multipart/form-data">
+            @csrf
+            <div>
+                <label>Name</label>
+                <input type="text" class="upload-texts" style="display: block" name="name"></input>
 
-         <div class="dropdown">
-            <label data-value="">Select a subcategory...</label>
-         <ul>
-            <li data-value="1">Sub 1</li>
-            <li data-value="2">Sub 2</li>
-            <li data-value="3">Sub 3</li>
-         </ul>
-         </div>
-        </div>
+            </div>
 
-        <div>
-            <label>Description</label>
-            <textarea type="text" class="upload-texts" style="display: block" name="description"></textarea>
+            <div class="wrapper">
 
-        </div>
+                <div class="dropdown">
+                    <label data-value="">Select a subcategory...</label>
+                    <ul>
+                        <li data-value="1">Sub 1</li>
+                        <li data-value="2">Sub 2</li>
+                        <li data-value="3">Sub 3</li>
+                    </ul>
+                </div>
+            </div>
 
-        <div>
-            <label>Price</label>
-            <input type="text" class="upload-texts" style="display: block" name="description"></input>
+            <div>
+                <label>Description</label>
+                <textarea type="text" class="upload-texts" style="display: block" name="description"></textarea>
 
-        </div>
+            </div>
 
-        <!-- Header -->
-        <div class="upload-area__header">
-            <h1 class="upload-area__title">Upload your file</h1>
-            <p class="upload-area__paragraph">
-                File should be an image
-                <strong class="upload-area__tooltip">
-                    Like
-                    <span class="upload-area__tooltip-data"></span> <!-- Data Will be Comes From Js -->
-                </strong>
-            </p>
-        </div>
-        <!-- End Header -->
+            <div>
+                <label>Price</label>
+                <input type="text" class="upload-texts" style="display: block" name="description"></input>
 
-        <!-- Drop Zoon -->
-        <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+            </div>
+
+            <!-- Header -->
+            <div class="upload-area__header">
+                <h1 class="upload-area__title">Upload your file</h1>
+                <p class="upload-area__paragraph">
+                    File should be an image
+                    <strong class="upload-area__tooltip">
+                        Like
+                        <span class="upload-area__tooltip-data"></span> <!-- Data Will be Comes From Js -->
+                    </strong>
+                </p>
+            </div>
+            <!-- End Header -->
+
+            <!-- Drop Zoon -->
+            <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
     <span class="drop-zoon__icon">
       <i class='bx bxs-file-image'></i>
     </span>
-            <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
-            <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
-            <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-            <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*" name="image">
-        </div>
-        <!-- End Drop Zoon -->
+                <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
+                <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
+                <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+                <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*" name="image">
+            </div>
+            <!-- End Drop Zoon -->
 
-        <!-- File Details -->
-        <div id="fileDetails" class="upload-area__file-details file-details">
-            <h3 class="file-details__title">Uploaded File</h3>
+            <!-- File Details -->
+            <div id="fileDetails" class="upload-area__file-details file-details">
+                <h3 class="file-details__title">Uploaded File</h3>
 
-            <div id="uploadedFile" class="uploaded-file">
-                <div class="uploaded-file__icon-container">
-                    <i class='bx bxs-file-blank uploaded-file__icon'></i>
-                    <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
-                </div>
+                <div id="uploadedFile" class="uploaded-file">
+                    <div class="uploaded-file__icon-container">
+                        <i class='bx bxs-file-blank uploaded-file__icon'></i>
+                        <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
+                    </div>
 
-                <div id="uploadedFileInfo" class="uploaded-file__info">
-                    <span class="uploaded-file__name">Project 1</span>
-                    <span class="uploaded-file__counter">0%</span>
+                    <div id="uploadedFileInfo" class="uploaded-file__info">
+                        <span class="uploaded-file__name">Project 1</span>
+                        <span class="uploaded-file__counter">0%</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- End File Details -->
-        <input type="submit" class="submit-btn"></input>
+            <!-- End File Details -->
+            <input type="submit" class="submit-btn"></input>
 
-        @if($errors->any())
-            <h4 class="m-auto p-2 f text-rose-500 text-center"
-                style="color: red">{{$errors->first()}}</h4>
-        @endif
-    </form>
-    <!-- End Upload Area -->
+            @if($errors->any())
+                <h4 class="m-auto p-2 f text-rose-500 text-center"
+                    style="color: red">{{$errors->first()}}</h4>
+            @endif
+        </form>
+        <!-- End Upload Area -->
 
-    <!-- Footer Section -->
-    <div class="footer__container">
-        <div class="footer__links">
-            <div class="footer__link--wrapper">
-                <div class="footer__link--items">
-                    <h2>About Us</h2>
-                    <a href="/sign__up">How it works</a> <a href="/">Testimonials</a>
-                    <a href="/">Careers</a> <a href="/">Terms of Service</a>
-                </div>
-                <div class="footer__link--items">
-                    <h2>Contact Us</h2>
-                    <a href="/">Contact</a> <a href="/">Support</a>
-                    <a href="/">Destinations</a>
-                </div>
-            </div>
-            <div class="footer__link--wrapper">
-                <div class="footer__link--items">
-                    <h2>Videos</h2>
-                    <a href="/">Submit Video</a> <a href="/">Ambassadors</a>
-                    <a href="/">Agency</a>
-                </div>
-                <div class="footer__link--items">
-                    <h2>Social Media</h2>
-                    <a href="/">Instagram</a> <a href="/">Facebook</a>
-                    <a href="/">Youtube</a> <a href="/">Twitter</a>
-                </div>
-            </div>
-        </div>
-        <section class="social__media">
-            <div class="social__media--wrap">
-                <div class="footer__logo">
-                    <a href="/" id="footer__logo">HEAVEN</a>
-                </div>
-                <p class="website__rights">© HEAVEN 2020. All rights reserved</p>
-                <div class="social__icons">
-                    <a href="/" class="social__icon--link" target="_blank"
-                    ><i class="fab fa-facebook"></i
-                        ></a>
-                    <a href="/" class="social__icon--link"
-                    ><i class="fab fa-instagram"></i
-                        ></a>
-                    <a href="/" class="social__icon--link"
-                    ><i class="fab fa-youtube"></i
-                        ></a>
-                    <a href="/" class="social__icon--link"
-                    ><i class="fab fa-linkedin"></i
-                        ></a>
-                    <a href="/" class="social__icon--link"
-                    ><i class="fab fa-twitter"></i
-                        ></a>
-                </div>
-            </div>
-        </section>
     </div>
+    <!-- Footer Section -->
+    <!-- End Upload Area -->
+    <div>
+        <x-side-bar></x-side-bar>
+    </div>
+
 </div>
 </body>
 
@@ -180,20 +145,13 @@
 
 <style>
     /* General Styles */
-
-    * {
-        box-sizing: border-box;
-        font-family: 'Cardo', serif;
-
-    }
-
     :root {
         --clr-white: rgb(255, 255, 255);
         --clr-black: rgb(0, 0, 0);
         --clr-light: rgb(245, 248, 255);
         --clr-light-gray: rgb(196, 195, 196);
-        --clr-blue: rgb(63, 134, 255);
-        --clr-light-blue: rgb(171, 202, 255);
+        --clr-blue: #ff7720;
+        --clr-light-blue: #ff7720;
     }
 
     body {
@@ -504,68 +462,67 @@
 </style>
 
 <style>
-/*Dropdown Menu*/
-html, body {
-  background: #343838;
-  font: 10px 'Cardo';
-  line-height: 18px;
-  border: none;
-  width: 500%;
-  height: 500%;
-}
+    /*Dropdown Menu*/
+    html, body {
+        background: #343838;
+        font: 10px 'Cardo';
+        line-height: 18px;
+        border: none;
+        width: 500%;
+        height: 500%;
+    }
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
+    .wrapper {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
 
-.dropdown {
-  margin: 0px auto;
-  position: relative;
-  width: calc(100% - 40px);
-  max-width: 400px;
-}
+    .dropdown {
+        margin: 0px auto;
+        position: relative;
+        width: calc(100% - 40px);
+        max-width: 400px;
+    }
 
-.dropdown label {
-  display: block;
-  padding: 8px 16px;
-  background: #02C7EA;
-  color: #3B92E3;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
+    .dropdown label {
+        display: block;
+        padding: 8px 16px;
+        background: #02C7EA;
+        color: #3B92E3;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
 
-.dropdown ul {
-  list-style: none;
-  position: absolute;
-  width: 100%;
-}
+    .dropdown ul {
+        list-style: none;
+        position: absolute;
+        width: 100%;
+    }
 
-.dropdown ul li {
-  padding: 0px 16px;
-  color: #4DB9C9;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
-  height: 0px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: height 0.1s linear 0s;
-}
+    .dropdown ul li {
+        padding: 0px 16px;
+        color: #4DB9C9;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+        height: 0px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: height 0.1s linear 0s;
+    }
 
-.dropdown ul li:hover,
-.dropdown ul li.selected {
-  background: #00B4CC;
-  color: #FAFAFA;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-}
+    .dropdown ul li:hover,
+    .dropdown ul li.selected {
+        background: #00B4CC;
+        color: #FAFAFA;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    }
 
-.dropdown:hover ul li {
-  padding: 8px 16px;
-  height: 34px;
-}
+    .dropdown:hover ul li {
+        padding: 8px 16px;
+        height: 34px;
+    }
 </style>
-
 
 
 <script>
@@ -789,15 +746,15 @@ html, body {
 
 <!--Dropdown Menu-->
 <script>
-    $(function() {
-  $('.dropdown ul li').on('click', function() {
-    var label = $(this).parent().parent().children('label');
-    label.attr('data-value', $(this).attr('data-value'));
-    label.html($(this).html());
+    $(function () {
+        $('.dropdown ul li').on('click', function () {
+            var label = $(this).parent().parent().children('label');
+            label.attr('data-value', $(this).attr('data-value'));
+            label.html($(this).html());
 
-    $(this).parent().children('.selected').removeClass('selected');
-    $(this).addClass('selected');
-  });
-});
+            $(this).parent().children('.selected').removeClass('selected');
+            $(this).addClass('selected');
+        });
+    });
 </script>
 </html>
