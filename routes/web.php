@@ -6,6 +6,7 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\SubCategoryFormController;
+use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesFormController;
 
@@ -27,10 +28,10 @@ Route::get('/', [HomePageController::class, "showHomePage"]);
 // ----- Kitchen/Order Pages Start ---------
 Route::post('kitchenOrders', [orderFormController::class, 'selectedOrder']);
 Route::post('submitOrder', [orderFormController::class, 'insertOrder']);
-Route::get('kitchenView',[orderFormController::class, 'kitchenOrderListing' ]);
+Route::get('kitchenView', [orderFormController::class, 'kitchenOrderListing']);
 // ----- Kitchen/Order Pages End ---------
 
-Route::get("/login",[CustomAuthController::class,"index"]);
+Route::get("/login", [CustomAuthController::class, "index"]);
 
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('login-post', [CustomAuthController::class, 'customLogin'])->name('login-post');
@@ -38,35 +39,35 @@ Route::get('registration', [CustomAuthController::class, 'registration'])->name(
 Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])->name('sign-up-post');
 
 Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
-        // -- Main dashboard ----
-        Route::get("/", [DashboardController::class, "showDashboard"]);
-        Route::get("/dashboard", [DashboardController::class, "showDashboard"]);
-        // ------- Categories start ----------
-        Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
-        Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
-        Route::get("/add_categories", [CategoriesController::class, "showCategoriesUploadForm"]);
+    // -- Main dashboard ----
+    Route::get("/", [DashboardController::class, "showDashboard"]);
+    Route::get("/dashboard", [DashboardController::class, "showDashboard"]);
+    // ------- Categories start ----------
+    Route::get("/categories_dashboard", [CategoriesController::class, "showCategoriesDashboard"]);
+    Route::get("/view_categories", [CategoriesController::class, "showCategoriesUploadView"]);
+    Route::get("/add_categories", [CategoriesController::class, "showCategoriesUploadForm"]);
 
-        Route::post("/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
-        //-------- Categories end -----------------
+    Route::post("/upload_category_post", [CategoriesFormController::class, "uploadCategory"])->name("/admin/upload_category_post");
+    //-------- Categories end -----------------
 
-        //--------- Subcategories start -------------
-        Route::get("/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
+    //--------- Subcategories start -------------
+    Route::get("/add_subcategories", [SubCategoriesController::class, "showSubCategoriesForm"]);
 
-        Route::post("/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
-        //--------- Subcategories end -------------
+    Route::post("/upload_sub_category_post", [SubCategoryFormController::class, "uploadSubCategory"]);
+    //--------- Subcategories end -------------
 
-        //------- Menu start -----------------------
-        Route::get("/add_menu", [MenuController::class, "showUploadForm"]);
-        Route::post("/upload_menu_post", [MenuController::class, "uploadMenu"]);
-        //------ Menu End --------------------
+    //------- Menu start -----------------------
+    Route::get("/add_menu", [MenuController::class, "showUploadForm"]);
+    Route::post("/upload_menu_post", [MenuController::class, "uploadMenu"]);
+    //------ Menu End --------------------
 
-        //------- Orders start -----------------------
-        Route::get("/view_orders", [OrdersController::class, "showOrdersView"]);
-        //------ Orders End --------------------
+    //------- Orders start -----------------------
+    Route::get("/view_orders", [OrdersController::class, "showOrdersView"]);
+    //------ Orders End --------------------
 
     //---- Users start ---------------------
-    Route::get("/view_users", [\App\Http\Controllers\UserDashboardController::class, "showUserDashboard"]);
-        //----- Users end --------------------
+    Route::get("/view_users", [UserDashboardController::class, "showUserDashboard"]);
+    //----- Users end --------------------
 
-    });
+});
 

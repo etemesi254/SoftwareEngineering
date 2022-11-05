@@ -162,7 +162,7 @@
                 </div>
                 <div class="flex justify-between mx-5  flex-wrap">
 
-                    <a href="/admin/add_subcategories" style="background-color: rgba(230,96,1,0.2)"
+                    <a href="/admin/view_orders" style="background-color: rgba(230,96,1,0.2)"
                        class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
 
                         <i class="fa-solid fa-truck-moving fa-2xl my-5"></i>
