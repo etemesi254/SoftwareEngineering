@@ -36,12 +36,13 @@
         <div class="row" style="margin: 0 50px">
             @foreach($menus as $menu)
                 <div class="col-4 image-container">
-                    <div style="height: 300px;width: 350px">
+                    <div style="height: 300px;width: 350px; margin: 0 20px">
                         <img src="{{Storage::url($menu->image)}}">
                     </div>
                     <h4 class="col-4-title">{{$menu->name}}</h4>
                     <h4 class="col-4-desc">{{$menu->description}}</h4>
-                    <div style="display: flex;justify-content: space-between">
+
+                    <div style="display: flex;justify-content: space-between; margin: 10px 0">
                         <p class="col-4-price">Ksh {{$menu->unit_price}} /=</p>
                         <form action="kitchenOrders" method="post">
                             @csrf

@@ -13,6 +13,11 @@
                 Heavens Taste Administrator Dashboard
             </a>
         </div>
+        <a class="panel-action" href="/">
+            <span class="material-symbols-outlined">home</span>
+            <span class="panel-action-text">Home Page</span>
+        </a>
+
         <a class="panel-action" href="/admin/add_categories">
             <span class="material-symbols-outlined">add_circle</span>
             <span class="panel-action-text">Add Menu Category</span>
