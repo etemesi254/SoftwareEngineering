@@ -127,10 +127,14 @@ class CustomAuthController extends Controller
             $orderDetails = DB::table('users')
                 ->selectRaw(
                     'menus.image as image,
-                                menus.name as name,
-                                order_details.quantity as quantity,
-                                order_details.total as total_price,
-                                users.id as id')
+                    menus.name as name,
+                    orders.date as date,
+                    orders.description as description,
+                    order_details.quantity as quantity,
+                    order_details.total as total_price,
+                    orders.status as status,
+                    users.id as id,
+                    orders.id as orderID')
                 ->join('orders', 'users.id', '=', 'orders.customer_id')
                 ->join('order_details', 'orders.id', '=', 'order_details.order_id')
                 ->join('menus', 'menus.id', '=', 'order_details.product_id')

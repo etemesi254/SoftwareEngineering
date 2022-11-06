@@ -30,6 +30,8 @@ return new class extends Migration {
                 $table->foreign("customer_id")->references("id")->on("users");
 
             });
+
+            DB::update("ALTER TABLE orders AUTO_INCREMENT=2021; ");
         }
     }
 

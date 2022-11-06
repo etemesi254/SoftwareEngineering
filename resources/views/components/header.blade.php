@@ -27,14 +27,17 @@
                 @if(session()->has('email'))
                     <li class="navbar__item">
                         @if(session('userRole')=='admin')
-                            <a href="/admin" title="Administrator: {{session('userName')}}">
+                            <a href="users" title="Administrator: {{session('userName')}}'s Dashboard">
                                 <i class="uil uil-user-circle"></i>
+                            </a>
+                            <a href="/admin" title="Administrator: {{session('userName')}}">
+                                <i class="uil uil-user-square"></i>
                             </a>
                         @else
                             <form action="users" method="post">
                                 @csrf
                                 <input type="hidden" name="userID" value="{{session('userID')}}">
-                                <button type="submit">
+                                <button type="submit" title="User: {{session('userName')}}">
                                     <i class="uil uil-user-circle"></i>
                                 </button>
                             </form>
