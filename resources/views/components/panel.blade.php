@@ -45,10 +45,7 @@
             <span class="material-symbols-outlined">grading</span>
             <span class="panel-action-text">View Fulfilled Orders</span>
         </a>
-        <div class="panel-action">
-            <span class="material-symbols-outlined">insights</span>
-            <span class="panel-action-text">Transactions</span>
-        </div>
+
         <a href="/logout" class="panel-bottom panel-action">
             <span class="material-symbols-outlined">logout</span>
             <span class="panel-action-text">Logout</span>
