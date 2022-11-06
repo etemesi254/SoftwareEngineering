@@ -3,6 +3,8 @@
 @import "about.css";
 @import "kitchen.css";
 @import "footer.css";
+@import "users.css";
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,11 +15,17 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: linear-gradient(to right, rgba(179, 139, 103,0.4), rgba(179, 139, 103,0.2));
+    /*background-image: linear-gradient(to right, rgba(179, 139, 103, 0.6), rgba(179, 139, 103, 0.6));*/
+    background-image: linear-gradient(to right, rgba(179, 139, 103, 0.4), rgba(179, 139, 103, 0.2));
+
 }
 
 .header {
     background-color: #B38B67;
+}
+
+.uil {
+    font-size: 50px;
 }
 
 .navbar {
@@ -201,21 +209,21 @@ body {
     }
 }
 
-.header-row{
+.header-row {
     display: flex;
     justify-content: space-between;
     background-color: white;
     width: 100%;
 }
 
-.header-image{
+.header-image {
     width: 200px;
     height: 100px;
 
 }
 
-.subcategory-row{
-    background-image: linear-gradient(to right, rgba(179, 139, 103,0.5), rgba(179, 139, 103,0));
+.subcategory-row {
+    background-image: linear-gradient(to right, rgba(179, 139, 103, 0.5), rgba(179, 139, 103, 0));
     width: 95%;
     box-shadow: #070707;
 }

@@ -28,12 +28,16 @@
                     <li class="navbar__item">
                         @if(session('userRole')=='admin')
                             <a href="/admin" title="Administrator: {{session('userName')}}">
-                                <i class="uil uil-user-circle" style="font-size: 50px"></i>
+                                <i class="uil uil-user-circle"></i>
                             </a>
                         @else
-                            <a href="/" title="User: {{session('userName')}}">
-                                <i class="uil uil-user-circle" style="font-size: 50px"></i>
-                            </a>
+                            <form action="users" method="post">
+                                @csrf
+                                <input type="hidden" name="userID" value="{{session('userID')}}">
+                                <button type="submit">
+                                    <i class="uil uil-user-circle"></i>
+                                </button>
+                            </form>
                         @endif
                     </li>
                     <li class="navbar__btn">
