@@ -15,23 +15,19 @@ class orderFormController extends Controller
     public function selectedOrder(Request $request)
     {
         if (session()->has('email')) {
-            if (session('userRole') == 'employee') {
-                $selected_menu = $request->input('id');
-                $unit_price = $request->input('unit_price');
-                $id = Auth::id();
-                $menuData = DB::table('menus')->find($selected_menu);
-                $currentTime = Carbon::now();
+            $selected_menu = $request->input('id');
+            $unit_price = $request->input('unit_price');
+            $id = Auth::id();
+            $menuData = DB::table('menus')->find($selected_menu);
+            $currentTime = Carbon::now();
 
-                return view('kitchenside.orderForm', [
-                    'menu_id' => $selected_menu,
-                    'unit_price' => $unit_price,
-                    'customer_id' => $id,
-                    'menu_data' => $menuData,
-                    'current_time' => $currentTime,
-                ]);
-            } else {
-                return redirect("/login?window=login")->withErrors(['msg' => "User Needs to be Logged In as an Employee"]);
-            }
+            return view('kitchenside.orderForm', [
+                'menu_id' => $selected_menu,
+                'unit_price' => $unit_price,
+                'customer_id' => $id,
+                'menu_data' => $menuData,
+                'current_time' => $currentTime,
+            ]);
         } else {
             return redirect("/login?window=login")->withErrors(['msg' => "User Needs to be Logged In"]);
         }
@@ -79,11 +75,12 @@ class orderFormController extends Controller
         );
     }
 
-    public function orderCompletion(Request $request){
+    public function orderCompletion(Request $request)
+    {
         DB::table('orders')
-            ->where('id',$request->input('orderID'))
+            ->where('id', $request->input('orderID'))
             ->limit(1)
-            ->update(array('status'=>'completed'));
+            ->update(array('status' => 'completed'));
 
         return redirect("/kitchenView");
     }

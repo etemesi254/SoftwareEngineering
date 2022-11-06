@@ -16,7 +16,7 @@
             </p>
             <div class="m-6">
                 <a class="menu-btn" href="#menu"> View Menu</a>
-                <a class="order-btn"> Make an order</a>
+{{--                <a class="order-btn"> Make an order</a>--}}
             </div>
 
         </div>

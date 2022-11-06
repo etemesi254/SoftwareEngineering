@@ -45,22 +45,31 @@ class CustomAuthController extends Controller
                 ->first()->roles;
             $request->session()->put('userRole', $selectRole,);
 
-//            selecting logged-in users name
-            $selectName = DB::table('users')
+//            selecting logged-in users id
+            $selectID = DB::table('users')
                 ->where('email', $request->input('email'))
-                ->get('fullname')
-                ->first()->fullname;
-            $request->session()->put('userName', $selectName,);
+                ->get('id')
+                ->first()->id;
+            $request->session()->put('userID', $selectID,);
 
-            if ($selectRole == 'admin'){
+//            selecting logged-in users username
+            $selectCustomName = DB::table('users')
+                ->where('email', $request->input('email'))
+                ->get('username')
+                ->first()->username;
+            $request->session()->put('nickname', $selectCustomName,);
+
+
+            if ($selectRole == 'admin') {
                 return redirect()->intended('/admin');
-            }else{
+            } else {
                 return redirect()->intended('/');
             }
         } else {
             return redirect("/login?window=login")->withErrors(['msg' => "Invalid Login Credentials"]);
         }
     }
+
 
     public function customLogout(Request $request)
     {
@@ -103,12 +112,31 @@ class CustomAuthController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function userDashboard(Request $request)
     {
         if (Auth()->check()) {
-            return view('');
+
+            $selectUName = DB::table('users')
+                ->where('id', $request->input('userID'))
+                ->get('fullname')
+                ->first()->fullname;
+            $request->session()->put('userName', $selectUName,);
+
+            $selectPhoneNumber = DB::table('users')
+                ->where('id', $request->input('userID'))
+                ->get('telephone')
+                ->first()->telephone;
+            $request->session()->put('phoneNumber', $selectPhoneNumber,);
+
+            $selectCustomName = DB::table('users')
+                ->where('id', $request->input('userID'))
+                ->get('username')
+                ->first()->username;
+            $request->session()->put('nickname', $selectCustomName,);
+
+            return view('users.dashboard');
         } else {
-            return redirect("login");
+            return redirect("/login?window=login")->withErrors(['msg' => "Unable to Access User Panel without login first"]);
         }
     }
 }

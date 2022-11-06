@@ -1,0 +1,116 @@
+.dash.navigation {
+    display: block;
+    width: 70px;
+    padding: 10px;
+    margin: 10% 0;
+    margin-left: 15px;
+    border: 2px solid #B38B67;
+    border-radius: 10px;
+    z-index: 10;
+    position: fixed;
+}
+
+/*
+----------------------
+SECTION - USER DETAILS
+----------------------
+*/
+
+/*-------- common section css rules --------*/
+.title-card,
+.email_password,
+.payment_methods {
+    background-color: #B38B67;
+}
+
+.user_preview .title-card h1,
+.user_preview .title-card h2 {
+    color: whitesmoke;
+}
+
+.user_preview .title-card h1:hover {
+    transform: translateX(7px);
+    transition: 0.5s ease-in;
+}
+
+.user_preview .title-card h2,
+.user_details .email_password span h2,
+.user_details .payment_methods span h2{
+    font-size: 25px;
+}
+
+/*-------- common section css rules --------*/
+
+.dash_main {
+    margin: 20px 10%;
+    border: 2px solid #FF9F1C;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.user_preview {
+    display: flex;
+    width: fit-content;
+    justify-content: space-between;
+}
+
+.user_preview .dash_image-container {
+    width: fit-content;
+}
+
+.user_preview .dash_image-container img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin: 0 50px;
+    border: 2px solid #4a271d;
+}
+
+.user_preview .title-card,
+.user_details .email_password,
+.user_details .payment_methods {
+    border: 2px solid #B38B67;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    border-radius: 15px;
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+.user_preview .title-card h1 {
+    font-size: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: fit-content;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+
+.dash_main .user_details {
+    display: flex;
+    margin-top: 50px;
+}
+
+.user_details .email_password,
+.dash_main .user_details .payment_methods {
+    margin: 0 40px;
+    height: fit-content;
+}
+
+.user_details .email_password h1,
+.user_details .payment_methods h1 {
+    font-size: 30px;
+    color: #4a271d;
+}
+
+.user_details .email_password h2,
+.user_details .payment_methods h2 {
+    font-size: 20px;
+    color: #4a271d;
+}
+
+/*
+----------------------
+SECTION - USER ORDERS
+----------------------
+*/

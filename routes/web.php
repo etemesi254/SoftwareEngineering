@@ -47,6 +47,11 @@ Route::get('registration', [CustomAuthController::class, 'index'])->name('regist
 Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])->name('sign-up-post');
 // ----- Login and Registration end ---------
 
+// -- User start----
+Route::post('users',[CustomAuthController::class, 'userDashboard']);
+// -- User end----
+
+// -- Administrator start ----
 Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
     // -- Main dashboard ----
     Route::get("/", [DashboardController::class, "showDashboard"]);
@@ -78,4 +83,4 @@ Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
     Route::get("/view_users", [UserDashboardController::class, "showUserDashboard"]);
     //----- Users end --------------------
 });
-
+// -- Administrator end----
