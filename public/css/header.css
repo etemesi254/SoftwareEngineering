@@ -13,7 +13,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: linear-gradient(to right, rgba(179, 139, 103, 0.6), rgba(255, 253, 237, 0.5), rgba(179, 139, 103, 0.6));
+    background-image: linear-gradient(to right, rgba(179, 139, 103,0.6), rgba(179, 139, 103,0.6));
 }
 
 .header {
