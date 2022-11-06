@@ -14,9 +14,9 @@ html, body {
     overflow-x: hidden;
     transition: 0.5s;
     z-index: 1;
-    top: 10px;
+    /*top: 10px;*/
     left: 0;
-    border-radius: 15px;
+    /*border-radius: 15px;*/
 }
 .panel:after{
     margin-left: 30%;

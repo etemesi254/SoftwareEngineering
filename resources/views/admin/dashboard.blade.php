@@ -24,7 +24,7 @@
     <div style="width: 37%"></div>
 
     <div class="m-6" style="width: 124%">
-        <span class="menu-btn" onclick="openNav()" style="cursor: pointer">&#9776 Side Menu </span>
+{{--        <span class="menu-btn" onclick="openNav()" style="cursor: pointer">&#9776 Side Menu </span>--}}
         <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px;color: #ff7720">
             Dashboard
         </h1>
