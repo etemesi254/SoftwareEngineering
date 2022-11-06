@@ -14,10 +14,16 @@ html, body {
     overflow-x: hidden;
     transition: 0.5s;
     z-index: 1;
-    /*top: 10px;*/
+    top: 0;
     left: 0;
     /*border-radius: 15px;*/
 }
+@media only screen and (max-width: 1000px) {
+    .panel {
+        display: none !important;
+    }
+}
+
 .panel:after{
     margin-left: 30%;
 }

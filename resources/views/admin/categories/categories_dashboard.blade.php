@@ -13,15 +13,10 @@
 </head>
 <body style="background-color: rgba(107,162,146,0.1)">
 
-<div class="w-50 h-10 bg-[#0C0B0D]"></div>
-
 <div class="flex h-full">
-    <div class="panel">
-        <x-panel></x-panel>
-    </div>
+    <x-panel></x-panel>
 
     <div style="width: 40%"></div>
-
 
     <div class="m-6">
 

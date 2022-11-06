@@ -68,6 +68,12 @@ class orderFormController extends Controller
     public function kitchenOrderListing()
     {
         $orders = Orders::all()->where('status', '=', 'pending');
+        $user = auth()->user();
+
+
+        if ($user == null || $user->roles == "customer") {
+            return (new HomePageController())->showHomePage();
+        }
         return view('kitchenside.kitchenView',
             [
                 'orderList' => $orders,
@@ -75,11 +81,12 @@ class orderFormController extends Controller
         );
     }
 
-    public function orderCompletion(Request $request){
+    public function orderCompletion(Request $request)
+    {
         DB::table('orders')
-            ->where('id',$request->input('orderID'))
+            ->where('id', $request->input('orderID'))
             ->limit(1)
-            ->update(array('status'=>'completed'));
+            ->update(array('status' => 'completed'));
 
         return redirect("/kitchenView");
     }
