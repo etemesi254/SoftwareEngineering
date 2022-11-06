@@ -5,15 +5,28 @@ html, body {
 .panel {
     background-color: #0C0B0D;
     height:  calc(100%);
-    width: 30%;
+    width: 0;
     position: fixed;
-    min-width: 250px;
-    max-width: 350px;
+    /*min-width: 250px;*/
+    /*max-width: 350px;*/
     color: rgba(255, 255, 255, 0.6);
     font-family: "Outfit", sans-serif;
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 1;
+    top: 10px;
+    left: 0;
+    border-radius: 15px;
 }
 .panel:after{
     margin-left: 30%;
+}
+.closebtn{
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 35px;
+    margin-left: 50px;
 }
 .panel-maintext {
     margin-top: 30px;

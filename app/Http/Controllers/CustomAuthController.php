@@ -33,32 +33,27 @@ class CustomAuthController extends Controller
         if (Auth::attempt($credentials)) {
             UserLogins::create(["user" => \auth()->user()->id]);
 
-            $request->session()->regenerate();
-
-//            storing logged in users email
-            $request->session()->put('email', $request->input('email'));
-
 //            selecting logged-in users role
             $selectRole = DB::table('users')
                 ->where('email', $request->input('email'))
                 ->get('roles')
                 ->first()->roles;
-            $request->session()->put('userRole', $selectRole,);
-
 //            selecting logged-in users id
             $selectID = DB::table('users')
                 ->where('email', $request->input('email'))
                 ->get('id')
                 ->first()->id;
-            $request->session()->put('userID', $selectID,);
-
-//            selecting logged-in users username
+//            selecting logged - in users username
             $selectCustomName = DB::table('users')
                 ->where('email', $request->input('email'))
                 ->get('username')
                 ->first()->username;
-            $request->session()->put('nickname', $selectCustomName,);
 
+            $request->session()->regenerate();
+            $request->session()->put('email', $request->input('email'));
+            $request->session()->put('userRole', $selectRole,);
+            $request->session()->put('userID', $selectID,);
+            $request->session()->put('nickname', $selectCustomName,);
 
             if ($selectRole == 'admin') {
                 return redirect()->intended('/admin');
@@ -115,34 +110,36 @@ class CustomAuthController extends Controller
     public function userDashboard(Request $request)
     {
         if (Auth()->check()) {
-
             $selectUName = DB::table('users')
                 ->where('id', $request->input('userID'))
                 ->get('fullname')
                 ->first()->fullname;
-            $request->session()->put('userName', $selectUName,);
 
             $selectPhoneNumber = DB::table('users')
                 ->where('id', $request->input('userID'))
                 ->get('telephone')
                 ->first()->telephone;
+
+            $request->session()->put('userName', $selectUName,);
             $request->session()->put('phoneNumber', $selectPhoneNumber,);
+            //email, userRole, userID and nickname are already present sessions
 
-            $selectCustomName = DB::table('users')
-                ->where('id', $request->input('userID'))
-                ->get('username')
-                ->first()->username;
-            $request->session()->put('nickname', $selectCustomName,);
-
-            $selectOrders = DB::table('orders')
-                ->where('customer_id', $request->input('userID'))
+            $orderDetails = DB::table('users')
+                ->selectRaw(
+                    'menus.image as image,
+                                menus.name as name,
+                                order_details.quantity as quantity,
+                                order_details.total as total_price,
+                                users.id as id')
+                ->join('orders', 'users.id', '=', 'orders.customer_id')
+                ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+                ->join('menus', 'menus.id', '=', 'order_details.product_id')
+                ->where('users.id', '=', $request->input('userID'))
                 ->get();
 
-//            return view('users.dashboard' ,compact($selectOrders));
-            return view('users.dashboard' ,
-                [
-                    'customerOrders'=>$selectOrders,
-                ]);
+            return view('users.dashboard', [
+                'orderDetails' => $orderDetails
+            ]);
         } else {
             return redirect("/login?window=login")->withErrors(['msg' => "Unable to Access User Panel without login first"]);
         }
