@@ -18,7 +18,7 @@
                     <a href="/about" class="navbar__links" id="about-page">About</a>
                 </li>
                 <li class="navbar__item">
-                    <a href="/#menu" class="navbar__links" id="services-page">Menu</a>
+                    <a href="/menu" class="navbar__links" id="services-page">Menu</a>
                 </li>
                 <li class="navbar__item">
                     <a href="" class="navbar__links" id="services-page">Orders</a>

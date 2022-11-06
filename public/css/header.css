@@ -200,3 +200,22 @@ body {
         margin: 0;
     }
 }
+
+.header-row{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    width: 100%;
+}
+
+.header-image{
+    width: 200px;
+    height: 100px;
+
+}
+
+.subcategory-row{
+    background-image: linear-gradient(to right, rgba(179, 139, 103,0.5), rgba(179, 139, 103,0));
+    width: 95%;
+    box-shadow: #070707;
+}

@@ -26,6 +26,8 @@ use App\Http\Controllers\CategoriesFormController;
 
 // ----- Home page  Start ------
 Route::get('/', [HomePageController::class, "showHomePage"]);
+Route::get('/menu', [HomePageController::class, "showMenuPage"]);
+
 Route::get('about', function () {
     return view('about');
 });
