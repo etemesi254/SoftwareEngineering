@@ -15,10 +15,7 @@
 
 <div class="flex h-full w-full">
 
-    <div class="panel">
-        <x-panel></x-panel>
-    </div>
-
+    <x-panel></x-panel>
 
     <div style="width: 37%"></div>
 

@@ -36,6 +36,7 @@ Route::get('about', function () {
 // ----- Kitchen/Order Pages Start ---------
 Route::post('kitchenOrders', [orderFormController::class, 'selectedOrder']);
 Route::post('submitOrder', [orderFormController::class, 'insertOrder']);
+
 Route::get('kitchenView', [orderFormController::class, 'kitchenOrderListing']);
 Route::post('kitchenView', [orderFormController::class, 'orderCompletion']);
 // ----- Kitchen/Order Pages End ---------
@@ -79,6 +80,7 @@ Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
 
     //------- Orders start -----------------------
     Route::get("/view_orders", [OrdersController::class, "showOrdersView"]);
+    Route::get("/orders_dashboard",[OrdersController::class,"showOrdersDashboard"]);
     //------ Orders End --------------------
 
     //---- Users start ---------------------

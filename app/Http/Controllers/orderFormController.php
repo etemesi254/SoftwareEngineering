@@ -68,6 +68,12 @@ class orderFormController extends Controller
     public function kitchenOrderListing()
     {
         $orders = Orders::all()->where('status', '=', 'pending');
+        $user = auth()->user();
+
+
+        if ($user == null || $user->roles == "customer") {
+            return (new HomePageController())->showHomePage();
+        }
         return view('kitchenside.kitchenView',
             [
                 'orderList' => $orders,

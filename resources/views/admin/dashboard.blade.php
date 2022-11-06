@@ -24,7 +24,7 @@
     <div style="width: 37%"></div>
 
     <div class="m-6" style="width: 124%">
-        <span class="menu-btn" onclick="openNav()" style="cursor: pointer">&#9776 Side Menu </span>
+        {{--        <span class="menu-btn" onclick="openNav()" style="cursor: pointer">&#9776 Side Menu </span>--}}
         <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px;color: #ff7720">
             Dashboard
         </h1>
@@ -165,15 +165,15 @@
                 </div>
                 <div class="flex justify-between mx-5  flex-wrap">
 
-                    <a href="/admin/view_orders" style="background-color: rgba(230,96,1,0.2)"
+                    <a href="/admin/orders_dashboard" style="background-color: rgba(230,96,1,0.2)"
                        class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
 
                         <i class="fa-solid fa-truck-moving fa-2xl my-5"></i>
 
                         <div
-                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">View
+                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Orders
                             <br>
-                            Orders
+                            Dashboard
                         </div>
 
                     </a>
@@ -196,7 +196,7 @@
                         <i class="fa-solid fa-cloud-upload fa-2xl my-5"></i>
 
                         <div
-                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">View Users
+                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px"> Users
                             <br>
                             Dashboard
                         </div>
@@ -218,20 +218,33 @@
 
             </div>
 
-            <div class="m-6">
+            <div class="m-6 ">
                 <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 20px;color:#7c3000">
                     Kitchen Orders
                 </h1>
-                <a href="/kitchenView" style="background-color: rgba(230,96,1,0.2)"
-                   class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
-                    <i class="fa-solid fa-cloud-upload fa-2xl my-5"></i>
-                    <div
-                        style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">View Users
-                        <br>
-                        Dashboard
-                    </div>
+                <div class="flex justify-between mx-5  flex-wrap">
+                    <a href="/kitchenView" style="background-color: rgba(230,96,1,0.2)"
+                       class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
+                        <i class="fa-solid fa-kitchen-set fa-2xl my-5"></i>
+                        <div
+                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">Kitchen
+                            <br>
+                            View
+                        </div>
+                    </a>
+                    <a href="/admin/view_orders" style="background-color: rgba(230,96,1,0.2)"
+                       class="m-5 p-5  rounded-3xl shadow-lg hover:shadow-2xl flex justify-between flex-col w-40 text-center">
 
-                </a>
+                        <i class="fa-solid fa-truck-moving fa-2xl my-5"></i>
+
+                        <div
+                            style="font-family: 'Outfit', sans-serif;font-weight: lighter;font-size: 15px">View
+                            <br>
+                            Orders
+                        </div>
+
+                    </a>
+                </div>
             </div>
 
         </div>

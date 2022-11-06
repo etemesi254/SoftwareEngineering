@@ -5,19 +5,25 @@ html, body {
 .panel {
     background-color: #0C0B0D;
     height:  calc(100%);
-    width: 0;
+    width: 16%;
     position: fixed;
-    /*min-width: 250px;*/
-    /*max-width: 350px;*/
+    min-width: 250px;
+    max-width: 350px;
     color: rgba(255, 255, 255, 0.6);
     font-family: "Outfit", sans-serif;
     overflow-x: hidden;
     transition: 0.5s;
     z-index: 1;
-    top: 10px;
+    top: 0;
     left: 0;
-    border-radius: 15px;
+    /*border-radius: 15px;*/
 }
+@media only screen and (max-width: 1000px) {
+    .panel {
+        display: none !important;
+    }
+}
+
 .panel:after{
     margin-left: 30%;
 }

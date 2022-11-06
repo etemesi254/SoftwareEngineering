@@ -19,6 +19,7 @@
     <div class="panel">
         <x-panel></x-panel>
     </div>
+    <div style="width: 30%"></div>
 
     <div class="m-6" style="width: 100%">
 
