@@ -33,34 +33,38 @@ class CustomAuthController extends Controller
         if (Auth::attempt($credentials)) {
             UserLogins::create(["user" => \auth()->user()->id]);
 
-            $request->session()->regenerate();
-
-//            storing logged in users email
-            $request->session()->put('email', $request->input('email'));
-
 //            selecting logged-in users role
             $selectRole = DB::table('users')
                 ->where('email', $request->input('email'))
                 ->get('roles')
                 ->first()->roles;
-            $request->session()->put('userRole', $selectRole,);
-
-//            selecting logged-in users name
-            $selectName = DB::table('users')
+//            selecting logged-in users id
+            $selectID = DB::table('users')
                 ->where('email', $request->input('email'))
-                ->get('fullname')
-                ->first()->fullname;
-            $request->session()->put('userName', $selectName,);
+                ->get('id')
+                ->first()->id;
+//            selecting logged - in users username
+            $selectCustomName = DB::table('users')
+                ->where('email', $request->input('email'))
+                ->get('username')
+                ->first()->username;
 
-            if ($selectRole == 'admin'){
+            $request->session()->regenerate();
+            $request->session()->put('email', $request->input('email'));
+            $request->session()->put('userRole', $selectRole,);
+            $request->session()->put('userID', $selectID,);
+            $request->session()->put('nickname', $selectCustomName,);
+
+            if ($selectRole == 'admin') {
                 return redirect()->intended('/admin');
-            }else{
+            } else {
                 return redirect()->intended('/');
             }
         } else {
             return redirect("/login?window=login")->withErrors(['msg' => "Invalid Login Credentials"]);
         }
     }
+
 
     public function customLogout(Request $request)
     {
@@ -103,12 +107,41 @@ class CustomAuthController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function userDashboard(Request $request)
     {
         if (Auth()->check()) {
-            return view('');
+            $selectUName = DB::table('users')
+                ->where('id', $request->input('userID'))
+                ->get('fullname')
+                ->first()->fullname;
+
+            $selectPhoneNumber = DB::table('users')
+                ->where('id', $request->input('userID'))
+                ->get('telephone')
+                ->first()->telephone;
+
+            $request->session()->put('userName', $selectUName,);
+            $request->session()->put('phoneNumber', $selectPhoneNumber,);
+            //email, userRole, userID and nickname are already present sessions
+
+            $orderDetails = DB::table('users')
+                ->selectRaw(
+                    'menus.image as image,
+                                menus.name as name,
+                                order_details.quantity as quantity,
+                                order_details.total as total_price,
+                                users.id as id')
+                ->join('orders', 'users.id', '=', 'orders.customer_id')
+                ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+                ->join('menus', 'menus.id', '=', 'order_details.product_id')
+                ->where('users.id', '=', $request->input('userID'))
+                ->get();
+
+            return view('users.dashboard', [
+                'orderDetails' => $orderDetails
+            ]);
         } else {
-            return redirect("login");
+            return redirect("/login?window=login")->withErrors(['msg' => "Unable to Access User Panel without login first"]);
         }
     }
 }

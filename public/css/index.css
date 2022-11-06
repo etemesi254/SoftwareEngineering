@@ -2,7 +2,7 @@
 COMMON CLASS CSS
 */
 .image-container {
-    width: 700px;
+    width: fit-content;
 }
 
 .image-container img {

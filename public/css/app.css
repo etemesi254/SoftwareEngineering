@@ -11,9 +11,22 @@ html, body {
     max-width: 350px;
     color: rgba(255, 255, 255, 0.6);
     font-family: "Outfit", sans-serif;
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 1;
+    top: 10px;
+    left: 0;
+    border-radius: 15px;
 }
 .panel:after{
     margin-left: 30%;
+}
+.closebtn{
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 35px;
+    margin-left: 50px;
 }
 .panel-maintext {
     margin-top: 30px;

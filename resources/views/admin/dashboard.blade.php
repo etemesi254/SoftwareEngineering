@@ -18,13 +18,13 @@
 <div class="w-50 h-10 bg-[#0C0B0D]" style="position: fixed"></div>
 
 <div class="flex h-full">
-    <div class="panel">
-        <x-panel></x-panel>
-    </div>
+
+    <x-panel></x-panel>
+
     <div style="width: 37%"></div>
 
     <div class="m-6" style="width: 124%">
-
+        <span class="menu-btn" onclick="openNav()" style="cursor: pointer">&#9776 Side Menu </span>
         <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px;color: #ff7720">
             Dashboard
         </h1>
@@ -240,7 +240,15 @@
     <x-side-bar></x-side-bar>
 
 </div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
 
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 
 </body>
 </html>
