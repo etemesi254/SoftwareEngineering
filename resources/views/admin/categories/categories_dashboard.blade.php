@@ -20,7 +20,7 @@
         <x-panel></x-panel>
     </div>
 
-    <div style="width: 37%"></div>
+    <div style="width: 40%"></div>
 
 
     <div class="m-6">

@@ -14,7 +14,7 @@
 <section class="kitchen-view">
     <div class="order-display">
         @foreach($orderList as $order)
-            <form action="" method="post">
+            <form action="" method="post" style="width: 50%">
                 @csrf
                 <article class="order-content">
                     <div class="order-content-top">

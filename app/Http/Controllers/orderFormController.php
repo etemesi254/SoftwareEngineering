@@ -15,7 +15,7 @@ class orderFormController extends Controller
     public function selectedOrder(Request $request)
     {
         if (session()->has('email')) {
-            if (session('userRole') == 'employee') {
+            if ((session('userRole') == 'employee'|| session('userRole') == 'customer'))  {
                 $selected_menu = $request->input('id');
                 $unit_price = $request->input('unit_price');
                 $id = Auth::id();

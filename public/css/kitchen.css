@@ -197,6 +197,9 @@ MAIN - KITCHEN PAGE CONTENT CSS
 .order-content .order-content-middle .image-container {
     /*margin-top: 20px;*/
 }
+.image-container{
+    width: 50%;
+}
 
 .order-content .order-content-middle .food-info {
     margin-left: 30px;
