@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomePageController;
 use App\Models\CategoriesDashboard;
 use App\Models\Menu;
 use App\Models\SubCategories;
@@ -26,6 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
+Route::get('/menu', [HomePageController::class, "getDataForMenu"]);
 
 Route::get('/users', function (Request $request) {
 

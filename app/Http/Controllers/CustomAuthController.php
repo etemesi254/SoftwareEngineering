@@ -134,7 +134,15 @@ class CustomAuthController extends Controller
                 ->first()->username;
             $request->session()->put('nickname', $selectCustomName,);
 
-            return view('users.dashboard');
+            $selectOrders = DB::table('orders')
+                ->where('customer_id', $request->input('userID'))
+                ->get();
+
+//            return view('users.dashboard' ,compact($selectOrders));
+            return view('users.dashboard' ,
+                [
+                    'customerOrders'=>$selectOrders,
+                ]);
         } else {
             return redirect("/login?window=login")->withErrors(['msg' => "Unable to Access User Panel without login first"]);
         }

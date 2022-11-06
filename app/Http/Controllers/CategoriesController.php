@@ -16,7 +16,7 @@ class CategoriesController extends Controller
         $user = auth()->user();
         $categories = new SubCategories();
         $values = $categories->SubCategoriesAggregate();
-        $total_categories = $categories::all()->count();
+        $total_categories = Categories::all()->count();
 
         $subcategories = new SubCategories();
 

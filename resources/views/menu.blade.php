@@ -3,28 +3,11 @@
 <html lang="en">
 <head>
     <x-header-tag></x-header-tag>
-    <title>{{$category->category_name}}</title>
+
 </head>
 <body>
 <x-header></x-header>
 <div class="top__container">
-    <div class="row">
-        <div class="col-2">
-            <h1 style="font-weight: normal;font-size: 60px;color: #ff7720">{{$category->category_name}}</h1>
-            <p class="my-6 py-6">
-                {{$category->description}}
-            </p>
-            <div class="m-6">
-                <a class="menu-btn" href="#menu"> View Menu</a>
-{{--                <a class="order-btn"> Make an order</a>--}}
-            </div>
-
-        </div>
-        <div class="col-2 image-container">
-            <img src="{{ Storage::url($category->image) }}" class="m-6">
-        </div>
-
-    </div>
 
     <div id="menu" style="border-top: solid 2px rgba(0,0,0,0.05)">
         <h1 style="font-weight: normal;font-size: 60px;color: #ff7720;text-align: center">Menu</h1>

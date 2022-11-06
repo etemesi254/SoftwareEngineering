@@ -42,7 +42,7 @@ class MenuController extends Controller
         } else {
             return "error";
         }
-        return "success";
+        return redirect("/admin");
     }
 
     public function getMenusForTime(String $time="*",int $limit=PHP_INT_MAX): \Illuminate\Support\Collection
@@ -56,7 +56,14 @@ class MenuController extends Controller
             ->where("categories.category_name","=",$time)
             //->groupBy("subcategory_id")
             ->get();
-
+    }
+    public function getAllMenus(){
+        return Db::table('menus')
+            ->join('sub_categories', 'sub_categories.id', "=", "menus.subcategory_id")
+            ->join("categories", "categories.id", "=", "sub_categories.category_id")
+            ->select("menus.id", "menus.name", "menus.unit_price", "menus.description", "menus.image", "sub_categories.subcategory_name", "categories.category_name")
+            //->groupBy("subcategory_id")
+            ->get();
     }
 
 }
