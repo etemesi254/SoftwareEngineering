@@ -27,7 +27,7 @@ class Categories extends Model
             ->rightJoin("sub_categories", "sub_categories.id", "=", "menus.subcategory_id")
             ->rightJoin("categories","sub_categories.category_id","=","categories.id")
             ->selectRaw("categories.category_name, count(categories.id) as counts")
-            ->groupBy("menus.subcategory_id")
+            ->groupBy("categories.id")
             ->get();
 
 

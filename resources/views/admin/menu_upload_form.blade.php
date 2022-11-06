@@ -19,6 +19,9 @@
     <div class="panel">
         <x-panel></x-panel>
     </div>
+
+    <div style="width: 37%"></div>
+
     <div class="w-full">
         <!-- Upload Area -->
         <form id="uploadArea" class="upload-area" action="/admin/upload_category_post" method="post"

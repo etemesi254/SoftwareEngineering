@@ -20,6 +20,9 @@
         <x-panel></x-panel>
     </div>
 
+    <div style="width: 37%"></div>
+
+
     <div class="m-6">
 
         <h1 style="font-family: 'Outfit',sans-serif;font-weight: bold;font-size: 30px;color: #ff7720">

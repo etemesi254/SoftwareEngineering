@@ -17,6 +17,9 @@
     <div class="panel">
         <x-panel></x-panel>
     </div>
+
+    <div style="width: 37%"></div>
+
     <div class="w-full">
 
         <!-- Upload Area -->

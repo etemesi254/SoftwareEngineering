@@ -6,12 +6,15 @@ html, body {
     background-color: #0C0B0D;
     height:  calc(100%);
     width: 30%;
+    position: fixed;
     min-width: 250px;
     max-width: 350px;
     color: rgba(255, 255, 255, 0.6);
     font-family: "Outfit", sans-serif;
 }
-
+.panel:after{
+    margin-left: 30%;
+}
 .panel-maintext {
     margin-top: 30px;
     font-size: 20px;
