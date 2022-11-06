@@ -21,7 +21,7 @@ REST OF THE PAGE
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+
     margin-left: 200px;
     margin-bottom: 200px;
 }
@@ -63,9 +63,12 @@ REST OF THE PAGE
 
 .col-4 {
     flex-basis: 23%;
-    padding: 20px;
+    /*padding: 20px;*/
     /*min-width: 200px;*/
+    height: 600px;
     align-content: center;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     border-radius: 10px;
     /*border: 1px solid rgba(0, 0, 0, 2);*/
@@ -86,6 +89,7 @@ REST OF THE PAGE
 
 .col-4-title {
     font-size: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
@@ -105,6 +109,8 @@ REST OF THE PAGE
     margin-bottom: 10px;
     font-family: 'Poppins', sans-serif;
     font-weight: lighter;
+    height: 150px;
+    text-overflow: fade;
 }
 
 .menu-order-btn {

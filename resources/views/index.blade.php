@@ -36,23 +36,26 @@
         <div class="row" style="margin: 0 50px">
             @foreach($menus as $menu)
                 <div class="col-4 image-container">
-                    <div style="height: 300px;width: 350px">
-                        <img src="{{Storage::url($menu->image)}}">
+                    <div style="height: 250px;width: 100%">
+                        <img src="{{Storage::url($menu->image)}}" style="width: 100%;height: 250px;object-fit: fill">
                     </div>
-                    <h4 class="col-4-title">{{$menu->name}}</h4>
-                    <h4 class="col-4-desc">{{$menu->description}}</h4>
-                    <div style="display: flex;justify-content: space-between">
-                        <p class="col-4-price">Ksh {{$menu->unit_price}} /=</p>
-                        <form action="kitchenOrders" method="post">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$menu->id}}">
-                            <input type="hidden" name="unit_price" value="{{$menu->unit_price}}">
-                            <button class="menu-order-btn" style="background-color: #ff7720;" type="submit">Order Now
-                            </button>
-                        </form>
-                    </div>
-                    <p style="color: rgba(0,0,0,0.4);font-size: 17px">{{$menu->subcategory_name}}</p>
+                    <div class="m-6">
+                        <h4 class="col-4-title">{{$menu->name}}</h4>
+                        <h4 class="col-4-desc">{{$menu->description}}</h4>
+                        <div style="display: flex;justify-content: space-between">
+                            <p class="col-4-price">Ksh {{$menu->unit_price}} /=</p>
+                            <form action="kitchenOrders" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$menu->id}}">
+                                <input type="hidden" name="unit_price" value="{{$menu->unit_price}}">
+                                <button class="menu-order-btn" style="background-color: #ff7720;" type="submit">Order
+                                    Now
+                                </button>
+                            </form>
+                        </div>
+                        <p style="color: rgba(0,0,0,0.4);font-size: 17px">{{$menu->subcategory_name}}</p>
 
+                    </div>
                 </div>
             @endforeach
         </div>

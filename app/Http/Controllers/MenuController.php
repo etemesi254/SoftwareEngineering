@@ -42,7 +42,7 @@ class MenuController extends Controller
         } else {
             return "error";
         }
-        return "success";
+        return redirect("/admin");
     }
 
     public function getMenusForTime(String $time="*",int $limit=PHP_INT_MAX): \Illuminate\Support\Collection
