@@ -2,7 +2,7 @@
 
     <div class="user_preview">
         <div class="dash_image-container">
-            <img src="{{URL::asset('/image/foods/burger.jpg')}}" alt="">
+            <img src="{{URL::asset('/image/1.jpg')}}" alt="">
         </div>
 
         <div class="title-card">
