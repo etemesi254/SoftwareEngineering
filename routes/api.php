@@ -28,7 +28,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
 Route::get('/menu', [HomePageController::class, "getDataForMenu"]);
 
 Route::get('/users', function (Request $request) {
@@ -86,18 +85,19 @@ Route::post("login_user", function (Request $request) {
 
     $rules = [
         "password" => "required|min:6",
-        "username" => "required",
+        "email" => "required",
     ];
     $msg = [];
     $status = 200;
     try {
         $request->validate($rules);
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
 
             $id = Auth::id();
             $currentUser = User::find($id);
             $token = $currentUser->createToken($currentUser->username);
+            $currentUser->setRememberToken($token);
             $msg = ["status" => 200, "description" => "okay", "token" => $token->plainTextToken];
         } else {
             $msg = ["status" => 401, "description" => "unauthorised"];
@@ -113,7 +113,9 @@ Route::post("login_user", function (Request $request) {
     return response($msg, $status);
 });
 
-
+Route::middleware('auth:sanctum')->get('/retrieve_user', function (Request $request) {
+    return \auth()->user();
+});
 Route::post("add_category", function (Request $req) {
     $rules = ["category" => "required"];
 
@@ -170,7 +172,7 @@ Route::get('/get_menu', function (Request $request) {
         return response($response_data, 200);
 
     } catch (\PHPUnit\Exception $e) {
-        $response_data = ["status" => 400, "description" => $e->getMessage() ];
+        $response_data = ["status" => 400, "description" => $e->getMessage()];
         return response($response_data, 400);
     }
 
@@ -184,7 +186,7 @@ Route::get("/get_category_details", function (Request $request) {
     return response($response_data, 200);
 });
 
-Route::get("/get_subcategory_details",function (){
+Route::get("/get_subcategory_details", function () {
 
     $categories = new SubCategories();
     $values = $categories->SubCategoriesAggregate();
@@ -192,7 +194,7 @@ Route::get("/get_subcategory_details",function (){
     return response($response_data, 200);
 });
 
-Route::any("/add_menu",function (Request $request){
+Route::any("/add_menu", function (Request $request) {
     $rules = [
         "name" => "required",
         "unit_price" => "required",
@@ -200,16 +202,15 @@ Route::any("/add_menu",function (Request $request){
         "image" => "required",
         "available_quantity" => "required",
         "subcategory_id" => "required",
-        ];
+    ];
 
     $msg = [];
     $status = 200;
-    try{
+    try {
         $request->validate($rules);
-    } catch (Exception $e)
-    {
+    } catch (Exception $e) {
         $status = 400;
-        $msg = ["statusDescription"=>$e->getMessage(),"status"=>400];
+        $msg = ["statusDescription" => $e->getMessage(), "status" => 400];
     }
     return response($msg, $status);
 
