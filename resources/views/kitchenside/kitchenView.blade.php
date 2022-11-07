@@ -17,7 +17,29 @@
             <form action="" method="post">
                 @csrf
                 <article class="order-content">
+                    @php
+                        $orderDetails = DB::table('orders')
+                        ->selectRaw(
+                        'menus.image as image,
+                        menus.name as name,
+                        orders.customer_id as customerID,
+                        order_details.quantity as quantity,
+                        order_details.total as total_price'
+                        )
+                        ->join('order_details','orders.id','=','order_details.order_id')
+                        ->join('users', 'users.id', '=', 'orders.customer_id')
+                        ->join('menus','menus.id','=','order_details.product_id')
+                        ->where('orders.id','=',$order['id'])
+                        ->get()
+                        ->first();
+
+                        $selectUName = DB::table('users')
+                            ->where('id', $orderDetails->customerID)
+                            ->get('fullname')
+                            ->first()->fullname;
+                    @endphp
                     <div class="order-content-top">
+
                         <h2>Order #{{$order['id']}}</h2>
                         <br>
                         <span class="time">
@@ -30,23 +52,12 @@
                             <br>
                             <h3 style="margin: 0 10px">Time:{{$time}}</h3>
                         </span>
+                        <span>
+                            <h2>Customer: {{$selectUName}}</h2>
+                        </span>
                     </div>
 
                     <div class="order-content-middle order-list">
-                        @php
-                            $orderDetails = DB::table('orders')
-                            ->selectRaw(
-                            'menus.image as image,
-                            menus.name as name,
-                            order_details.quantity as quantity,
-                            order_details.total as total_price'
-                            )
-                            ->join('order_details','orders.id','=','order_details.order_id')
-                            ->join('menus','menus.id','=','order_details.product_id')
-                            ->where('orders.id','=',$order['id'])
-                            ->get()
-                            ->first();
-                        @endphp
                         <div class="image-container">
                             <img src="{{ Storage::url($orderDetails->image) }}" alt="">
                         </div>
@@ -72,7 +83,7 @@
                         <div class="confirmation">
                             <input type="hidden" name="orderID" value="{{$order['id']}}">
                             <button type="submit" name="completed">Completed</button>
-{{--                            <button type="submit" name="rejected">Rejected</button>--}}
+                            {{--                            <button type="submit" name="rejected">Rejected</button>--}}
                         </div>
                     </div>
                 </article>
