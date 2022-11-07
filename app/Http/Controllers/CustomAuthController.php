@@ -49,11 +49,18 @@ class CustomAuthController extends Controller
                 ->get('username')
                 ->first()->username;
 
+//            selecting logged-in user's full name
+            $selectUName = DB::table('users')
+                ->where('email', $request->input('email'))
+                ->get('fullname')
+                ->first()->fullname;
+
             $request->session()->regenerate();
             $request->session()->put('email', $request->input('email'));
             $request->session()->put('userRole', $selectRole,);
             $request->session()->put('userID', $selectID,);
             $request->session()->put('nickname', $selectCustomName,);
+            $request->session()->put('userName', $selectUName,);
 
             if ($selectRole == 'admin') {
                 return redirect()->intended('/admin');
@@ -110,27 +117,27 @@ class CustomAuthController extends Controller
     public function userDashboard(Request $request)
     {
         if (Auth()->check()) {
-            $selectUName = DB::table('users')
-                ->where('id', $request->input('userID'))
-                ->get('fullname')
-                ->first()->fullname;
 
             $selectPhoneNumber = DB::table('users')
                 ->where('id', $request->input('userID'))
                 ->get('telephone')
                 ->first()->telephone;
 
-            $request->session()->put('userName', $selectUName,);
+
             $request->session()->put('phoneNumber', $selectPhoneNumber,);
-            //email, userRole, userID and nickname are already present sessions
+            //email, userName, userRole, userID and nickname are already present sessions
 
             $orderDetails = DB::table('users')
                 ->selectRaw(
                     'menus.image as image,
-                                menus.name as name,
-                                order_details.quantity as quantity,
-                                order_details.total as total_price,
-                                users.id as id')
+                    menus.name as name,
+                    orders.date as date,
+                    orders.description as description,
+                    order_details.quantity as quantity,
+                    order_details.total as total_price,
+                    orders.status as status,
+                    users.id as id,
+                    orders.id as orderID')
                 ->join('orders', 'users.id', '=', 'orders.customer_id')
                 ->join('order_details', 'orders.id', '=', 'order_details.order_id')
                 ->join('menus', 'menus.id', '=', 'order_details.product_id')
