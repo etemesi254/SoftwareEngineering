@@ -2,7 +2,6 @@
 @import "index.css";
 @import "about.css";
 @import "kitchen.css";
-@import "footer.css";
 @import "users.css";
 
 * {
@@ -73,6 +72,7 @@ body {
 
 .navbar__item {
     height: 80px;
+    display: flex;
 }
 
 .navbar__links {

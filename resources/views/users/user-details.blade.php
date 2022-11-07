@@ -43,7 +43,7 @@
 
         <div class="payment_methods">
             <div class="wallet_container"
-                 style="width: 200px; margin-bottom: 10px; margin-left: 20px; height: 150px; background-color: #1c7430; border-radius: 20px; padding: 10px; border: 2px solid #4a271d">
+                 style="width: 400px; margin-bottom: 10px; margin-left: 20px; height: 150px; background-color: #1c7430; border-radius: 20px; padding: 10px; border: 2px solid #4a271d">
                 <div class="wallet">
                     <h2 style="color: whitesmoke">Heaven's Gold:</h2>
                     <h1>KES 0.00</h1>

@@ -188,21 +188,28 @@ MAIN - KITCHEN PAGE CONTENT CSS
     border: 2px solid #7C3000;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.order-content .order-content-middle div.image-container img{
-    width: 70px;
-    height: 70px;
+
+.order-content .order-content-middle div.image-container img {
+    width: 100px;
+    height: 100px;
     border: 2px solid #7C3000;
     border-radius: 50px;
 }
+
 .order-content .order-content-middle .image-container {
     /*margin-top: 20px;*/
+    width: fit-content;
+    height: fit-content;
+    margin: 0 20px;
 }
-.image-container{
+
+.image-container {
     width: 50%;
 }
 
 .order-content .order-content-middle .food-info {
-    margin-left: 30px;
+    /*margin-left: 30px;*/
+    width: 20em;
 }
 
 .kitchen-view .order-display .order-content .order-content-bottom {
@@ -218,8 +225,24 @@ MAIN - KITCHEN PAGE CONTENT CSS
     background-color: transparent;
     border-radius: 10px;
     border: 2px solid #7C3000;
-    margin: 0 10px;
+    margin: 0 140px;
     margin-top: 15px;
+}
+
+.order-content .order-content-top h2,
+.order-content .order-content-middle h2,
+.order-content .order-content-bottom h2 {
+    font-size: 25px;
+}
+
+.order-content .order-content-top h3,
+.order-content .order-content-middle h3,
+.order-content .order-content-bottom h3 {
+    font-size: 15px;
+}
+
+.order-content .order-content-bottom .subtotals span h3 {
+    margin-top: 10px;
 }
 
 @media only screen and (min-width: 1024px) {
