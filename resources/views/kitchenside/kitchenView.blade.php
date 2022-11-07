@@ -26,9 +26,9 @@
                                 $date = date('Y.j.n', $timestamp);
                                 $time = date('H:i:s', $timestamp);
                             @endphp
-                            <h3>Date:{{$date}}</h3>
+                            <h3 style="margin: 0 10px">Date:{{$date}}</h3>
                             <br>
-                            <h3>Time:{{$time}}</h3>
+                            <h3 style="margin: 0 10px">Time:{{$time}}</h3>
                         </span>
                     </div>
 
