@@ -14,7 +14,7 @@
 <section class="kitchen-view">
     <div class="order-display">
         @foreach($orderList as $order)
-            <form action="" method="post" style="width: 50%">
+            <form action="" method="post">
                 @csrf
                 <article class="order-content">
                     <div class="order-content-top">
@@ -60,8 +60,14 @@
 
                     <div class="order-content-bottom">
                         <div class="subtotals">
-                            <h3>Total Qty = {{$orderDetails->quantity}} Items</h3>
-                            <h2>Total Price = Ksh {{$orderDetails->total_price}}</h2>
+                            <span style="display: flex; justify-content: space-around">
+                                <h3>Total Qty = </h3>
+                                <h2>{{$orderDetails->quantity}} Items</h2>
+                            </span>
+                            <span style="display: flex; justify-content: space-around">
+                                <h3>Total Price = </h3>
+                                <h2>Ksh {{$orderDetails->total_price}}</h2>
+                            </span>
                         </div>
                         <div class="confirmation">
                             <input type="hidden" name="orderID" value="{{$order['id']}}">

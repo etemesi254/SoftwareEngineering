@@ -20,7 +20,8 @@ SECTION - USER DETAILS
 .title-card,
 .email_password,
 .payment_methods {
-    background-color: #B38B67;
+    /*background-color: #B38B67;*/
+    background-color: rgba(179,139,103,0.5);
 }
 
 .user_preview .title-card h1,
@@ -69,7 +70,7 @@ SECTION - USER DETAILS
 .user_preview .title-card,
 .user_details .email_password,
 .user_details .payment_methods {
-    border: 2px solid #B38B67;
+    border: 5px solid #B38B67;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
     border-radius: 15px;
@@ -117,9 +118,10 @@ SECTION - USER ORDERS
 .orders_title_card,
 .order_info{
     margin: 30px 0;
+    width: fit-content;
     padding: 15px;
     border-radius: 15px;
-    background-color: #B38B67;
+    background-color: rgba(179,139,103,0.5);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .orders_title_card div h1{
