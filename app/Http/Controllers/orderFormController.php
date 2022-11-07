@@ -48,7 +48,6 @@ class orderFormController extends Controller
         $newOrder->status = $request->status;
 
         //running the new assigned queries and updating order details table
-
         if ($newOrder->save()) {
             $newOrderDetails = new OrderDetails;
             $lastID = DB::getPdo()->lastInsertId();
@@ -62,7 +61,35 @@ class orderFormController extends Controller
             $newOrderDetails->save();
             return redirect("/#menu?window=order")->withErrors(['msg' => "Order Placed Successfully"]);
         }
+    }
 
+    public function Sse(Request $request)
+    {
+        //generating instance of model
+        $newOrder = new Orders;
+
+        //assigning extracted data
+        $newOrder->customer_id = $request->customerId;
+        $newOrder->quantity = $request->customer_quantity;
+        $newOrder->price = $request->unit_price;
+        $newOrder->date = $request->dateTime;
+        $newOrder->description = $request->customer_preferences;
+        $newOrder->status = $request->status;
+
+        //running the new assigned queries and updating order details table
+        if ($newOrder->save()) {
+            $newOrderDetails = new OrderDetails;
+            $lastID = DB::getPdo()->lastInsertId();
+            $orderInfo = DB::table('orders')->find($lastID);
+
+            $newOrderDetails->order_id = $orderInfo->id;
+            $newOrderDetails->product_id = $request->menuId;
+            $newOrderDetails->price = $request->unit_price;
+            $newOrderDetails->quantity = $request->customer_quantity;
+
+            $newOrderDetails->save();
+            return redirect("/#menu?window=order")->withErrors(['msg' => "Order Placed Successfully"]);
+        }
     }
 
     public function kitchenOrderListing()

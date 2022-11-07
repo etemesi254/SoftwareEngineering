@@ -3,9 +3,12 @@
 use App\Http\Controllers\HomePageController;
 use App\Models\CategoriesDashboard;
 use App\Models\Menu;
+use App\Models\OrderDetails;
+use App\Models\Orders;
 use App\Models\SubCategories;
 use App\Models\User;
 use App\Models\Categories;
+use App\Models\UserLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -96,6 +99,9 @@ Route::post("login_user", function (Request $request) {
 
             $id = Auth::id();
             $currentUser = User::find($id);
+
+            UserLogins::create(["user" => $currentUser->id]);
+
             $token = $currentUser->createToken($currentUser->username);
             $currentUser->setRememberToken($token);
             $msg = ["status" => 200, "description" => "okay", "token" => $token->plainTextToken];
@@ -115,6 +121,53 @@ Route::post("login_user", function (Request $request) {
 
 Route::middleware('auth:sanctum')->get('/retrieve_user', function (Request $request) {
     return \auth()->user();
+});
+Route::middleware("auth:sanctum")->any("/make_order", function (Request $request) {
+    $rules = [
+        "product_id" => "required|int",
+        "quantity" => "required|int",
+        "description" => "required"];
+
+    $msg = [];
+    $status = 200;
+
+    try {
+        $request->validate($rules);
+
+        // fetch menu and user from request
+        $menu = Menu::find($request->product_id);
+        $user = auth()->user();
+        // create order
+        $orders = Orders::create([
+            "customer_id" => $user->id,
+            "quantity" => $request->quantity,
+            "price" => $menu->unit_price,
+            "description" => $request->description
+        ]);
+        $orderDetails = OrderDetails::create([
+            "order_id" => $orders->id,
+            "product_id" => $menu->id,
+            "price" => $menu->unit_price,
+            "quantity" => $request->quantity
+        ]);
+
+        $msg = ["status" => 200, "description" => "Okay"];
+
+    } catch (Exception $e) {
+        $msg = ["status" => 500, "description" => $e->getMessage(), "token" => ""];
+        $status = 500;
+    }
+    return response($msg, $status);
+});
+
+Route::middleware("auth:sanctum")->any("get_orders", function () {
+
+    $user_id = \auth()->user()->id;
+    $data = DB::select("select orders.id,menus.name,order_details.total,menus.image,order_details.quantity, orders.status from order_details inner join orders on orders.id = order_details.order_id inner  join users on  orders.customer_id = users.id
+inner join menus on menus.id = order_details.product_id where users.id = " . $user_id);
+
+    return response($data,200);
+
 });
 Route::post("add_category", function (Request $req) {
     $rules = ["category" => "required"];
