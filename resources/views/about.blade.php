@@ -32,7 +32,7 @@
                 Nikkei cuisine which celebrates the marriage of Japanese & Peruvian fare, complemented with the finest
                 wines, sake and signature cocktails.</p>
             <button class="main__btn">
-                <a href="tel:+25412345678">Schedule Call</a>
+                <a href="tel:+254797236922">Schedule Call</a>
             </button>
         </div>
     </div>
