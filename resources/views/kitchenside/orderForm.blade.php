@@ -24,7 +24,7 @@
 
             <div class="field">
                 <label for="quantity">Quantity:</label>
-                <input type='number' id="quantity" name='quantity' step="1"/>
+                <input type='number' id="quantity" name='quantity' step="1" autocomplete="off"/>
             </div>
 
             <div class="field">

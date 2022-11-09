@@ -59,7 +59,7 @@ class orderFormController extends Controller
             $newOrderDetails->quantity = $request->customer_quantity;
 
             $newOrderDetails->save();
-            return redirect("/#menu?window=order")->withErrors(['msg' => "Order Placed Successfully"]);
+            return redirect("/#menu")->withErrors(['msg' => "Order Placed Successfully"]);
         }
     }
 

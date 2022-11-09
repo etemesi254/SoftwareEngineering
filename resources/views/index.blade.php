@@ -27,9 +27,9 @@
     </div>
 
     <div id="menu" style="border-top: solid 2px rgba(0,0,0,0.05)">
-        <h1 style="font-weight: normal;font-size: 60px;color: #ff7720;text-align: center">Menu</h1>
+        <h1 style="font-weight: normal;font-size: 60px;color: #ff7720;text-align: center">{{$category->category_name}} Menu</h1>
         @if($errors->any())
-            <h4 class="m-auto p-2 f text-rose-500 text-center" style="font-family: 'Outfit',sans-serif">
+            <h4 class="m-auto p-2 f text-rose-500 text-center" style="font-family: 'Outfit',sans-serif; font-size: 35px;">
                 {{$errors->first()}}
             </h4>
         @endif
