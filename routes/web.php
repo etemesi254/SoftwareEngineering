@@ -51,7 +51,7 @@ Route::post('sign-up-post', [CustomAuthController::class, 'customRegistration'])
 // ----- Login and Registration end ---------
 
 // -- User start----
-Route::post('users',[CustomAuthController::class, 'userDashboard']);
+Route::post('users', [CustomAuthController::class, 'userDashboard']);
 // -- User end----
 
 // -- Administrator start ----
@@ -80,7 +80,7 @@ Route::middleware(['auth'])->name("admin")->prefix("admin")->group(function () {
 
     //------- Orders start -----------------------
     Route::get("/view_orders", [OrdersController::class, "showOrdersView"]);
-    Route::get("/orders_dashboard",[OrdersController::class,"showOrdersDashboard"]);
+    Route::get("/orders_dashboard", [OrdersController::class, "showOrdersDashboard"]);
     //------ Orders End --------------------
 
     //---- Users start ---------------------

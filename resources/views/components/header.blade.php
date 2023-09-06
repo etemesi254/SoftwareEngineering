@@ -30,11 +30,11 @@
                             <form action="users" method="post">
                                 @csrf
                                 <input type="hidden" name="userID" value="{{session('userID')}}">
-                                <button type="submit" title="Administrator: {{session('userName')}}'s Dashboard">
+                                <button type="submit" title="Customer View: {{session('userName')}}'s Dashboard">
                                     <i class="uil uil-user-circle"></i>
                                 </button>
                             </form>
-                            <a href="/admin" title="Administrator: {{session('userName')}}">
+                            <a href="/admin" title="Admin: {{session('userName')}}">
                                 <i class="uil uil-user-square"></i>
                             </a>
                         @else
